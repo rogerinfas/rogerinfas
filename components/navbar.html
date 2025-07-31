@@ -1,0 +1,26 @@
+<nav class="bg-dark fixed w-full z-10 shadow-lg backdrop-blur-sm bg-opacity-90">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <div class="text-primary font-bold text-xl font-title tracking-tight">R<span class="text-secondary">IS</span></div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#perfil" class="hover:text-primary transition font-medium">Perfil</a>
+                <a href="#proyectos" class="hover:text-primary transition font-medium">Proyectos</a>
+                <a href="#habilidades" class="hover:text-primary transition font-medium">Habilidades</a>
+                <a href="#contacto" class="hover:text-primary transition font-medium">Contacto</a>
+            </div>
+            <button class="md:hidden focus:outline-none" id="menu-btn">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div class="hidden md:hidden bg-darker w-full px-6 py-4" id="mobile-menu">
+        <div class="flex flex-col space-y-4">
+            <a href="#perfil" class="hover:text-primary transition font-medium">Perfil</a>
+            <a href="#proyectos" class="hover:text-primary transition font-medium">Proyectos</a>
+            <a href="#habilidades" class="hover:text-primary transition font-medium">Habilidades</a>
+            <a href="#contacto" class="hover:text-primary transition font-medium">Contacto</a>
+        </div>
+    </div>
+</nav>
