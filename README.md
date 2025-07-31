@@ -52,7 +52,7 @@ print("Turning ideas into scalable solutions with clean code and modern technolo
 
 ## 📫 Want to get in touch?
 
-* 💼 **Full portfolio**: [rogerinfas.github.io/portafolio](https://rogerinfas.github.io/portafolio)
+* 💼 **Full portfolio**: [https://rogerinfas.github.io/rogerinfas/](https://rogerinfas.github.io/rogerinfas/)
 * 📧 **Professional email**: [contactorogeris@gmail.com](mailto:contactorogeris@gmail.com)
 * 💬 **Open to**:
 
