@@ -201,9 +201,6 @@ class Developer:
   *"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* - Martin Fowler
   
   ---
-  
-  ![Profile Views](https://komarev.com/ghpvc/?username=rogerinfas&color=2E9EF7&style=for-the-badge&label=PROFILE+VIEWS)
-  
-  ⭐️ From [Roger Infa Sánchez](https://github.com/rogerinfas) with ❤️
 
 </div>
+
