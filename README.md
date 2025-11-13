@@ -1,4 +1,4 @@
-# 👋 ¡Hola! Soy Roger Infa Sánchez
+# ¡Hola! Soy Roger Infa Sánchez
 
 <div align="center">
   
@@ -13,7 +13,7 @@
 
 ---
 
-## 🚀 Sobre mí
+## Sobre mí
 
 ```javascript
 const roger = {
@@ -39,7 +39,7 @@ const roger = {
 
 <div align="center">
 
-### 🎯 Backend Development
+### Backend Development
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
@@ -48,7 +48,7 @@ const roger = {
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 
-### 🎨 Frontend Development
+### Frontend Development
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -57,7 +57,7 @@ const roger = {
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-### 🗄️ Databases & Storage
+### Databases & Storage
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
@@ -72,7 +72,7 @@ const roger = {
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 
-### 🛠️ Tools & Others
+###  Tools & Others
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
@@ -83,7 +83,7 @@ const roger = {
 
 ---
 
-## 📊 GitHub Stats
+## GitHub Stats
 
 <div align="center">
   
@@ -97,7 +97,7 @@ const roger = {
 
 ---
 
-## 🎯 Currently Working On
+## Currently Working On
 
 <table>
   <tr>
@@ -124,7 +124,7 @@ const roger = {
 
 ---
 
-## 🎨 My Development Philosophy
+## My Development Philosophy
 
 ```python
 class Developer:
@@ -152,18 +152,18 @@ class Developer:
 
 ---
 
-## 🤝 Let's Connect!
+## Let's Connect!
 
 <div align="center">
 
-### 💼 Open to:
+### Open to:
 
 🔹 **Full Stack / Backend Developer** positions  
 🔹 **Open Source** collaborations  
 🔹 **Technical Consulting** projects  
 🔹 **Freelance** opportunities  
 
-### 📬 Get in Touch
+### Get in Touch
 
 <table>
   <tr>
@@ -196,11 +196,12 @@ class Developer:
 
 <div align="center">
   
-  ### 💭 Quote I Live By
+  ### Quote I Live By
   
   *"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* - Martin Fowler
   
   ---
 
 </div>
+
 
