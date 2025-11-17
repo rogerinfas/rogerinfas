@@ -21,15 +21,15 @@ const roger = {
     location: "Arequipa, Perú 🇵🇪",
     education: "Software Engineering Student @ Universidad La Salle",
     currentFocus: ["Backend Development", "Software Architecture", "Clean Code"],
-    motto: "Transforming ideas into scalable solutions ✨",
+    motto: "Transforming ideas into scalable solutions",
     
     workingOn: {
-        thesis: "Geolocation systems for urban transportation 🚍",
+        thesis: "Geolocation systems for urban transportation ",
         learning: ["Hexagonal Architecture", "Domain-Driven Design (DDD)", "Microservices"],
         openTo: ["Collaborations", "Job Opportunities", "Tech Consulting"]
     },
     
-    funFact: "I believe the best code is the one you don't have to explain 📖"
+    funFact: "I believe the best code is the one you don't have to explain "
 };
 ```
 
@@ -50,7 +50,6 @@ const roger = {
 
 ### Frontend Development
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
@@ -203,5 +202,6 @@ class Developer:
   ---
 
 </div>
+
 
 
