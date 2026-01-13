@@ -21,7 +21,9 @@
 | **Focus** | ![DDD](https://img.shields.io/badge/DDD-black?style=flat-square) ![Hexagonal](https://img.shields.io/badge/Hexagonal_Arch-black?style=flat-square) ![Microservices](https://img.shields.io/badge/Microservices-black?style=flat-square) |
 
 <br />
-
+<!-- 
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=rogerinfas&show_icons=true&theme=graywhite&hide_border=true&hide_title=true&include_all_commits=true&count_private=true" height="150" />
 </div>
+-->
+
