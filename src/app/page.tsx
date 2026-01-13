@@ -72,7 +72,7 @@ export default function Home() {
                 <ArrowUpRight className="md:size-[30px] size-5" />
               </Link>
               <Link
-                className="flex items-center gap-2.5 w-max text-foreground rounded-base border-2 border-border bg-white md:px-10 px-4 md:py-3 py-2 md:text-[22px] text-base shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
+                className="flex items-center gap-2.5 w-max text-foreground rounded-base border-2 border-border bg-secondary-background dark:bg-background md:px-10 px-4 md:py-3 py-2 md:text-[22px] text-base shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
                 href={"mailto:contactorogeris@gmail.com"}
               >
                 Contactar
