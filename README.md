@@ -30,7 +30,8 @@
 
 | Domain | Stack |
 | :--- | :--- |
-| **Backend** | `NestJS` `Node.js` `Python` `Django` `FastAPI` `REST` |
+| **Backend** | `NestJS` `Node.js` `Python` `Django` `FastAPI` `REST` `Spring Boot`|
 | **Frontend** | `React` `TypeScript` `Tailwind CSS` |
 | **Data & Infra** | `PostgreSQL` `MongoDB` `Redis` `Docker` `AWS` `Linux` |
-| **Focus** | `DDD` `Hexagonal Architecture` `Microservices` |
+| **Focus** | `DDD` `Hexagonal Architecture` `Microservices` `CQRS`|
+
