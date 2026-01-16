@@ -1,15 +1,11 @@
 <div align="center">
-
   <h1 style="border-bottom: none;">Roger Infa Sánchez</h1>
   <p>Backend Specialist & Software Engineering</p>
   
   <p>
     <a href="https://linkedin.com/in/roger-infa-sanchez"><img src="https://img.shields.io/badge/LINKEDIN-000000?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>&nbsp;<a href="mailto:contactorogeris@gmail.com"><img src="https://img.shields.io/badge/EMAIL-000000?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>&nbsp;<a href="https://rogerinfas.vercel.app/"><img src="https://img.shields.io/badge/PORTFOLIO-000000?style=for-the-badge&logo=safari&logoColor=white" alt="Portfolio" /></a>
   </p>
-
 </div>
-
-<br />
 
 ### Technical Arsenal
 
@@ -26,5 +22,6 @@
   <img src="https://github-readme-stats.vercel.app/api?username=rogerinfas&show_icons=true&theme=graywhite&hide_border=true&hide_title=true&include_all_commits=true&count_private=true" height="150" />
 </div>
 -->
+
 
 
