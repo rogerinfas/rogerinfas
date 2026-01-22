@@ -9,8 +9,6 @@
 
 </div>
 
-<br />
-
 ### Technical Arsenal
 
 | Domain | Stack |
@@ -26,5 +24,6 @@
   <img src="https://github-readme-stats.vercel.app/api?username=rogerinfas&show_icons=true&theme=graywhite&hide_border=true&hide_title=true&include_all_commits=true&count_private=true" height="150" />
 </div>
 -->
+
 
 
