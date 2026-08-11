@@ -1,57 +1,54 @@
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 sm:p-24 bg-background text-foreground">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex mb-12">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-border bg-background/80 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto lg:rounded-xl lg:border lg:p-4">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-      </div>
-
-      <div className="relative flex flex-col items-center justify-center my-12 text-center">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-6xl text-foreground mb-4">
-          React Application
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-md">
-          A clean initial React & Next.js starter project.
-        </p>
-      </div>
-
-      <div className="grid text-center lg:max-w-5xl lg:w-full lg:grid-cols-4 lg:text-left gap-4 mt-8">
-        <div className="group rounded-xl border border-border p-6 transition-all hover:border-foreground/30 hover:bg-secondary-background">
-          <h2 className="mb-2 text-2xl font-semibold">
-            Docs <span className="inline-block transition-transform group-hover:translate-x-1">-&gt;</span>
-          </h2>
-          <p className="text-sm opacity-70">
-            Find in-depth information about React features and API.
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 sm:p-24 bg-background text-foreground">
+      <div className="max-w-3xl w-full text-center space-y-8">
+        
+        <div className="space-y-4">
+          <div className="inline-flex items-center rounded-full border border-border bg-secondary-background px-3 py-1 text-xs font-semibold text-foreground/80">
+            React + shadcn/ui Initial Template
+          </div>
+          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl text-foreground">
+            Proyecto Inicial Mínimo
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Configuración limpia y liviana con componentes nativos de React, Next.js App Router y la biblioteca de shadcn/ui.
           </p>
         </div>
 
-        <div className="group rounded-xl border border-border p-6 transition-all hover:border-foreground/30 hover:bg-secondary-background">
-          <h2 className="mb-2 text-2xl font-semibold">
-            Learn <span className="inline-block transition-transform group-hover:translate-x-1">-&gt;</span>
-          </h2>
-          <p className="text-sm opacity-70">
-            Learn about React in an interactive environment.
-          </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button>Empezar</Button>
+          <Button variant="outline">Documentación</Button>
         </div>
 
-        <div className="group rounded-xl border border-border p-6 transition-all hover:border-foreground/30 hover:bg-secondary-background">
-          <h2 className="mb-2 text-2xl font-semibold">
-            Templates <span className="inline-block transition-transform group-hover:translate-x-1">-&gt;</span>
-          </h2>
-          <p className="text-sm opacity-70">
-            Explore starter templates and components.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left pt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>React 19 & Next.js 16</CardTitle>
+              <CardDescription>Infraestructura base moderna.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-sm opacity-80">
+              Arquitectura basada en Server Components e interfaz ultrarrápida.
+            </CardContent>
+          </Card>
 
-        <div className="group rounded-xl border border-border p-6 transition-all hover:border-foreground/30 hover:bg-secondary-background">
-          <h2 className="mb-2 text-2xl font-semibold">
-            Deploy <span className="inline-block transition-transform group-hover:translate-x-1">-&gt;</span>
-          </h2>
-          <p className="text-sm opacity-70">
-            Instantly deploy your React app to Vercel or cloud.
-          </p>
+          <Card>
+            <CardHeader>
+              <CardTitle>shadcn/ui Componentes</CardTitle>
+              <CardDescription>Librería UI lista para producción.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-sm opacity-80">
+              Estilos con Tailwind CSS y accesibilidad garantizada con Radix UI primitives.
+            </CardContent>
+          </Card>
         </div>
       </div>
     </main>
