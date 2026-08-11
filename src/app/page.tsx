@@ -3,10 +3,11 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Menu, X, ArrowRight } from "lucide-react"
+import { ArrowUpRight, X, ArrowRight } from "lucide-react"
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState("Home")
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const projects = [
@@ -41,6 +42,8 @@ export default function Home() {
         "Spatial audio synthesis interface designed for creative producers and high-end interactive installations.",
     },
   ]
+
+  const navItems = ["Home", "Work", "Studio", "Contact"]
 
   const activeProject = projects[currentSlide]
 
@@ -185,39 +188,85 @@ export default function Home() {
 
       </div>
 
-      {/* Fullscreen Mobile / Drawer Overlay */}
+      {/* RIGHT SIDE DRAWER OVERLAY MATCHING EXACT DESIGN */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-8 sm:p-12 animate-in fade-in duration-300">
-          <div className="flex justify-between items-center">
-            <span className="font-serif text-3xl">”</span>
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="size-9 flex items-center justify-center rounded-md border border-white/20 text-white"
-            >
-              <X className="size-4" />
-            </button>
-          </div>
+        <>
+          {/* Dark Backdrop */}
+          <div
+            onClick={() => setMenuOpen(false)}
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs animate-in fade-in duration-300"
+          />
 
-          <nav className="flex flex-col gap-6 text-3xl sm:text-5xl font-light tracking-tight">
-            <Link href="#featured" onClick={() => setMenuOpen(false)} className="hover:opacity-60 transition-opacity">
-              Featured Work
-            </Link>
-            <Link href="#studio" onClick={() => setMenuOpen(false)} className="hover:opacity-60 transition-opacity">
-              Studio & Philosophy
-            </Link>
-            <Link href="#services" onClick={() => setMenuOpen(false)} className="hover:opacity-60 transition-opacity">
-              Capabilities
-            </Link>
-            <Link href="#contact" onClick={() => setMenuOpen(false)} className="hover:opacity-60 transition-opacity">
-              Contact & Inquiries
-            </Link>
-          </nav>
+          {/* Side Drawer Panel */}
+          <div className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-[340px] sm:max-w-[380px] bg-[#EBEBEB] text-black shadow-2xl flex flex-col justify-between p-8 sm:p-10 animate-in slide-in-from-right duration-300">
+            
+            {/* Drawer Top Header with X Close */}
+            <div className="flex justify-end">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-black hover:opacity-60 transition-opacity p-1 cursor-pointer"
+                aria-label="Close Navigation Menu"
+              >
+                <X className="size-6 stroke-[1.5]" />
+              </button>
+            </div>
 
-          <div className="flex justify-between text-xs font-mono tracking-widest text-white/50 border-t border-white/10 pt-6">
-            <span>KOMMA KOMMA STUDIO</span>
-            <span>2026 EDITION</span>
+            {/* Menu Items List */}
+            <div className="flex flex-col gap-2 my-auto">
+              {navItems.map((item) => {
+                const isActive = activeTab === item
+                return (
+                  <button
+                    key={item}
+                    onClick={() => {
+                      setActiveTab(item)
+                      setMenuOpen(false)
+                    }}
+                    className={`text-left text-3xl sm:text-4xl font-sans tracking-tight transition-all px-4 py-2 ${
+                      isActive
+                        ? "bg-[#E54838] text-white font-normal"
+                        : "text-black hover:opacity-60 font-normal"
+                    }`}
+                  >
+                    {item}
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Drawer Footer Details */}
+            <div className="border-t border-black/15 pt-6 grid grid-cols-2 gap-4 text-left">
+              
+              {/* Column 1: Legal */}
+              <div>
+                <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Legal</p>
+                <div className="space-y-1">
+                  <a href="#terms" className="text-xs text-black/85 hover:text-black block transition-colors">
+                    Terms of use
+                  </a>
+                  <a href="#transparency" className="text-xs text-black/85 hover:text-black block transition-colors">
+                    Transparency Statement
+                  </a>
+                </div>
+              </div>
+
+              {/* Column 2: Contact */}
+              <div>
+                <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Contact</p>
+                <div className="space-y-1">
+                  <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
+                    hello@kommakomma.is
+                  </a>
+                  <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
+                    Book a call?
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
           </div>
-        </div>
+        </>
       )}
 
     </div>
