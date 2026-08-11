@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, X, ArrowRight } from "lucide-react"
+import { X, ArrowRight } from "lucide-react"
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -15,31 +15,25 @@ export default function Home() {
       title: "MERLA",
       year: "2026",
       subtitle: "FEATURED PROJECT",
-      poster: "/images/merla_poster_card.png",
+      bgImage: "/images/project_merla_bg.png",
       headline:
         "Komma Komma is a product design & web-experience creative studio created for brands that refuse to blend in.",
-      description:
-        "Radio Frequency Identification system for modern retail intelligence. Built to significantly speed up warehouse inventory count.",
     },
     {
-      title: "SOLARIS",
-      year: "2025",
-      subtitle: "ARCHITECTURAL BRANDING",
-      poster: "/images/merla_poster_card.png",
-      headline:
-        "We engineer digital identities, physical installations, and immersive platforms that reshape contemporary design.",
-      description:
-        "Next-generation solar energy analytics platform with real-time telemetry and generative visual data displays.",
-    },
-    {
-      title: "AURA LABS",
+      title: "HANNA STÍNA",
       year: "2026",
-      subtitle: "SPATIAL COMPUTING",
-      poster: "/images/merla_poster_card.png",
+      subtitle: "FEATURED PROJECT",
+      bgImage: "/images/project_hanna_bg.png",
       headline:
-        "Crafting boundary-pushing web experiences with raw precision, high typography, and atmospheric sound design.",
-      description:
-        "Spatial audio synthesis interface designed for creative producers and high-end interactive installations.",
+        "An image-led portfolio for interior architect Hanna Stína, built around large photography and room to breathe.",
+    },
+    {
+      title: "TÖLUM ÍSLENSKU",
+      year: "2026",
+      subtitle: "FEATURED PROJECT",
+      bgImage: "/images/project_tolum_bg.png",
+      headline:
+        "A pin campaign that gives Icelandic learners a visible way to ask for the conversation they are trying to have.",
     },
   ]
 
@@ -55,23 +49,23 @@ export default function Home() {
         onClick={() => menuOpen && setMenuOpen(false)}
         className={`relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#0a0f0a] text-white flex flex-col justify-between overflow-hidden ${
           menuOpen
-            ? "h-[calc(100vh-32px)] my-4 ml-4 flex-1 rounded-[20px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] border border-black/10 cursor-pointer pointer-events-auto select-none"
+            ? "h-[calc(100vh-28px)] my-3.5 ml-3.5 flex-1 rounded-[20px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] border border-white/20 cursor-pointer pointer-events-auto select-none"
             : "h-screen w-full rounded-none shadow-none border-none"
         }`}
       >
-        {/* Fullscreen Dark Forest Background Image */}
+        {/* Fullscreen Full-Bleed Project Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/dark_forest_bg.png"
-            alt="Dark Forest Foliage Background"
+            src={activeProject.bgImage}
+            alt={activeProject.title}
             fill
             priority
-            className="object-cover object-center scale-105 filter brightness-[0.70] contrast-[1.15] blur-[0.4px] transition-all duration-1000"
+            className="object-cover object-center scale-100 filter brightness-[0.75] contrast-[1.1] transition-all duration-1000"
           />
-          {/* Soft Vignette & Smooth Gradient Overlays for Feathered Edges */}
-          <div className="absolute inset-0 bg-radial from-transparent via-black/35 to-black/85 pointer-events-none" />
-          <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black/90 via-black/50 to-transparent pointer-events-none" />
-          <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
+          {/* Soft Vignette & Smooth Gradient Overlays for Readability */}
+          <div className="absolute inset-0 bg-radial from-transparent via-black/25 to-black/80 pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black/85 via-black/40 to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
         </div>
 
         {/* Main Content Container Inside Canvas */}
@@ -91,7 +85,9 @@ export default function Home() {
             {/* Right Actions */}
             <div className="flex items-center gap-3 sm:gap-4">
               <a
-                href="mailto:hello@kommakomma.studio"
+                href="https://cal.eu/kommakomma"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
               >
                 <span>Book a call</span>
@@ -120,40 +116,23 @@ export default function Home() {
             </div>
           </header>
 
-          {/* CENTER HERO POSTER ARTWORK & OVERLAY METADATA */}
-          <div className="relative flex flex-1 items-center justify-center py-8">
-            
-            {/* HORIZONTAL METADATA BAR OVERLAY */}
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 hidden md:flex items-center justify-between px-6 lg:px-16 text-[11px] font-mono tracking-[0.25em] text-white/75 pointer-events-none z-20">
-              <span className="uppercase">{activeProject.subtitle}</span>
-              <span className="uppercase font-semibold tracking-[0.3em]">{activeProject.title}</span>
-              <span className="uppercase">{activeProject.year}</span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setCurrentSlide((prev) => (prev + 1) % projects.length)
-                }}
-                className="pointer-events-auto flex items-center gap-2 uppercase hover:text-white transition-colors group cursor-pointer"
-              >
-                <span>VIEW PROJECT</span>
-                <span className="inline-flex items-center justify-center size-5 rounded-md border border-white/30 text-[10px] group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
-                  <ArrowRight className="size-3" />
-                </span>
-              </button>
-            </div>
-
-            {/* FLOATING CENTER POSTER CARD WITH SOFT FEATHERED SHADOW */}
-            <div className="group relative z-10 w-[240px] sm:w-[290px] md:w-[330px] lg:w-[360px] aspect-[3/4] rounded-sm overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] border border-white/10 transition-all duration-700 hover:scale-[1.015] cursor-pointer">
-              <Image
-                src={activeProject.poster}
-                alt={activeProject.title}
-                fill
-                priority
-                className="object-cover object-center filter transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Subtle paper finish inner vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10 opacity-70 pointer-events-none" />
-            </div>
+          {/* CENTER OVERLAY METADATA LINE */}
+          <div className="relative flex flex-1 items-center justify-between px-2 sm:px-6 text-[11px] font-mono tracking-[0.25em] text-white/85 z-20 pointer-events-none">
+            <span className="uppercase">{activeProject.subtitle}</span>
+            <span className="uppercase font-bold tracking-[0.3em] text-white text-base sm:text-lg drop-shadow-lg">{activeProject.title}</span>
+            <span className="uppercase">{activeProject.year}</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setCurrentSlide((prev) => (prev + 1) % projects.length)
+              }}
+              className="pointer-events-auto hidden sm:flex items-center gap-2 uppercase hover:text-white transition-colors group cursor-pointer"
+            >
+              <span>VIEW PROJECT</span>
+              <span className="inline-flex items-center justify-center size-5 rounded-md border border-white/30 text-[10px] group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
+                <ArrowRight className="size-3" />
+              </span>
+            </button>
           </div>
 
           {/* BOTTOM SECTION: HEADLINE & SLIDE PAGINATION */}
@@ -164,13 +143,6 @@ export default function Home() {
               <p className="text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-white/95 max-w-2xl font-sans drop-shadow-md">
                 {activeProject.headline}
               </p>
-            </div>
-
-            {/* Mobile Metadata Link (visible on mobile only) */}
-            <div className="flex md:hidden items-center justify-between text-[11px] font-mono tracking-widest text-white/70 py-2 border-t border-white/10">
-              <span>{activeProject.subtitle}</span>
-              <span className="font-bold text-white">{activeProject.title}</span>
-              <span>{activeProject.year}</span>
             </div>
 
             {/* Right Slide Pagination / Controls */}
@@ -268,7 +240,7 @@ export default function Home() {
                 <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
                   hello@kommakomma.is
                 </a>
-                <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
+                <a href="https://cal.eu/kommakomma" target="_blank" rel="noreferrer" className="text-xs text-black/85 hover:text-black block transition-colors">
                   Book a call?
                 </a>
               </div>
