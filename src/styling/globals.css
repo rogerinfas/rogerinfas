@@ -6,47 +6,51 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --border-radius: 5px;
-  --box-shadow-x: 4px;
-  --box-shadow-y: 4px;
-  --reverse-box-shadow-x: -4px;
-  --reverse-box-shadow-y: -4px;
+  --border-radius: 24px;
+  --box-shadow-x: 0px;
+  --box-shadow-y: 8px;
+  --reverse-box-shadow-x: 0px;
+  --reverse-box-shadow-y: -8px;
 
   --heading-font-weight: 700;
-  --base-font-weight: 500;
+  --base-font-weight: 400;
 
-  --background: oklch(96.5% 0.025 160);
-  --secondary-background: oklch(100% 0 0);
-  --foreground: oklch(0% 0 0);
-  --main-foreground: oklch(100% 0 0);
+  /* Modo Claro - Alta Gama (Crema, Oro y Carbón) */
+  --background: #F7F5F0; /* Crema suave lujoso */
+  --secondary-background: #FFFFFF; /* Tarjetas blancas inmaculadas */
+  --foreground: #1C1C1C; /* Negro suave para texto principal */
+  --main-foreground: #FFFFFF; /* Texto blanco sobre botones principales */
 
-  --main: oklch(40.5% 0.125 160);
-  --border: oklch(0% 0 0);
-  --ring: oklch(0% 0 0);
-  --overlay: oklch(0% 0 0 / 0.8);
+  --main: #9A7B56; /* Oro/bronce profundo para alto contraste en modo claro */
+  --border: rgba(154, 123, 86, 0.2); /* Borde con tinte dorado sutil */
+  --ring: #9A7B56;
+  --overlay: rgba(247, 245, 240, 0.85);
 
-  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+  --shadow: 0 10px 40px -10px rgba(154, 123, 86, 0.08);
 
-  --chart-1: oklch(40.5% 0.125 160);
-  --chart-2: oklch(67.28% 0.2147 24.22);
-  --chart-3: oklch(86.03% 0.176 92.36);
-  --chart-4: oklch(55% 0.15 160);
-  --chart-5: oklch(66.34% 0.1806 277.2);
-  --chart-active-dot: #000;
+  --chart-1: #9A7B56;
+  --chart-2: #BFA181;
+  --chart-3: #1C1C1C;
+  --chart-4: #D4C5B0;
+  --chart-5: #6E573B;
+  --chart-active-dot: #9A7B56;
 }
 
 .dark {
-  --background: oklch(22.5% 0.03 160);
-  --secondary-background: oklch(23.93% 0 0);
-  --foreground: oklch(92.49% 0 0);
-  --main-foreground: oklch(100% 0 0);
+  /* Modo Oscuro - Alta Gama (Negro Suave, Carbón y Oro Apagado) */
+  --background: #1C1C1C; /* Negro suave */
+  --secondary-background: #252525; /* Tarjetas en carbón sutil */
+  --foreground: #F4F4F4; /* Gris claro para texto principal */
+  --main-foreground: #1C1C1C; /* Negro suave sobre el oro principal */
 
-  --border: oklch(0% 0 0);
-  --ring: oklch(100% 0 0);
+  --main: #BFA181; /* Oro apagado radiante en fondo oscuro */
+  --border: rgba(191, 161, 129, 0.18); /* Borde sutil con tinte dorado */
+  --ring: #BFA181;
+  --overlay: rgba(28, 28, 28, 0.85);
 
-  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+  --shadow: 0 10px 40px -10px rgba(0,0,0,0.6);
 
-  --chart-active-dot: #fff;
+  --chart-active-dot: #BFA181;
 }
 
 @theme inline {
@@ -73,8 +77,8 @@
   --radius-base: var(--border-radius);
 
   --shadow-shadow: var(--shadow);
-  --shadow-nav: 4px 4px 0px 0px var(--border);
-  --shadow-darkNav: 4px 4px 0px 0px var(--dark-border);
+  --shadow-nav: 0 4px 20px -2px rgba(0,0,0,0.05);
+  --shadow-darkNav: 0 4px 20px -2px rgba(0,0,0,0.3);
 
   --font-weight-base: var(--base-font-weight);
   --font-weight-heading: var(--heading-font-weight);
@@ -82,24 +86,16 @@
   --animate-marquee: marquee 5s linear infinite;
   --animate-marquee2: marquee2 5s linear infinite;
 
-  --spacing-container: 1300px;
+  --spacing-container: 1400px;
 
   @keyframes marquee {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
   }
 
   @keyframes marquee2 {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(0%);
-    }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
   }
 }
 
@@ -120,22 +116,22 @@
 
 body,
 .scrollbar {
-  --sb-track-color: #ffffff;
-  --sb-thumb-color: #000000;
+  --sb-track-color: transparent;
+  --sb-thumb-color: rgba(0, 0, 0, 0.15);
 }
 
 html.dark body,
 html.dark .scrollbar {
-  --sb-track-color: #1f1f1f;
-  --sb-thumb-color: #e6e6e6;
+  --sb-track-color: transparent;
+  --sb-thumb-color: rgba(255, 255, 255, 0.15);
 }
 
 .scrollbar::-webkit-scrollbar {
-  width: 16px;
+  width: 8px;
 }
 
 body::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
 
 .toc-scrollbar::-webkit-scrollbar {
@@ -147,17 +143,10 @@ body::-webkit-scrollbar-track,
   background: var(--sb-track-color);
 }
 
-body::-webkit-scrollbar-track {
-  border-left: 4px solid #000;
-}
-
 body::-webkit-scrollbar-thumb,
 .scrollbar::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
-}
-
-html.dark body::-webkit-scrollbar-thumb {
-  border-left: 4px solid #000;
+  border-radius: 9999px;
 }
 
 .code::-webkit-scrollbar-track {

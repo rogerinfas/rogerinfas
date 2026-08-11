@@ -30,14 +30,15 @@ export const metadata: Metadata = {
     "NestJS",
     "Python",
     "React",
-    "Neobrutalism",
+    "Glassmorphism",
+    "Modern UI",
   ],
   authors: [{ name: "Roger Infa Sánchez", url: "https://github.com/rogerinfas" }],
   openGraph: {
     type: "website",
     description:
       "Portafolio de Roger Infa Sánchez. Desarrollador de software especializado en NestJS, Python y React.",
-    images: ["https://www.neobrutalism.dev/preview.png"], // Placeholder, ideally should be updated
+    images: ["https://example.com/preview.png"], // Placeholder, ideally should be updated
     url: "https://github.com/rogerinfas",
     title: "Roger Infa Sánchez - Portafolio",
   },
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     title: "Roger Infa Sánchez - Desarrollador de Software",
     description:
       "Portafolio de Roger Infa Sánchez. Desarrollador de software especializado en NestJS, Python y React.",
-    images: ["https://www.neobrutalism.dev/preview.png"],
+    images: ["https://example.com/preview.png"],
     creator: "@rogerinfas", // Assuming handle
   },
 }
