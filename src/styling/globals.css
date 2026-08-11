@@ -6,51 +6,51 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --border-radius: 24px;
+  --border-radius: 16px;
   --box-shadow-x: 0px;
-  --box-shadow-y: 8px;
+  --box-shadow-y: 4px;
   --reverse-box-shadow-x: 0px;
-  --reverse-box-shadow-y: -8px;
+  --reverse-box-shadow-y: -4px;
 
-  --heading-font-weight: 700;
+  --heading-font-weight: 400;
   --base-font-weight: 400;
 
-  /* Modo Claro - Alta Gama (Crema, Oro y Carbón) */
-  --background: #F7F5F0; /* Crema suave lujoso */
-  --secondary-background: #FFFFFF; /* Tarjetas blancas inmaculadas */
-  --foreground: #1C1C1C; /* Negro suave para texto principal */
-  --main-foreground: #FFFFFF; /* Texto blanco sobre botones principales */
+  /* Estética Marco Nava Studio (Editorial & Warm Off-White) */
+  --background: #FAF5EB; /* Crema artesanal / Warm cream */
+  --secondary-background: #F2ECE1; /* Tarjeta crema suave */
+  --foreground: #111111; /* Negro editorial */
+  --main-foreground: #FAF5EB; /* Texto crema sobre elementos principales */
 
-  --main: #9A7B56; /* Oro/bronce profundo para alto contraste en modo claro */
-  --border: rgba(154, 123, 86, 0.2); /* Borde con tinte dorado sutil */
-  --ring: #9A7B56;
-  --overlay: rgba(247, 245, 240, 0.85);
+  --main: #111111; /* Negro editorial para botones/acentos */
+  --border: rgba(17, 17, 17, 0.12); /* Líneas ultrafinas de separación */
+  --ring: #111111;
+  --overlay: rgba(250, 245, 235, 0.9);
 
-  --shadow: 0 10px 40px -10px rgba(154, 123, 86, 0.08);
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 
-  --chart-1: #9A7B56;
-  --chart-2: #BFA181;
-  --chart-3: #1C1C1C;
-  --chart-4: #D4C5B0;
-  --chart-5: #6E573B;
-  --chart-active-dot: #9A7B56;
+  --chart-1: #111111;
+  --chart-2: #444444;
+  --chart-3: #888888;
+  --chart-4: #BFA181;
+  --chart-5: #FAF5EB;
+  --chart-active-dot: #111111;
 }
 
 .dark {
-  /* Modo Oscuro - Alta Gama (Negro Suave, Carbón y Oro Apagado) */
-  --background: #1C1C1C; /* Negro suave */
-  --secondary-background: #252525; /* Tarjetas en carbón sutil */
-  --foreground: #F4F4F4; /* Gris claro para texto principal */
-  --main-foreground: #1C1C1C; /* Negro suave sobre el oro principal */
+  /* Modo Oscuro Marco Nava Studio */
+  --background: #111111; /* Negro noche suave */
+  --secondary-background: #1A1A1A; /* Tarjeta carbón */
+  --foreground: #FAF5EB; /* Texto crema editorial */
+  --main-foreground: #111111; /* Texto negro sobre botones claros */
 
-  --main: #BFA181; /* Oro apagado radiante en fondo oscuro */
-  --border: rgba(191, 161, 129, 0.18); /* Borde sutil con tinte dorado */
-  --ring: #BFA181;
-  --overlay: rgba(28, 28, 28, 0.85);
+  --main: #FAF5EB; /* Crema radiante */
+  --border: rgba(250, 245, 235, 0.12); /* Líneas ultrafinas claras */
+  --ring: #FAF5EB;
+  --overlay: rgba(17, 17, 17, 0.9);
 
-  --shadow: 0 10px 40px -10px rgba(0,0,0,0.6);
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
 
-  --chart-active-dot: #BFA181;
+  --chart-active-dot: #FAF5EB;
 }
 
 @theme inline {

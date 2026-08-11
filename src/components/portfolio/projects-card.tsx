@@ -1,29 +1,29 @@
-import { FileText } from "lucide-react"
 import projects from "@/data/reviews"
 
 export default function ProjectsCard() {
   return (
-    <div id="projects" className="md:col-span-2 lg:col-span-2 row-span-2 bg-secondary-background rounded-base p-8 sm:p-10 shadow-shadow border border-border flex flex-col">
-      <h2 className="text-3xl font-heading mb-8">Proyectos Destacados</h2>
-      <div className="grid grid-cols-1 gap-4 flex-1 overflow-y-auto pr-2 scrollbar-thin">
-        {projects.map((project, index) => (
-          <div key={index} className="bg-background rounded-2xl p-5 border border-border transition-colors hover:border-foreground/20">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-secondary-background rounded-xl">
-                <FileText className="size-5" />
-              </div>
-              <div>
-                <h4 className="text-lg font-heading leading-none text-foreground">
+    <div id="projects" className="md:col-span-2 lg:col-span-2 row-span-2 bg-secondary-background/60 rounded-2xl p-8 sm:p-10 border border-border flex flex-col justify-between transition-all hover:border-foreground/30">
+      <div>
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
+          <h2 className="text-2xl font-serif italic">Proyectos Destacados</h2>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/40 font-semibold">[ SELECCIÓN ]</span>
+        </div>
+        <div className="space-y-5 max-h-[360px] overflow-y-auto pr-2 scrollbar-thin">
+          {projects.map((project, index) => (
+            <div key={index} className="p-4 rounded-xl border border-border/60 bg-background/40 hover:border-foreground/20 transition-all">
+              <div className="flex justify-between items-baseline mb-1">
+                <h4 className="text-base font-heading uppercase tracking-wide">
                   {project.fullName}
                 </h4>
-                <p className="text-xs text-[#9A7B56] dark:text-[#D4C5B0] font-semibold mt-1">{project.jobTitle}</p>
+                <span className="text-[10px] text-foreground/50 uppercase tracking-widest font-mono">0{index + 1}</span>
               </div>
+              <p className="text-[11px] uppercase tracking-wider text-foreground/60 font-semibold mb-2">{project.jobTitle}</p>
+              <p className="text-xs text-foreground/75 leading-relaxed">
+                {project.review}
+              </p>
             </div>
-            <p className="text-sm text-foreground/80 leading-relaxed">
-              {project.review}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

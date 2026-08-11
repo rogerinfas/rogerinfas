@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="mt-20 text-center text-sm text-foreground/50">
-      <p>&copy; {new Date().getFullYear()} Roger Infa Sánchez. Todos los derechos reservados.</p>
+    <footer className="mt-24 pt-8 border-t border-border/40 text-center text-xs uppercase tracking-widest text-foreground/40 font-mono">
+      <p>&copy; {new Date().getFullYear()} ROGER INFA STUDIO. ALL RIGHTS RESERVED.</p>
     </footer>
   )
 }

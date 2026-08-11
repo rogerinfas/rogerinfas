@@ -1,45 +1,37 @@
 import Link from "next/link"
-import { ArrowUpRight, Github, Linkedin, Code2 } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 export default function HeroCard() {
   return (
-    <div className="md:col-span-2 lg:col-span-2 row-span-2 bg-secondary-background rounded-base p-8 sm:p-10 shadow-shadow flex flex-col justify-between border border-border transition-transform hover:-translate-y-1 group relative overflow-hidden">
-      <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-        <Code2 size={200} />
-      </div>
+    <div className="md:col-span-2 lg:col-span-2 row-span-2 bg-secondary-background/60 rounded-2xl p-8 sm:p-12 border border-border flex flex-col justify-between transition-all hover:border-foreground/30 relative overflow-hidden group">
       <div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading tracking-tight text-foreground mb-4">
-          Roger Infa Sánchez
+        <div className="text-xs uppercase tracking-[0.25em] text-foreground/50 font-semibold mb-6">
+          [ PORTAFOLIO DE INGENIERÍA ]
+        </div>
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-heading tracking-tight text-foreground leading-[1.1] mb-6">
+          ROGER INFA <br />
+          <span className="font-serif italic font-normal text-foreground/80">SÁNCHEZ</span>
         </h1>
-        <h2 className="text-xl sm:text-2xl font-heading text-[#9A7B56] dark:text-[#D4C5B0] mb-6 uppercase tracking-wider">
-          Ingeniero de Software
+        <h2 className="text-lg sm:text-xl font-serif italic text-foreground/70 mb-8 border-l-2 border-foreground/30 pl-4 py-1">
+          Ingeniero de Software & Arquitecto de Sistemas Escalables
         </h2>
-        <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-md">
-          Más de 3 años de experiencia en el diseño de arquitecturas escalables, integración de sistemas complejos y creación de soluciones empresariales B2B. Orientado al alto rendimiento y código limpio.
+        <p className="text-base sm:text-lg text-foreground/75 leading-relaxed max-w-lg">
+          Más de 3 años de experiencia en el diseño e integración de arquitecturas desacopladas, microservicios y soluciones B2B de alto rendimiento.
         </p>
       </div>
-      <div className="mt-8 flex gap-4">
+
+      <div className="mt-10 flex items-center gap-6 flex-wrap">
         <Link
-          className="inline-flex items-center gap-2 bg-main text-main-foreground rounded-full px-6 py-3 font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          className="inline-flex items-center gap-3 bg-main text-main-foreground rounded-full px-8 py-4 text-sm font-medium tracking-wider uppercase transition-all hover:opacity-90 hover:scale-105"
           href="#projects"
         >
-          Ver Proyectos <ArrowUpRight size={20} />
+          Explorar Proyectos <ArrowUpRight size={18} />
         </Link>
         <Link
-          className="inline-flex items-center justify-center size-12 bg-foreground text-background rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          href="https://github.com/rogerinfas"
-          target="_blank"
-          aria-label="GitHub"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-foreground/70 hover:text-foreground underline underline-offset-8 transition-colors"
+          href="mailto:contactorogeris@gmail.com"
         >
-          <Github size={20} />
-        </Link>
-        <Link
-          className="inline-flex items-center justify-center size-12 bg-[#0077b5] text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
-          href="https://linkedin.com/in/roger-infa-sanchez"
-          target="_blank"
-          aria-label="LinkedIn"
-        >
-          <Linkedin size={20} />
+          Contactar Directamente
         </Link>
       </div>
     </div>
