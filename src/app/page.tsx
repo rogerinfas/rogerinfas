@@ -45,7 +45,7 @@ export default function Home() {
   const activeProject = projects[currentSlide]
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-black text-white font-sans selection:bg-white selection:text-black">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#0a0f0a] text-white font-sans selection:bg-white selection:text-black">
       
       {/* Fullscreen Dark Forest Background Image */}
       <div className="absolute inset-0 z-0">
@@ -54,95 +54,102 @@ export default function Home() {
           alt="Dark Forest Foliage Background"
           fill
           priority
-          className="object-cover object-center scale-105 filter brightness-[0.75] contrast-[1.1] transition-all duration-1000"
+          className="object-cover object-center scale-105 filter brightness-[0.70] contrast-[1.15] blur-[0.4px] transition-all duration-1000"
         />
-        {/* Subtle Dark Vignette & Atmospheric Radial Gradient */}
-        <div className="absolute inset-0 bg-radial from-transparent via-black/30 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+        {/* Soft Vignette & Smooth Gradient Overlays for Feathered Edges */}
+        <div className="absolute inset-0 bg-radial from-transparent via-black/35 to-black/85 pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black/90 via-black/50 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 flex min-h-screen flex-col justify-between p-6 sm:p-10 lg:p-14">
+      <div className="relative z-10 flex min-h-screen flex-col justify-between p-6 sm:p-10 lg:p-12">
         
-        {/* TOP NAVIGATION BAR */}
+        {/* TOP NAVIGATION BAR WITH SOFT BLURRED BACKGROUND */}
         <header className="flex items-center justify-between w-full">
-          {/* Logo - Quote Icon */}
+          {/* Logo - Double Quote Symbol */}
           <Link
             href="/"
-            className="text-3xl sm:text-4xl font-serif tracking-tighter hover:opacity-80 transition-opacity flex items-center justify-center size-10"
+            className="text-3xl sm:text-4xl font-serif tracking-tighter hover:opacity-80 transition-opacity flex items-center justify-center size-9 text-white drop-shadow-md"
             aria-label="Komma Studio Logo"
           >
-            <span className="font-bold text-4xl leading-none selection:bg-transparent">”</span>
+            <span className="font-bold text-3xl sm:text-4xl leading-none">”</span>
           </Link>
 
           {/* Right Actions */}
           <div className="flex items-center gap-3 sm:gap-4">
             <a
               href="mailto:hello@kommakomma.studio"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-5 py-2.5 text-xs font-mono tracking-wider uppercase backdrop-blur-md transition-all hover:border-white/50 hover:bg-black/60 hover:scale-105"
+              className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
             >
               <span>Book a call</span>
-              <ArrowUpRight className="size-3.5" />
+              <span className="inline-flex items-center justify-center size-4 rounded bg-white/10 text-white text-[10px]">
+                ➔
+              </span>
             </a>
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex size-10 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md transition-all hover:border-white/50 hover:scale-105"
+              className="flex size-9 items-center justify-center rounded-md border border-white/15 bg-[#18181b]/70 backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:scale-[1.02] cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
-              {menuOpen ? <X className="size-4" /> : <div className="flex flex-col gap-1.5 w-4 items-center">
-                <span className="w-full h-[1.5px] bg-white rounded-full"></span>
-                <span className="w-full h-[1.5px] bg-white rounded-full"></span>
-              </div>}
+              {menuOpen ? (
+                <X className="size-4" />
+              ) : (
+                <div className="flex flex-col gap-1 w-3.5 items-center">
+                  <span className="w-full h-[1.5px] bg-white rounded-full"></span>
+                  <span className="w-full h-[1.5px] bg-white rounded-full"></span>
+                </div>
+              )}
             </button>
           </div>
         </header>
 
         {/* CENTER HERO POSTER ARTWORK & OVERLAY METADATA */}
-        <div className="relative flex flex-1 items-center justify-center py-12">
+        <div className="relative flex flex-1 items-center justify-center py-10">
           
           {/* HORIZONTAL METADATA BAR OVERLAY */}
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 hidden md:flex items-center justify-between px-4 lg:px-12 text-xs font-mono tracking-widest text-white/80 pointer-events-none z-20">
-            <span className="uppercase tracking-[0.25em]">{activeProject.subtitle}</span>
-            <span className="uppercase tracking-[0.25em] font-semibold">{activeProject.title}</span>
-            <span className="uppercase tracking-[0.25em]">{activeProject.year}</span>
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 hidden md:flex items-center justify-between px-6 lg:px-16 text-[11px] font-mono tracking-[0.25em] text-white/75 pointer-events-none z-20">
+            <span className="uppercase">{activeProject.subtitle}</span>
+            <span className="uppercase font-semibold tracking-[0.3em]">{activeProject.title}</span>
+            <span className="uppercase">{activeProject.year}</span>
             <button
               onClick={() => setCurrentSlide((prev) => (prev + 1) % projects.length)}
-              className="pointer-events-auto flex items-center gap-2 uppercase tracking-[0.2em] hover:text-white transition-colors group cursor-pointer"
+              className="pointer-events-auto flex items-center gap-2 uppercase hover:text-white transition-colors group cursor-pointer"
             >
               <span>VIEW PROJECT</span>
-              <span className="inline-flex items-center justify-center size-5 rounded-full border border-white/30 text-[10px] group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
+              <span className="inline-flex items-center justify-center size-5 rounded-md border border-white/30 text-[10px] group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
                 <ArrowRight className="size-3" />
               </span>
             </button>
           </div>
 
-          {/* FLOATING CENTER POSTER CARD */}
-          <div className="group relative z-10 w-[270px] sm:w-[320px] md:w-[360px] lg:w-[400px] aspect-[3/4] rounded-md overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] border border-white/10 transition-transform duration-700 hover:scale-[1.02] cursor-pointer">
+          {/* FLOATING CENTER POSTER CARD WITH SOFT FEATHERED SHADOW */}
+          <div className="group relative z-10 w-[260px] sm:w-[310px] md:w-[350px] lg:w-[380px] aspect-[3/4] rounded-sm overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] border border-white/10 transition-all duration-700 hover:scale-[1.015] cursor-pointer">
             <Image
               src={activeProject.poster}
               alt={activeProject.title}
               fill
               priority
-              className="object-cover object-center filter drop-shadow-2xl transition-transform duration-700 group-hover:scale-105"
+              className="object-cover object-center filter transition-transform duration-700 group-hover:scale-105"
             />
-            {/* Soft inner glow highlight */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-white/10 opacity-60 pointer-events-none" />
+            {/* Subtle paper finish inner vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10 opacity-70 pointer-events-none" />
           </div>
         </div>
 
         {/* BOTTOM SECTION: HEADLINE & SLIDE PAGINATION */}
-        <footer className="grid grid-cols-1 md:grid-cols-12 items-end gap-6 w-full pt-6">
+        <footer className="grid grid-cols-1 md:grid-cols-12 items-end gap-6 w-full pt-4">
           
           {/* Left Large Editorial Text */}
           <div className="md:col-span-8 lg:col-span-7">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-white/95 max-w-2xl font-sans">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-white/95 max-w-2xl font-sans drop-shadow-md">
               {activeProject.headline}
             </p>
           </div>
 
           {/* Mobile Metadata Link (visible on mobile only) */}
-          <div className="flex md:hidden items-center justify-between text-xs font-mono tracking-widest text-white/70 py-2 border-t border-white/10">
+          <div className="flex md:hidden items-center justify-between text-[11px] font-mono tracking-widest text-white/70 py-2 border-t border-white/10">
             <span>{activeProject.subtitle}</span>
             <span className="font-bold text-white">{activeProject.title}</span>
             <span>{activeProject.year}</span>
@@ -185,9 +192,9 @@ export default function Home() {
             <span className="font-serif text-3xl">”</span>
             <button
               onClick={() => setMenuOpen(false)}
-              className="size-10 flex items-center justify-center rounded-full border border-white/20 text-white"
+              className="size-9 flex items-center justify-center rounded-md border border-white/20 text-white"
             >
-              <X className="size-5" />
+              <X className="size-4" />
             </button>
           </div>
 
