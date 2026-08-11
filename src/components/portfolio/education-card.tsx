@@ -7,37 +7,47 @@ import {
 
 export default function EducationCard() {
   return (
-    <div className="md:col-span-3 lg:col-span-4 bg-secondary-background/60 rounded-2xl p-8 sm:p-10 border border-border flex flex-col md:flex-row gap-8 items-start md:items-center justify-between transition-all hover:border-foreground/30">
-      <div>
-        <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/40 font-semibold block mb-2">[ ACADÉMICO ]</span>
-        <h2 className="text-3xl font-serif italic mb-2">Educación & Certificaciones</h2>
-        <p className="text-xs text-foreground/60 max-w-xl leading-relaxed">Formación académica universitaria y especializaciones técnicas en arquitectura de software y desarrollo web.</p>
+    <div className="space-y-12">
+      <div className="flex items-center justify-between border-b border-border pb-4">
+        <span className="text-xs uppercase tracking-[0.3em] font-semibold text-foreground/50">[ 04 / EDUCACIÓN & CERTIFICACIONES ]</span>
+        <span className="text-xs uppercase tracking-widest text-foreground/40 font-mono">FORMACIÓN</span>
       </div>
-      
-      <Accordion
-        className="w-full md:w-[500px] bg-background/50 rounded-xl px-6 py-1 border border-border/80"
-        type="single"
-        collapsible
-      >
-        <AccordionItem className="border-b border-border/60" value="edu-1">
-          <AccordionTrigger className="text-left font-heading text-xs uppercase tracking-wider py-4 hover:no-underline hover:text-foreground/70">
-            Universidad La Salle (2021 - Presente)
-          </AccordionTrigger>
-          <AccordionContent className="text-xs text-foreground/75 pb-4 leading-relaxed">
-            Ingeniería de Software. Proyecto de tesis enfocado en optimización de rutas de transporte urbano implementando algoritmos de geolocalización y movilidad inteligente.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem className="border-none" value="cert-1">
-          <AccordionTrigger className="text-left font-heading text-xs uppercase tracking-wider py-4 hover:no-underline hover:text-foreground/70">
-            Certificaciones Técnicas (Udemy & Cisco)
-          </AccordionTrigger>
-          <AccordionContent className="text-xs text-foreground/75 pb-4 space-y-2">
-            <p>• Flask y MySQL – Desarrollo Web Integral (2025)</p>
-            <p>• APIs RESTful con Python, FastAPI y JWT (2025)</p>
-            <p>• Cisco Networking Academy (2022)</p>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="lg:col-span-5 space-y-3">
+          <h2 className="text-3xl sm:text-4xl font-serif italic">Formación Académica Continuada</h2>
+          <p className="text-sm text-foreground/70 leading-relaxed">
+            Ingeniería universitaria acreditada y certificaciones técnicas especializadas en desarrollo backend y cloud.
+          </p>
+        </div>
+
+        <div className="lg:col-span-7">
+          <Accordion
+            className="w-full border border-border rounded-2xl px-8 py-2 bg-secondary-background/40 divide-y divide-border"
+            type="single"
+            collapsible
+          >
+            <AccordionItem className="border-b border-border" value="edu-1">
+              <AccordionTrigger className="text-left font-heading text-sm uppercase tracking-wider py-6 hover:no-underline hover:text-foreground/70">
+                Universidad La Salle (2021 - Presente)
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-foreground/75 pb-6 leading-relaxed">
+                Ingeniería de Software. Proyecto de tesis enfocado en optimización de rutas de transporte urbano implementando algoritmos de geolocalización y movilidad inteligente.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem className="border-none" value="cert-1">
+              <AccordionTrigger className="text-left font-heading text-xs uppercase tracking-wider py-6 hover:no-underline hover:text-foreground/70">
+                Certificaciones Técnicas Especializadas
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-foreground/75 pb-6 space-y-3">
+                <p>• Flask y MySQL – Desarrollo Web Integral (2025)</p>
+                <p>• APIs RESTful con Python, FastAPI y JWT (2025)</p>
+                <p>• Cisco Networking Academy (2022)</p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
     </div>
   )
 }

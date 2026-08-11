@@ -18,27 +18,40 @@ export default function ExperienceCard() {
       role: "Desarrollador Frontend",
       description: "Desarrollo de aplicaciones web transaccionales de alto tráfico para LATAM con Vue.js y TailwindCSS.",
     },
+    {
+      company: "MF Gastronomía y Calidad",
+      period: "2024 – 2025",
+      role: "Asistente de TI",
+      description: "Mantenimiento de infraestructura web y automatización de procesos de recepción de pedidos.",
+    },
   ]
 
   return (
-    <div id="experience" className="md:col-span-2 lg:col-span-2 row-span-2 bg-secondary-background/60 rounded-2xl p-8 sm:p-10 border border-border flex flex-col justify-between transition-all hover:border-foreground/30">
-      <div>
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
-          <h2 className="text-2xl font-serif italic">Experiencia Profesional</h2>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/40 font-semibold">[ TRAYECTORIA ]</span>
-        </div>
-        <div className="space-y-6">
-          {experiences.map((exp, index) => (
-            <div key={index} className="group">
-              <div className="flex justify-between items-baseline mb-1">
-                <h3 className="text-lg font-heading tracking-wide uppercase group-hover:text-foreground/80 transition-colors">{exp.company}</h3>
-                <span className="text-[10px] uppercase tracking-widest text-foreground/40 font-mono">{exp.period}</span>
+    <div className="space-y-12">
+      <div className="flex items-center justify-between border-b border-border pb-4">
+        <span className="text-xs uppercase tracking-[0.3em] font-semibold text-foreground/50">[ 03 / TRAYECTORIA PROFESIONAL ]</span>
+        <span className="text-xs uppercase tracking-widest text-foreground/40 font-mono">EXPERIENCIA</span>
+      </div>
+
+      <div className="divide-y divide-border border-b border-border">
+        {experiences.map((exp, index) => (
+          <div key={index} className="py-8 px-4 group hover:bg-secondary-background/40 transition-colors rounded-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div className="lg:col-span-3">
+                <span className="text-xs font-mono tracking-widest text-foreground/50 block mb-1">{exp.period}</span>
+                <span className="text-xs uppercase tracking-wider text-foreground/70 font-semibold">{exp.role}</span>
               </div>
-              <p className="text-xs uppercase tracking-wider text-foreground/60 font-semibold mb-2">{exp.role}</p>
-              <p className="text-xs text-foreground/75 leading-relaxed">{exp.description}</p>
+              <div className="lg:col-span-4">
+                <h3 className="text-2xl md:text-3xl font-heading uppercase tracking-wide group-hover:font-serif group-hover:italic transition-all">
+                  {exp.company}
+                </h3>
+              </div>
+              <div className="lg:col-span-5 text-sm text-foreground/75 leading-relaxed">
+                {exp.description}
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   )
