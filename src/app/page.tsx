@@ -83,35 +83,37 @@ export default function Home() {
             </Link>
 
             {/* Right Actions - Hidden when menu is open */}
-            {!menuOpen && (
-              <div className="flex items-center gap-3 sm:gap-4">
-                <a
-                  href="https://cal.eu/kommakomma"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
-                >
-                  <span>Book a call</span>
-                  <span className="inline-flex items-center justify-center size-4 rounded bg-white/10 text-white text-[10px]">
-                    ➔
-                  </span>
-                </a>
+            <div
+              className={`flex items-center gap-3 sm:gap-4 transition-opacity duration-300 ${
+                menuOpen ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
+              }`}
+            >
+              <a
+                href="https://cal.eu/kommakomma"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
+              >
+                <span>Book a call</span>
+                <span className="inline-flex items-center justify-center size-4 rounded bg-white/10 text-white text-[10px]">
+                  ➔
+                </span>
+              </a>
 
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setMenuOpen(true)
-                  }}
-                  className="flex size-9 items-center justify-center rounded-md border border-white/15 bg-[#18181b]/70 backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:scale-[1.02] cursor-pointer"
-                  aria-label="Open Navigation Menu"
-                >
-                  <div className="flex flex-col gap-1 w-3.5 items-center">
-                    <span className="w-full h-[1.5px] bg-white rounded-full"></span>
-                    <span className="w-full h-[1.5px] bg-white rounded-full"></span>
-                  </div>
-                </button>
-              </div>
-            )}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setMenuOpen(true)
+                }}
+                className="flex size-9 items-center justify-center rounded-md border border-white/15 bg-[#18181b]/70 backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:scale-[1.02] cursor-pointer"
+                aria-label="Open Navigation Menu"
+              >
+                <div className="flex flex-col gap-1 w-3.5 items-center">
+                  <span className="w-full h-[1.5px] bg-white rounded-full"></span>
+                  <span className="w-full h-[1.5px] bg-white rounded-full"></span>
+                </div>
+              </button>
+            </div>
           </header>
 
           {/* CENTER OVERLAY METADATA LINE */}
@@ -177,77 +179,80 @@ export default function Home() {
         </div>
       </div>
 
-      {/* RIGHT SIDE MENU PANEL - VISIBLE WHEN MENU IS OPEN */}
-      {menuOpen && (
-        <div className="w-[300px] sm:w-[360px] md:w-[400px] h-screen bg-[#EDEDED] text-black flex flex-col justify-between p-8 sm:p-10 shrink-0 z-50 animate-in slide-in-from-right duration-500">
+      {/* RIGHT SIDE MENU PANEL - ALWAYS MOUNTED WITH SMOOTH WIDTH TRANSITION */}
+      <div
+        className={`h-screen bg-[#EDEDED] text-black flex flex-col justify-between shrink-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          menuOpen
+            ? "w-[300px] sm:w-[360px] md:w-[400px] p-8 sm:p-10 opacity-100 pointer-events-auto"
+            : "w-0 p-0 opacity-0 pointer-events-none overflow-hidden"
+        }`}
+      >
+        {/* Drawer Top Header with X Close */}
+        <div className="flex justify-end min-w-[240px]">
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="text-black hover:opacity-60 transition-opacity p-1 cursor-pointer"
+            aria-label="Close Navigation Menu"
+          >
+            <X className="size-6 stroke-[1.5]" />
+          </button>
+        </div>
+
+        {/* Menu Items List */}
+        <div className="flex flex-col gap-2 my-auto min-w-[240px]">
+          {navItems.map((item) => {
+            const isActive = activeTab === item
+            return (
+              <button
+                key={item}
+                onClick={() => {
+                  setActiveTab(item)
+                  setMenuOpen(false)
+                }}
+                className={`text-left text-3xl sm:text-4xl font-sans tracking-tight transition-all px-4 py-2 ${
+                  isActive
+                    ? "bg-[#E54838] text-white font-normal"
+                    : "text-black hover:opacity-60 font-normal"
+                }`}
+              >
+                {item}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Drawer Footer Details */}
+        <div className="border-t border-black/15 pt-6 grid grid-cols-2 gap-4 text-left min-w-[240px]">
           
-          {/* Drawer Top Header with X Close */}
-          <div className="flex justify-end">
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="text-black hover:opacity-60 transition-opacity p-1 cursor-pointer"
-              aria-label="Close Navigation Menu"
-            >
-              <X className="size-6 stroke-[1.5]" />
-            </button>
+          {/* Column 1: Legal */}
+          <div>
+            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Legal</p>
+            <div className="space-y-1">
+              <a href="#terms" className="text-xs text-black/85 hover:text-black block transition-colors">
+                Terms of use
+              </a>
+              <a href="#transparency" className="text-xs text-black/85 hover:text-black block transition-colors">
+                Transparency Statement
+              </a>
+            </div>
           </div>
 
-          {/* Menu Items List */}
-          <div className="flex flex-col gap-2 my-auto">
-            {navItems.map((item) => {
-              const isActive = activeTab === item
-              return (
-                <button
-                  key={item}
-                  onClick={() => {
-                    setActiveTab(item)
-                    setMenuOpen(false)
-                  }}
-                  className={`text-left text-3xl sm:text-4xl font-sans tracking-tight transition-all px-4 py-2 ${
-                    isActive
-                      ? "bg-[#E54838] text-white font-normal"
-                      : "text-black hover:opacity-60 font-normal"
-                  }`}
-                >
-                  {item}
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Drawer Footer Details */}
-          <div className="border-t border-black/15 pt-6 grid grid-cols-2 gap-4 text-left">
-            
-            {/* Column 1: Legal */}
-            <div>
-              <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Legal</p>
-              <div className="space-y-1">
-                <a href="#terms" className="text-xs text-black/85 hover:text-black block transition-colors">
-                  Terms of use
-                </a>
-                <a href="#transparency" className="text-xs text-black/85 hover:text-black block transition-colors">
-                  Transparency Statement
-                </a>
-              </div>
+          {/* Column 2: Contact */}
+          <div>
+            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Contact</p>
+            <div className="space-y-1">
+              <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
+                hello@kommakomma.is
+              </a>
+              <a href="https://cal.eu/kommakomma" target="_blank" rel="noreferrer" className="text-xs text-black/85 hover:text-black block transition-colors">
+                Book a call?
+              </a>
             </div>
-
-            {/* Column 2: Contact */}
-            <div>
-              <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Contact</p>
-              <div className="space-y-1">
-                <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
-                  hello@kommakomma.is
-                </a>
-                <a href="https://cal.eu/kommakomma" target="_blank" rel="noreferrer" className="text-xs text-black/85 hover:text-black block transition-colors">
-                  Book a call?
-                </a>
-              </div>
-            </div>
-
           </div>
 
         </div>
-      )}
+
+      </div>
 
     </div>
   )
