@@ -82,38 +82,36 @@ export default function Home() {
               <span className="font-bold text-3xl sm:text-4xl leading-none">”</span>
             </Link>
 
-            {/* Right Actions */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <a
-                href="https://cal.eu/kommakomma"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
-              >
-                <span>Book a call</span>
-                <span className="inline-flex items-center justify-center size-4 rounded bg-white/10 text-white text-[10px]">
-                  ➔
-                </span>
-              </a>
+            {/* Right Actions - Hidden when menu is open */}
+            {!menuOpen && (
+              <div className="flex items-center gap-3 sm:gap-4">
+                <a
+                  href="https://cal.eu/kommakomma"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
+                >
+                  <span>Book a call</span>
+                  <span className="inline-flex items-center justify-center size-4 rounded bg-white/10 text-white text-[10px]">
+                    ➔
+                  </span>
+                </a>
 
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setMenuOpen(!menuOpen)
-                }}
-                className="flex size-9 items-center justify-center rounded-md border border-white/15 bg-[#18181b]/70 backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:scale-[1.02] cursor-pointer"
-                aria-label="Toggle Navigation Menu"
-              >
-                {menuOpen ? (
-                  <X className="size-4" />
-                ) : (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setMenuOpen(true)
+                  }}
+                  className="flex size-9 items-center justify-center rounded-md border border-white/15 bg-[#18181b]/70 backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:scale-[1.02] cursor-pointer"
+                  aria-label="Open Navigation Menu"
+                >
                   <div className="flex flex-col gap-1 w-3.5 items-center">
                     <span className="w-full h-[1.5px] bg-white rounded-full"></span>
                     <span className="w-full h-[1.5px] bg-white rounded-full"></span>
                   </div>
-                )}
-              </button>
-            </div>
+                </button>
+              </div>
+            )}
           </header>
 
           {/* CENTER OVERLAY METADATA LINE */}
