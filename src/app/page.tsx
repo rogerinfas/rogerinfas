@@ -245,7 +245,7 @@ export default function Home() {
       <div
         className={`fixed top-0 right-0 h-screen bg-[#F4F4F0] text-black z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
           menuOpen
-            ? "w-[300px] sm:w-[360px] md:w-[400px] opacity-100 pointer-events-auto shadow-2xl"
+            ? "w-[300px] sm:w-[360px] md:w-[400px] opacity-100 pointer-events-auto border-l border-black/5"
             : "w-0 opacity-0 pointer-events-none"
         }`}
       >
@@ -260,7 +260,7 @@ export default function Home() {
             </button>
           </div>
 
-          <div className="flex flex-col gap-2 my-auto">
+          <div className="flex flex-col gap-2.5 mt-10 sm:mt-14 mb-auto">
             {navItems.map((item) => {
               const isActive = activeTab === item.name
               return (
@@ -309,10 +309,10 @@ export default function Home() {
 
       {/* MAIN SITE CANVAS CONTAINER */}
       <main
-        className={`relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#0a0f0a] text-white ${
+        className={`relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#F4F4F0] text-white ${
           menuOpen
-            ? "mr-[300px] sm:mr-[360px] md:mr-[400px] my-3.5 ml-3.5 rounded-[20px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] border border-white/20 overflow-hidden cursor-pointer"
-            : "mr-0 my-0 ml-0 rounded-none shadow-none border-transparent"
+            ? "mr-[300px] sm:mr-[360px] md:mr-[400px] my-3.5 ml-3.5 rounded-[20px] shadow-lg border-none overflow-hidden cursor-pointer"
+            : "mr-0 my-0 ml-0 rounded-none shadow-none border-none"
         }`}
         onClick={() => menuOpen && setMenuOpen(false)}
       >
