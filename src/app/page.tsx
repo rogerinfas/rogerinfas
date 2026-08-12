@@ -85,6 +85,49 @@ export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-[#EDEDED] text-black font-sans selection:bg-white selection:text-black overflow-x-hidden">
       
+      {/* ALWAYS-VISIBLE FIXED TOP NAVBAR MATCHING EXACT SPECIFICATION */}
+      <header className="fixed top-0 inset-x-0 z-40 p-6 sm:p-10 lg:p-12 flex items-center justify-between pointer-events-none">
+        {/* Logo - Double Quote Symbol directly on screen */}
+        <Link
+          href="/"
+          className="pointer-events-auto text-4xl sm:text-5xl font-bold font-serif text-white tracking-tighter hover:opacity-80 transition-opacity drop-shadow-md select-none mix-blend-difference"
+          aria-label="Komma Studio Logo"
+        >
+          ”
+        </Link>
+
+        {/* Right Actions: Dark 'Book a call' button with white arrow box & 2 parallel lines */}
+        <div
+          className={`pointer-events-auto flex items-center gap-5 sm:gap-6 transition-opacity duration-300 ${
+            menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        >
+          <a
+            href="https://cal.eu/kommakomma"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 rounded-md bg-[#141414] px-4 py-2 text-sm font-medium tracking-tight text-white shadow-md transition-all hover:bg-black hover:scale-[1.02]"
+          >
+            <span className="text-xs sm:text-sm font-sans font-normal">Book a call</span>
+            <span className="flex size-5 items-center justify-center rounded-[3px] bg-white text-black">
+              <ArrowRight className="size-3.5 stroke-[2.5]" />
+            </span>
+          </a>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setMenuOpen(true)
+            }}
+            className="flex flex-col justify-center gap-[6px] p-2 cursor-pointer hover:opacity-80 transition-opacity mix-blend-difference"
+            aria-label="Open Navigation Menu"
+          >
+            <span className="w-7 h-[2px] bg-white rounded-full"></span>
+            <span className="w-7 h-[2px] bg-white rounded-full"></span>
+          </button>
+        </div>
+      </header>
+
       {/* FIXED SIDE MENU PANEL */}
       <div
         className={`fixed top-0 right-0 h-screen bg-[#EDEDED] text-black z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
@@ -205,51 +248,8 @@ export default function Home() {
           </div>
 
           {/* Hero Content Overlay */}
-          <div className="relative z-30 flex h-full flex-col justify-between p-6 sm:p-10 lg:p-12">
+          <div className="relative z-30 flex h-full flex-col justify-between p-6 sm:p-10 lg:p-12 pt-24 sm:pt-28">
             
-            {/* Top Navigation */}
-            <header className="flex items-center justify-between w-full">
-              <Link
-                href="/"
-                className="text-3xl sm:text-4xl font-serif tracking-tighter hover:opacity-80 transition-opacity flex items-center justify-center size-9 text-white drop-shadow-md"
-                aria-label="Komma Studio Logo"
-              >
-                <span className="font-bold text-3xl sm:text-4xl leading-none">”</span>
-              </Link>
-
-              <div
-                className={`flex items-center gap-3 sm:gap-4 transition-opacity duration-300 ${
-                  menuOpen ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
-                }`}
-              >
-                <a
-                  href="https://cal.eu/kommakomma"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-[#18181b]/70 px-3.5 py-1.5 text-[11px] font-mono tracking-wide uppercase backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:bg-[#18181b]/90 hover:scale-[1.02]"
-                >
-                  <span>Book a call</span>
-                  <span className="inline-flex items-center justify-center size-4 rounded bg-white/10 text-white text-[10px]">
-                    ➔
-                  </span>
-                </a>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setMenuOpen(true)
-                  }}
-                  className="flex size-9 items-center justify-center rounded-md border border-white/15 bg-[#18181b]/70 backdrop-blur-md shadow-lg transition-all hover:border-white/35 hover:scale-[1.02] cursor-pointer"
-                  aria-label="Open Navigation Menu"
-                >
-                  <div className="flex flex-col gap-1 w-3.5 items-center">
-                    <span className="w-full h-[1.5px] bg-white rounded-full"></span>
-                    <span className="w-full h-[1.5px] bg-white rounded-full"></span>
-                  </div>
-                </button>
-              </div>
-            </header>
-
             {/* Center Metadata Line */}
             <div className="relative flex flex-1 items-center justify-between px-2 sm:px-6 text-[11px] font-mono tracking-[0.25em] text-white/85 pointer-events-none">
               <span className="uppercase">{activeProject.subtitle}</span>
