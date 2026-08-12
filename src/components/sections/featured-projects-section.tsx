@@ -93,41 +93,6 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
 
         </div>
 
-        {/* VERTICAL PARALLAX IMAGE CAROUSEL / GALLERY STACK */}
-        <div className="pt-16 space-y-16">
-          <p className="text-xs font-mono uppercase tracking-widest text-black/50">Project Gallery Stack</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.slice(0, 4).map((proj, idx) => (
-              <div
-                key={proj.id}
-                className="relative h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-lg border border-black/10 group cursor-pointer"
-              >
-                {/* Parallax Image inside Card */}
-                <div
-                  className="absolute inset-[-15%] will-change-transform"
-                  style={{
-                    transform: `translate3d(0, ${(scrollY - 1600 - idx * 200) * 0.12}px, 0) scale(1.05)`,
-                  }}
-                >
-                  <Image
-                    src={proj.bgImage}
-                    alt={proj.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                
-                {/* Card Gradient & Metadata Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 sm:p-8 flex flex-col justify-end text-white z-10">
-                  <span className="text-[10px] font-mono uppercase tracking-widest opacity-80">{proj.year}</span>
-                  <h4 className="text-2xl sm:text-3xl font-sans font-medium tracking-tight">{proj.title}</h4>
-                  <p className="text-xs font-light opacity-90 line-clamp-2 mt-1">{proj.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
       </div>
     </section>

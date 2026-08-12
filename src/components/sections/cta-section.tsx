@@ -1,5 +1,6 @@
 "use client"
 
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
@@ -8,14 +9,33 @@ interface CtaSectionProps {
 }
 
 export function CtaSection({ scrollY }: CtaSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null)
+  const [sectionTop, setSectionTop] = useState(3000)
+
+  useEffect(() => {
+    const measure = () => {
+      if (sectionRef.current) {
+        setSectionTop(sectionRef.current.offsetTop)
+      }
+    }
+    measure()
+    setTimeout(measure, 500) // measure again after layout stabilizes
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [])
+
+  // Calc distance from section top to window scroll, applied to the parallax
+  const parallaxY = (scrollY - sectionTop) * 0.15
+
   return (
-    <section id="contact" className="relative bg-[#141414] text-white px-6 sm:px-12 md:px-16 py-28 md:py-36 overflow-hidden">
+    <section ref={sectionRef} id="contact" className="relative bg-[#141414] text-white px-6 sm:px-12 md:px-16 py-28 md:py-36 overflow-hidden">
       
       {/* Nature Background Image Parallax Layer */}
+      {/* We use inset-[-25%] so the image is taller than the container, giving it room to travel without showing the edges */}
       <div
-        className="absolute inset-0 opacity-30 z-0 pointer-events-none will-change-transform scale-110"
+        className="absolute inset-[-25%] opacity-30 z-0 pointer-events-none will-change-transform"
         style={{
-          transform: `translate3d(0, ${(scrollY - 3000) * 0.22}px, 0)`,
+          transform: `translate3d(0, ${parallaxY}px, 0)`,
         }}
       >
         <Image

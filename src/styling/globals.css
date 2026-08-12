@@ -190,3 +190,15 @@ body::-webkit-scrollbar-thumb,
     scrollbar-color: #000 transparent;
   }
 }
+
+/* Services section pulsing dot animation */
+@keyframes servicesDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Generic fade-in for accordion content */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
