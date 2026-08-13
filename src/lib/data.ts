@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title: "TRANSIGO — MONITOREO GPS",
     year: "2026",
     subtitle: "SISTEMA DE MONITOREO EN TIEMPO REAL",
-    bgImage: "/images/project_merla_bg.png",
+    bgImage: "/images/transigo_preview.png",
     posterImage: "/images/transigo_preview.png",
     description:
       "Aplicación web orientada a la gestión, monitoreo y visualización en tiempo real del sistema de transporte público basado en GPS. Supervisa unidades satelitales mediante WebSockets (Pub/Sub), gestiona rutas y calcula estimaciones de arribo (ETA).",
