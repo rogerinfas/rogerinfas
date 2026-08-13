@@ -36,8 +36,8 @@ export const projects: Project[] = [
     title: "PORTFOLIO EDITORIAL — ROGER INFA",
     year: "2026",
     subtitle: "SISTEMA WEB Y EXPERIENCIA INTERACTIVA",
-    bgImage: "/images/portfolio_bg_main.jpg",
-    posterImage: "/images/portfolio_bg_main.jpg",
+    bgImage: "/images/portfolio_bg_main.png",
+    posterImage: "/images/portfolio_bg_main.png",
     description:
       "Portfolio personal de desarrollador con diseño editorial avanzado, animaciones 3D en canvas, arquitectura desacoplada, selector de proyectos y formulario de contacto interactivo.",
     headline:
