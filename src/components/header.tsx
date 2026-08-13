@@ -6,9 +6,10 @@ import { navItems } from "@/lib/data"
 interface HeaderProps {
   menuOpen: boolean
   onMenuOpen: () => void
+  onContactClick?: () => void
 }
 
-export function Header({ menuOpen, onMenuOpen }: HeaderProps) {
+export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
   return (
     <header className="fixed top-0 inset-x-0 z-40 p-6 sm:p-10 lg:p-12 flex items-center justify-between pointer-events-none">
       {/* Logo - Roger Infa Monogram Logo */}
@@ -26,9 +27,9 @@ export function Header({ menuOpen, onMenuOpen }: HeaderProps) {
           menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
-        <a
-          href="mailto:contactorogeris@gmail.com"
-          className="inline-flex items-center gap-3 rounded-md bg-[#141414] px-4 py-2 text-sm font-medium tracking-tight text-white shadow-md transition-all hover:bg-black hover:scale-[1.02] group"
+        <button
+          onClick={onContactClick}
+          className="inline-flex items-center gap-3 rounded-md bg-[#141414] px-4 py-2 text-sm font-medium tracking-tight text-white shadow-md transition-all hover:bg-black hover:scale-[1.02] cursor-pointer group"
         >
           <span className="text-xs sm:text-sm font-sans font-normal">Contact me</span>
           <span className="flex size-5 items-center justify-center rounded-[3px] bg-white text-black p-0.5">
@@ -45,7 +46,7 @@ export function Header({ menuOpen, onMenuOpen }: HeaderProps) {
               />
             </svg>
           </span>
-        </a>
+        </button>
 
         <button
           onClick={(e) => {

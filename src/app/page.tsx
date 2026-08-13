@@ -11,15 +11,20 @@ import { CapabilitiesSection } from "@/components/sections/capabilities-section"
 import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { CtaSection } from "@/components/sections/cta-section"
 import { FooterSection } from "@/components/sections/footer-section"
+import { ContactModal } from "@/components/contact-modal"
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [contactModalOpen, setContactModalOpen] = useState(false)
   const [activeTab, setActiveTab] = useState("Home")
   const scrollY = useScrollY()
 
   const scrollToSection = useCallback((href: string, tabName: string) => {
     setActiveTab(tabName)
     setMenuOpen(false)
+    if (href === "#contact") {
+      setContactModalOpen(true)
+    }
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
@@ -29,7 +34,11 @@ export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-[#F4F4F0] text-black font-sans selection:bg-black selection:text-white overflow-x-hidden">
       
-      <Header menuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} />
+      <Header
+        menuOpen={menuOpen}
+        onMenuOpen={() => setMenuOpen(true)}
+        onContactClick={() => setContactModalOpen(true)}
+      />
 
       <SideMenu
         menuOpen={menuOpen}
@@ -59,9 +68,11 @@ export default function Home() {
           </div>
         </section>
 
-        <CtaSection scrollY={scrollY} />
+        <CtaSection scrollY={scrollY} onContactClick={() => setContactModalOpen(true)} />
         <FooterSection onNavigate={scrollToSection} />
       </main>
+
+      <ContactModal isOpen={contactModalOpen} onClose={() => setContactModalOpen(false)} />
 
     </div>
   )

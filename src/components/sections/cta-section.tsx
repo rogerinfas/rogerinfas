@@ -6,9 +6,10 @@ import { ArrowRight } from "lucide-react"
 
 interface CtaSectionProps {
   scrollY: number
+  onContactClick?: () => void
 }
 
-export function CtaSection({ scrollY }: CtaSectionProps) {
+export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const [sectionTop, setSectionTop] = useState(3000)
 
@@ -51,13 +52,13 @@ export function CtaSection({ scrollY }: CtaSectionProps) {
           <h3 className="text-4xl sm:text-6xl md:text-7xl font-sans font-light tracking-tight max-w-2xl">
             Have a project or technical role in mind?
           </h3>
-          <a
-            href="mailto:contactorogeris@gmail.com"
-            className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-lg text-sm font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90 hover:scale-105 shadow-xl"
+          <button
+            onClick={onContactClick}
+            className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-lg text-sm font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90 hover:scale-105 cursor-pointer shadow-xl"
           >
             <span>Let&apos;s build together</span>
             <ArrowRight className="size-4" />
-          </a>
+          </button>
         </div>
 
         <div className="size-48 md:size-64 opacity-15 font-mono font-bold text-[140px] leading-none select-none flex items-center justify-center tracking-tighter">
