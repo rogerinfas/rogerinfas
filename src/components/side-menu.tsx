@@ -12,7 +12,7 @@ interface SideMenuProps {
 
 export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuProps) {
   return (
-    <div
+    <aside
       className={`fixed top-0 right-0 h-screen bg-[#F4F4F0] text-black z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
         menuOpen
           ? "w-[300px] sm:w-[360px] md:w-[400px] opacity-100 pointer-events-auto border-l border-black/5"
@@ -30,7 +30,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
           </button>
         </div>
 
-        <div className="flex flex-col gap-2.5 mt-10 sm:mt-14 mb-auto">
+        <nav aria-label="Main Navigation" className="flex flex-col gap-2.5 mt-10 sm:mt-14 mb-auto">
           {navItems.map((item) => {
             const isActive = activeTab === item.name
             return (
@@ -47,34 +47,45 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
               </button>
             )
           })}
-        </div>
+        </nav>
 
         <div className="border-t border-black/15 pt-6 grid grid-cols-2 gap-4 text-left">
           <div>
-            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Legal</p>
+            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Profiles</p>
             <div className="space-y-1">
-              <a href="#terms" className="text-xs text-black/85 hover:text-black block transition-colors">
-                Terms of use
+              <a
+                href="https://github.com/rogerinfas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-black/85 hover:text-black block transition-colors font-medium"
+              >
+                GitHub ↗
               </a>
-              <a href="#transparency" className="text-xs text-black/85 hover:text-black block transition-colors">
-                Transparency Statement
+              <a
+                href="https://www.linkedin.com/in/roger-infa-sanchez/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-black/85 hover:text-black block transition-colors font-medium"
+              >
+                LinkedIn ↗
               </a>
             </div>
           </div>
 
           <div>
-            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Contact</p>
+            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Direct Contact</p>
             <div className="space-y-1">
-              <a href="mailto:hello@kommakomma.is" className="text-xs text-black/85 hover:text-black block transition-colors">
-                hello@kommakomma.is
+              <a
+                href="mailto:contactorogeris@gmail.com"
+                className="text-xs text-black/85 hover:text-black block transition-colors font-medium truncate"
+              >
+                contactorogeris@gmail.com
               </a>
-              <a href="https://cal.eu/kommakomma" target="_blank" rel="noreferrer" className="text-xs text-black/85 hover:text-black block transition-colors">
-                Book a call?
-              </a>
+              <span className="text-xs text-black/60 block">Full-Stack (Backend Focus)</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   )
 }

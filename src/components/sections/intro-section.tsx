@@ -35,19 +35,19 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
         {/* Typography Statement Layout matching Original */}
         <div className="space-y-4">
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-normal tracking-tight leading-[1.12]">
-            You <span className="text-black/40 italic font-serif font-light">only</span> quote<br />
-            We <span className="font-serif italic font-light">design</span><br />
-            what&apos;s important.
+            You <span className="text-black/40 italic font-serif font-light">envision</span> the product<br />
+            I <span className="font-serif italic font-light">engineer</span><br />
+            what&apos;s critical.
           </h2>
         </div>
 
         {/* Two Paragraph Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 pt-8 border-t border-black/15 text-base sm:text-lg font-light leading-relaxed text-black/80">
           <p>
-            Komma Komma is a product design and web-experience studio run by Oliver &amp; Freyr. We make visual identities, websites, and campaigns for people who care how their work is seen.
+            I am Roger Infa Sanchez, a Full-Stack Developer with a deep passion for backend architecture, scalable APIs, and system performance.
           </p>
           <p>
-            We work with founders and creative teams who have outgrown the template and want a presence that feels bespoke, shaped around the brand.
+            While I engineer complete end-to-end web applications with modern Next.js and React frontends, I thrive most when designing resilient server workflows, database schemas (PostgreSQL), and cloud infrastructure.
           </p>
         </div>
 

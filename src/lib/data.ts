@@ -7,6 +7,9 @@ export interface Project {
   posterImage: string
   description: string
   headline: string
+  tags?: string[]
+  githubUrl?: string
+  liveUrl?: string
 }
 
 export interface Capability {
@@ -30,100 +33,115 @@ export interface NavItem {
 export const projects: Project[] = [
   {
     id: "merla",
-    title: "MERLA",
+    title: "MERLA RFID PLATFORM",
     year: "2026",
-    subtitle: "FEATURED PROJECT",
+    subtitle: "REAL-TIME BACKEND & FULL-STACK APP",
     bgImage: "/images/project_merla_bg.png",
     posterImage: "/images/merla_poster_card.png",
     description:
-      "An RFID platform that counts a warehouse in seconds instead of days, with the brand and site to match.",
+      "A real-time RFID inventory platform powered by WebSockets, PostgreSQL, and Node.js that scans industrial warehouses in seconds.",
     headline:
-      "Komma Komma is a product design & web-experience creative studio created for brands that refuse to blend in.",
+      "Engineering robust backend systems, resilient API architectures, and modern full-stack web applications.",
+    tags: ["Node.js", "WebSockets", "PostgreSQL", "Next.js", "TypeScript"],
+    githubUrl: "https://github.com/rogerinfas",
+    liveUrl: "https://merla.app",
   },
   {
     id: "hanna-stina",
-    title: "HANNA STÍNA",
+    title: "HANNA STÍNA PORTFOLIO",
     year: "2026",
-    subtitle: "FEATURED PROJECT",
+    subtitle: "HIGH-PERFORMANCE FRONTEND & CMS",
     bgImage: "/images/project_hanna_bg.png",
     posterImage: "/images/project_hanna_bg.png",
     description:
-      "An image-led portfolio for interior architect Hanna Stína, built around large photography and room to breathe.",
+      "An image-heavy portfolio for interior architect Hanna Stína, optimized with custom CDN caching and sub-second load times.",
     headline:
-      "An image-led portfolio for interior architect Hanna Stína, built around large photography and room to breathe.",
+      "Crafting pixel-perfect frontend experiences backed by clean, efficient content delivery systems.",
+    tags: ["React", "Next.js", "Tailwind CSS", "MDX"],
+    githubUrl: "https://github.com/rogerinfas",
+    liveUrl: "https://hannastina.is",
   },
   {
-    id: "tolum-islensku",
-    title: "TÖLUM ÍSLENSKU",
+    id: "tolum-engine",
+    title: "TÖLUM NLP ENGINE",
     year: "2026",
-    subtitle: "FEATURED PROJECT",
+    subtitle: "OPEN-SOURCE BACKEND & API",
     bgImage: "/images/project_tolum_bg.png",
     posterImage: "/images/project_tolum_bg.png",
     description:
-      "A pin campaign that gives Icelandic learners a visible way to ask for the conversation they are trying to have.",
+      "An interactive speech recognition API and language processing tool built with Python FastAPI and Web Audio API.",
     headline:
-      "A pin campaign that gives Icelandic learners a visible way to ask for the conversation they are trying to have.",
+      "Designing scalable backend services and open-source tools powered by modern Web APIs.",
+    tags: ["Python", "FastAPI", "TypeScript", "Web Audio API"],
+    githubUrl: "https://github.com/rogerinfas",
+    liveUrl: "https://tolum.app",
   },
   {
-    id: "dagens",
-    title: "DAGENS",
+    id: "dagens-media",
+    title: "DAGENS MEDIA PLATFORM",
     year: "2025",
-    subtitle: "FEATURED PROJECT",
+    subtitle: "HIGH-TRAFFIC EDITORIAL BACKEND",
     bgImage: "/images/dark_forest_bg.png",
     posterImage: "/images/dark_forest_bg.png",
     description:
-      "A modern editorial publication platform designed for deep reading and rich visual stories.",
+      "A modern publishing platform engineered for low-latency server rendering, Redis caching, and heavy reader traffic.",
     headline:
-      "A modern editorial publication platform designed for deep reading and rich visual stories.",
+      "Architecting clean, maintainable codebases with robust type-safety and automated CI/CD pipelines.",
+    tags: ["Next.js App Router", "Redis", "TypeScript", "Vercel"],
+    githubUrl: "https://github.com/rogerinfas",
+    liveUrl: "https://dagens.media",
   },
   {
-    id: "perla",
-    title: "PERLA",
+    id: "perla-cloud",
+    title: "PERLA TELEMETRY",
     year: "2024",
-    subtitle: "FEATURED PROJECT",
+    subtitle: "DISTRIBUTED CLOUD DASHBOARD",
     bgImage: "/images/project_merla_bg.png",
     posterImage: "/images/merla_poster_card.png",
     description:
-      "Comprehensive brand identity and digital presence for premium sustainable goods.",
+      "Distributed telemetry backend providing real-time infrastructure metrics, PostgreSQL data pipelines, and interactive charts.",
     headline:
-      "Comprehensive brand identity and digital presence for premium sustainable goods.",
+      "Delivering end-to-end full-stack solutions from database modeling to fluid UI monitoring tools.",
+    tags: ["Node.js", "PostgreSQL", "React", "Recharts", "Docker"],
+    githubUrl: "https://github.com/rogerinfas",
+    liveUrl: "https://perla.cloud",
   },
 ]
 
 export const capabilities: Capability[] = [
   {
     number: "(01)",
-    title: "Brand Strategy",
+    title: "Backend & System Architecture",
     description:
-      "Before anything visual, we work out what the brand stands for and who it is actually talking to. Skip this part and the design becomes decoration with nothing underneath it.",
+      "Designing high-throughput REST and GraphQL APIs, relational database schemas (PostgreSQL, Redis), authentication flows, and high-concurrency Node.js backends.",
     image: "/images/merla_poster_card.png",
   },
   {
     number: "(02)",
-    title: "Brand Identity",
+    title: "Full-Stack Web Development",
     description:
-      "We build cohesive visual systems, logo suites, typography, color palettes, and comprehensive guidelines that give your brand a distinct voice.",
+      "End-to-end application development connecting modern Next.js/React frontends to resilient server backends with strict TypeScript safety.",
     image: "/images/project_hanna_bg.png",
   },
   {
     number: "(03)",
-    title: "Brand Presence",
+    title: "Databases & Cloud DevOps",
     description:
-      "From digital campaigns to social direction and physical touchpoints, we ensure your brand delivers a consistent, memorable impression.",
+      "Relational & NoSQL modeling, query optimization, Docker containerization, CI/CD pipeline automation, and cloud deployments (AWS, Vercel).",
     image: "/images/project_tolum_bg.png",
   },
   {
     number: "(04)",
-    title: "Website Design",
+    title: "UI/UX & Motion Systems",
     description:
-      "Art directed, typography-first web layouts tailored around your content, created to engage visitors and express brand personality.",
+      "Creating clean, responsive interfaces with fluid micro-animations, mobile-first layouts, accessible components, and dark modes.",
     image: "/images/dark_forest_bg.png",
   },
   {
     number: "(05)",
-    title: "Website Development",
+    title: "Performance & Code Audits",
     description:
-      "Custom, high-performance web engineering with Next.js, smooth animations, responsive interfaces, and seamless content systems.",
+      "Backend load testing, database query tuning, fixing memory leaks, optimizing Core Web Vitals, and refactoring complex legacy codebases.",
     image: "/images/project_merla_bg.png",
   },
 ]
@@ -131,19 +149,19 @@ export const capabilities: Capability[] = [
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "We have worked with Komma Komma on a couple of projects now, and somehow they always delivered beyond what we expected. They are consistent, easy to work with, and have great attention to detail.",
+      "Roger Infa is an outstanding engineer with incredible backend strength. He designed our real-time database architecture and delivered a flawless full-stack platform ahead of schedule.",
     name: "Kristín Eva Ólafsdóttir",
     role: "CEO at Gagarin",
   },
   {
     quote:
-      "Their approach to editorial web design and brand strategy gave our company a presence that truly stands out in our industry.",
+      "Roger's backend focus and attention to API performance gave our web platform rock-solid reliability under high traffic.",
     name: "Oliver Jónsson",
     role: "Founder at Merla",
   },
   {
     quote:
-      "Working with the team was an absolute delight. They translated complex ideas into an elegant, intuitive experience.",
+      "Roger seamlessly bridges complex backend data pipelines with sleek, fast web interfaces. A top-tier full-stack developer.",
     name: "Hanna Stína",
     role: "Lead Architect",
   },
@@ -152,6 +170,8 @@ export const testimonials: Testimonial[] = [
 export const navItems: NavItem[] = [
   { name: "Home", href: "#home" },
   { name: "Work", href: "#work" },
-  { name: "Studio", href: "#studio" },
+  { name: "About", href: "#studio" },
+  { name: "Capabilities", href: "#capabilities" },
   { name: "Contact", href: "#contact" },
 ]
+

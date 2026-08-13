@@ -48,22 +48,20 @@ export function CtaSection({ scrollY }: CtaSectionProps) {
 
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-12 relative z-10">
         <div className="space-y-6">
-          <h3 className="text-4xl sm:text-6xl md:text-7xl font-sans font-light tracking-tight">
-            Do you have a project in mind?
+          <h3 className="text-4xl sm:text-6xl md:text-7xl font-sans font-light tracking-tight max-w-2xl">
+            Have a project or technical role in mind?
           </h3>
           <a
-            href="https://cal.eu/kommakomma"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:contactorogeris@gmail.com"
             className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-lg text-sm font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90 hover:scale-105 shadow-xl"
           >
-            <span>Let&apos;s talk</span>
+            <span>Let&apos;s build together</span>
             <ArrowRight className="size-4" />
           </a>
         </div>
 
-        <div className="size-48 md:size-64 opacity-20 font-serif text-[180px] leading-none select-none flex items-center justify-center">
-          &ldquo;
+        <div className="size-48 md:size-64 opacity-15 font-mono font-bold text-[140px] leading-none select-none flex items-center justify-center tracking-tighter">
+          RIS
         </div>
       </div>
     </section>

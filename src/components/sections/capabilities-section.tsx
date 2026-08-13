@@ -107,6 +107,9 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
                   {/* Accordion Button Row */}
                   <button
                     type="button"
+                    id={`capability-button-${idx}`}
+                    aria-expanded={isExpanded}
+                    aria-controls={`capability-panel-${idx}`}
                     onClick={() => handleClick(idx)}
                     className="w-full text-left cursor-pointer transition-colors duration-200 ease-out"
                     style={{
@@ -142,6 +145,9 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
                   {/* Expandable Panel with animated height */}
                   <div
                     ref={(el) => { panelRefs.current[idx] = el }}
+                    id={`capability-panel-${idx}`}
+                    role="region"
+                    aria-labelledby={`capability-button-${idx}`}
                     className="w-full overflow-hidden"
                     style={{
                       height: 0,

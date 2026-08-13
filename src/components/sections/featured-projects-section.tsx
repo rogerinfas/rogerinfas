@@ -52,28 +52,62 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
                 {projects[activeProjectIdx].description}
               </p>
 
-              {/* Click to View Button */}
-              <a
-                href={`#${projects[activeProjectIdx].id}`}
-                className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90"
-              >
-                <span>Click to view</span>
-                <ArrowRight className="size-3.5" />
-              </a>
+              {/* Tech Stack Tags */}
+              {projects[activeProjectIdx].tags && (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {projects[activeProjectIdx].tags?.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[11px] font-mono bg-white/10 text-white/90 px-2.5 py-1 rounded-md border border-white/10"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Action Buttons: Live App & GitHub */}
+              <div className="flex items-center gap-3 pt-2">
+                {projects[activeProjectIdx].liveUrl && (
+                  <a
+                    href={projects[activeProjectIdx].liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90"
+                  >
+                    <span>View Live</span>
+                    <ArrowUpRight className="size-3.5" />
+                  </a>
+                )}
+                {projects[activeProjectIdx].githubUrl && (
+                  <a
+                    href={projects[activeProjectIdx].githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider font-medium border border-white/20 transition-all hover:bg-white/20"
+                  >
+                    <span>GitHub</span>
+                    <ArrowRight className="size-3.5" />
+                  </a>
+                )}
+              </div>
 
             </div>
           </div>
 
-          {/* Right Column: Interactive Project Names List */}
+          {/* Right Column: Accessible Interactive Project Names List */}
           <div className="lg:col-span-7 divide-y divide-black/15 border-t border-b border-black/15">
             {projects.map((proj, idx) => {
               const isSelected = activeProjectIdx === idx
               return (
-                <div
+                <button
                   key={proj.id}
+                  type="button"
                   onClick={() => setActiveProjectIdx(idx)}
                   onMouseEnter={() => setActiveProjectIdx(idx)}
-                  className={`py-6 px-4 flex items-center justify-between cursor-pointer transition-all duration-300 ${
+                  onFocus={() => setActiveProjectIdx(idx)}
+                  aria-pressed={isSelected}
+                  className={`w-full py-6 px-4 flex items-center justify-between cursor-pointer text-left transition-all duration-300 ${
                     isSelected
                       ? "bg-black/10 rounded-lg pl-6 translate-x-1"
                       : "hover:bg-black/5 rounded-lg"
@@ -86,7 +120,7 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
                     <span>{proj.year}</span>
                     <ArrowUpRight className={`size-4 transition-transform ${isSelected ? "opacity-100 translate-x-0.5 -translate-y-0.5" : "opacity-40"}`} />
                   </div>
-                </div>
+                </button>
               )
             })}
           </div>
