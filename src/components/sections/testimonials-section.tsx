@@ -20,7 +20,7 @@ export function TestimonialsSection() {
                 setTestimonialIdx((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))
               }
               className="size-7 rounded-md border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-all cursor-pointer"
-              aria-label="Previous Testimonial"
+              aria-label="Testimonio anterior"
             >
               <ChevronLeft className="size-4" />
             </button>
@@ -29,7 +29,7 @@ export function TestimonialsSection() {
                 setTestimonialIdx((prev) => (prev + 1) % testimonials.length)
               }
               className="size-7 rounded-md border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-all cursor-pointer"
-              aria-label="Next Testimonial"
+              aria-label="Siguiente testimonio"
             >
               <ChevronRight className="size-4" />
             </button>

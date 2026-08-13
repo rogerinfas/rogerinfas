@@ -21,7 +21,7 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
         ROGER<span className="text-[#E54838]">.</span>INFA
       </Link>
 
-      {/* Right Actions: Dark 'Contact me' button */}
+      {/* Right Actions: Dark 'Contáctame' button */}
       <div
         className={`pointer-events-auto flex items-center gap-5 sm:gap-6 transition-opacity duration-300 ${
           menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -31,7 +31,7 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
           onClick={onContactClick}
           className="inline-flex items-center gap-3 rounded-md bg-[#141414] px-4 py-2 text-sm font-medium tracking-tight text-white shadow-md transition-all hover:bg-black hover:scale-[1.02] cursor-pointer group"
         >
-          <span className="text-xs sm:text-sm font-sans font-normal">Contact me</span>
+          <span className="text-xs sm:text-sm font-sans font-normal">Contáctame</span>
           <span className="flex size-5 items-center justify-center rounded-[3px] bg-white text-black p-0.5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
             onMenuOpen()
           }}
           className="flex flex-col justify-center gap-[6px] p-2 cursor-pointer hover:opacity-80 transition-opacity mix-blend-difference"
-          aria-label="open menu"
+          aria-label="Abrir menú"
         >
           <span className="w-7 h-[2px] bg-white rounded-full"></span>
           <span className="w-7 h-[2px] bg-white rounded-full"></span>

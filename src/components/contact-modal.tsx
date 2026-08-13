@@ -10,10 +10,10 @@ interface ContactModalProps {
 }
 
 const PROJECT_TYPES = [
-  "Full-Stack Web App",
-  "Backend & API Architecture",
-  "Database & Performance",
-  "Consultation / Technical Role",
+  "Aplicación Web Full-Stack",
+  "Arquitectura Backend y APIs",
+  "Bases de Datos y Rendimiento",
+  "Consultoría / Rol Técnico",
 ]
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
@@ -30,7 +30,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     e.preventDefault()
 
     if (!name.trim() || !email.trim() || !message.trim()) {
-      toast.error("Please fill in all required fields.")
+      toast.error("Por favor completa todos los campos requeridos.")
       return
     }
 
@@ -40,8 +40,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
-      toast.success("Message sent successfully!", {
-        description: "Thank you for reaching out. Roger will get back to you shortly.",
+      toast.success("¡Mensaje enviado con éxito!", {
+        description: "Gracias por escribir. Te responderé a la brevedad.",
       })
     }, 1200)
   }
@@ -72,16 +72,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="flex items-center justify-between border-b border-white/10 pb-5">
           <div>
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#E54838]">
-              Get in Touch
+              Ponte en Contacto
             </span>
             <h3 className="text-2xl sm:text-3xl font-sans font-light tracking-tight mt-0.5">
-              Contact Roger Infa Sanchez
+              Contactar a Roger Infa Sanchez
             </h3>
           </div>
           <button
             onClick={onClose}
             className="size-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all cursor-pointer"
-            aria-label="Close contact modal"
+            aria-label="Cerrar modal de contacto"
           >
             <X className="size-5 stroke-[1.5]" />
           </button>
@@ -93,16 +93,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <div className="size-16 rounded-full bg-[#E54838]/20 text-[#E54838] flex items-center justify-center">
               <CheckCircle2 className="size-10" />
             </div>
-            <h4 className="text-2xl font-sans font-medium">Message Sent Successfully</h4>
+            <h4 className="text-2xl font-sans font-medium">¡Mensaje Enviado con Éxito!</h4>
             <p className="text-sm text-white/70 max-w-md">
-              Thank you for reaching out, <span className="text-white font-semibold">{name}</span>. Your message regarding <span className="text-[#E54838] font-mono">{selectedType}</span> has been received.
+              Gracias por escribir, <span className="text-white font-semibold">{name}</span>. He recibido tu mensaje sobre <span className="text-[#E54838] font-mono">{selectedType}</span>. Te responderé lo antes posible.
             </p>
             <div className="pt-4">
               <button
                 onClick={handleReset}
                 className="bg-white text-black px-6 py-2.5 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold hover:bg-white/90 transition-all cursor-pointer"
               >
-                Close Window
+                Cerrar Ventana
               </button>
             </div>
           </div>
@@ -112,7 +112,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             {/* Project / Opportunity Type Selection */}
             <div>
               <label className="block text-xs font-mono uppercase text-white/50 tracking-wider mb-2">
-                What are you looking to build or discuss?
+                ¿Qué deseas construir o consultar?
               </label>
               <div className="flex flex-wrap gap-2">
                 {PROJECT_TYPES.map((type) => (
@@ -136,13 +136,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="contact-name" className="block text-xs font-mono uppercase text-white/50 tracking-wider mb-1.5">
-                  Your Name *
+                  Tu Nombre *
                 </label>
                 <input
                   id="contact-name"
                   type="text"
                   required
-                  placeholder="John Doe"
+                  placeholder="Juan Pérez"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/40 transition-colors"
@@ -151,13 +151,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
               <div>
                 <label htmlFor="contact-email" className="block text-xs font-mono uppercase text-white/50 tracking-wider mb-1.5">
-                  Your Email *
+                  Tu Correo Electrónico *
                 </label>
                 <input
                   id="contact-email"
                   type="email"
                   required
-                  placeholder="john@example.com"
+                  placeholder="juan@ejemplo.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/40 transition-colors"
@@ -168,13 +168,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             {/* Message Textarea */}
             <div>
               <label htmlFor="contact-message" className="block text-xs font-mono uppercase text-white/50 tracking-wider mb-1.5">
-                Project Details / Message *
+                Detalles del Proyecto / Mensaje *
               </label>
               <textarea
                 id="contact-message"
                 required
                 rows={4}
-                placeholder="Tell me about your project goals, technical requirements, or schedule..."
+                placeholder="Cuéntame sobre tus objetivos, requisitos técnicos o fechas..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/40 transition-colors resize-none"
@@ -185,11 +185,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <div className="flex items-center justify-between pt-2">
               <a
                 href={`mailto:contactorogeris@gmail.com?subject=${encodeURIComponent(
-                  `[Portfolio Contact] ${selectedType}`
+                  `[Contacto Portfolio] ${selectedType}`
                 )}&body=${encodeURIComponent(message)}`}
                 className="text-xs font-mono text-white/50 hover:text-white underline transition-colors"
               >
-                Or send direct email ↗
+                O enviar correo directo ↗
               </a>
 
               <button
@@ -198,10 +198,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90 hover:scale-[1.02] disabled:opacity-50 cursor-pointer shadow-lg"
               >
                 {isSubmitting ? (
-                  <span>Sending...</span>
+                  <span>Enviando...</span>
                 ) : (
                   <>
-                    <span>Send Message</span>
+                    <span>Enviar Mensaje</span>
                     <Send className="size-3.5" />
                   </>
                 )}

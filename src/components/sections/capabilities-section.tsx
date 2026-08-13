@@ -77,7 +77,7 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
             className="inline-block size-1.5 rounded-full bg-current"
             style={{ animation: "servicesDot 1.15s ease-in-out infinite" }}
           />
-          <span>Where we can add value</span>
+          <span>Dónde puedo aportar valor</span>
         </p>
 
         {/* Body: 10-col sub-grid */}

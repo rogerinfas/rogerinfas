@@ -50,13 +50,13 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-12 relative z-10">
         <div className="space-y-6">
           <h3 className="text-4xl sm:text-6xl md:text-7xl font-sans font-light tracking-tight max-w-2xl">
-            Have a project or technical role in mind?
+            ¿Tienes un proyecto o rol técnico en mente?
           </h3>
           <button
             onClick={onContactClick}
             className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-lg text-sm font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90 hover:scale-105 cursor-pointer shadow-xl"
           >
-            <span>Let&apos;s build together</span>
+            <span>Construyamos juntos</span>
             <ArrowRight className="size-4" />
           </button>
         </div>

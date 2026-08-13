@@ -29,15 +29,15 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
         
         {/* Small Section Subtitle Tag */}
         <div className="flex items-center gap-2 text-xs font-mono text-black/50 uppercase tracking-widest">
-          <span>Introduction</span>
+          <span>Introducción</span>
         </div>
 
         {/* Typography Statement Layout matching Original */}
         <div className="space-y-4">
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-normal tracking-tight leading-[1.12]">
-            You <span className="text-black/40 italic font-serif font-light">envision</span> the product<br />
-            I <span className="font-serif italic font-light">engineer</span><br />
-            what&apos;s critical.
+            Tú <span className="text-black/40 italic font-serif font-light">imaginas</span> el producto<br />
+            Yo <span className="font-serif italic font-light">construyo</span><br />
+            lo que realmente importa.
           </h2>
         </div>
 

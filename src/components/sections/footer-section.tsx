@@ -33,7 +33,7 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs font-mono">
           <div>
-            <p className="uppercase text-white/40 mb-3">Contact Info</p>
+            <p className="uppercase text-white/40 mb-3">Contacto</p>
             <div className="space-y-1 text-white/80">
               <a href="mailto:contactorogeris@gmail.com" className="block hover:text-white transition-colors truncate">
                 contactorogeris@gmail.com
@@ -45,30 +45,30 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
           </div>
 
           <div>
-            <p className="uppercase text-white/40 mb-3">Navigation</p>
+            <p className="uppercase text-white/40 mb-3">Navegación</p>
             <div className="space-y-1 text-white/80">
-              <button onClick={() => onNavigate("#home", "Home")} className="block hover:text-white cursor-pointer">HOME</button>
-              <button onClick={() => onNavigate("#work", "Work")} className="block hover:text-white cursor-pointer">WORK</button>
-              <button onClick={() => onNavigate("#studio", "About")} className="block hover:text-white cursor-pointer">ABOUT</button>
-              <button onClick={() => onNavigate("#capabilities", "Capabilities")} className="block hover:text-white cursor-pointer">CAPABILITIES</button>
-              <button onClick={() => onNavigate("#contact", "Contact")} className="block hover:text-white cursor-pointer">CONTACT</button>
+              <button onClick={() => onNavigate("#home", "Inicio")} className="block hover:text-white cursor-pointer">INICIO</button>
+              <button onClick={() => onNavigate("#work", "Proyectos")} className="block hover:text-white cursor-pointer">PROYECTOS</button>
+              <button onClick={() => onNavigate("#studio", "Sobre mí")} className="block hover:text-white cursor-pointer">SOBRE MÍ</button>
+              <button onClick={() => onNavigate("#capabilities", "Habilidades")} className="block hover:text-white cursor-pointer">HABILIDADES</button>
+              <button onClick={() => onNavigate("#contact", "Contacto")} className="block hover:text-white cursor-pointer">CONTACTO</button>
             </div>
           </div>
 
           <div>
-            <p className="uppercase text-white/40 mb-3">Location &amp; Time</p>
+            <p className="uppercase text-white/40 mb-3">Ubicación y Hora</p>
             <div className="space-y-1 text-white/80">
-              <p>Full-Stack (Backend Focus)</p>
+              <p>Dev Full-Stack (Especialista Backend)</p>
               <p className="text-white font-semibold">{timeString || "00:00:00 UTC"}</p>
-              <p className="text-white/50">Remote / Worldwide</p>
+              <p className="text-white/50">Remoto / Todo el mundo</p>
             </div>
           </div>
 
           <div>
-            <p className="uppercase text-white/40 mb-3">Copyright</p>
+            <p className="uppercase text-white/40 mb-3">Derechos</p>
             <div className="space-y-1 text-white/80">
               <p>© {new Date().getFullYear()} Roger Infa Sanchez</p>
-              <p>Built with Next.js &amp; Tailwind</p>
+              <p>Desarrollado con Next.js y Tailwind</p>
             </div>
           </div>
         </div>

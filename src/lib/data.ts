@@ -32,78 +32,73 @@ export interface NavItem {
 
 export const projects: Project[] = [
   {
-    id: "merla",
-    title: "MERLA RFID PLATFORM",
+    id: "transigo-gps",
+    title: "TRANSIGO — MONITOREO GPS",
     year: "2026",
-    subtitle: "REAL-TIME BACKEND & FULL-STACK APP",
+    subtitle: "SISTEMA DE MONITOREO EN TIEMPO REAL",
     bgImage: "/images/project_merla_bg.png",
-    posterImage: "/images/merla_poster_card.png",
+    posterImage: "/images/transigo_preview.png",
     description:
-      "A real-time RFID inventory platform powered by WebSockets, PostgreSQL, and Node.js that scans industrial warehouses in seconds.",
+      "Aplicación web orientada a la gestión, monitoreo y visualización en tiempo real del sistema de transporte público basado en GPS. Supervisa unidades satelitales mediante WebSockets (Pub/Sub), gestiona rutas y calcula estimaciones de arribo (ETA).",
     headline:
-      "Engineering robust backend systems, resilient API architectures, and modern full-stack web applications.",
-    tags: ["Node.js", "WebSockets", "PostgreSQL", "Next.js", "TypeScript"],
-    githubUrl: "https://github.com/rogerinfas",
-    liveUrl: "https://merla.app",
+      "Seguimiento satelital de vehículos en tiempo real usando WebSockets (Pub/Sub) e interfaz directa con la API backend.",
+    tags: ["TransiGo", "WebSockets Pub/Sub", "TypeScript", "Telemetría GPS", "OpenStreetMap", "APIs Backend"],
+    liveUrl: "https://gps-based-transit-optimization.onlinestornsoftware.win/",
   },
   {
     id: "hanna-stina",
-    title: "HANNA STÍNA PORTFOLIO",
+    title: "PORTFOLIO HANNA STÍNA",
     year: "2026",
-    subtitle: "HIGH-PERFORMANCE FRONTEND & CMS",
+    subtitle: "FRONTEND DE ALTO RENDIMIENTO Y CMS",
     bgImage: "/images/project_hanna_bg.png",
     posterImage: "/images/project_hanna_bg.png",
     description:
-      "An image-heavy portfolio for interior architect Hanna Stína, optimized with custom CDN caching and sub-second load times.",
+      "Portfolio enfocado en fotografía para la arquitecta de interiores Hanna Stína, optimizado con caché CDN personalizada y tiempos de carga inferiores a un segundo.",
     headline:
-      "Crafting pixel-perfect frontend experiences backed by clean, efficient content delivery systems.",
+      "Creación de experiencias frontend impecables respaldadas por sistemas eficientes de entrega de contenido.",
     tags: ["React", "Next.js", "Tailwind CSS", "MDX"],
-    githubUrl: "https://github.com/rogerinfas",
     liveUrl: "https://hannastina.is",
   },
   {
     id: "tolum-engine",
-    title: "TÖLUM NLP ENGINE",
+    title: "MOTOR NLP TÖLUM",
     year: "2026",
-    subtitle: "OPEN-SOURCE BACKEND & API",
+    subtitle: "BACKEND Y API OPEN-SOURCE",
     bgImage: "/images/project_tolum_bg.png",
     posterImage: "/images/project_tolum_bg.png",
     description:
-      "An interactive speech recognition API and language processing tool built with Python FastAPI and Web Audio API.",
+      "API interactiva de reconocimiento de voz y herramienta de procesamiento de lenguaje desarrollada con Python FastAPI y Web Audio API.",
     headline:
-      "Designing scalable backend services and open-source tools powered by modern Web APIs.",
+      "Diseño de servicios backend escalables y herramientas de código abierto impulsadas por Web APIs modernas.",
     tags: ["Python", "FastAPI", "TypeScript", "Web Audio API"],
-    githubUrl: "https://github.com/rogerinfas",
     liveUrl: "https://tolum.app",
   },
   {
     id: "dagens-media",
-    title: "DAGENS MEDIA PLATFORM",
+    title: "PLATAFORMA DAGENS MEDIA",
     year: "2025",
-    subtitle: "HIGH-TRAFFIC EDITORIAL BACKEND",
+    subtitle: "BACKEND EDITORIAL DE ALTO TRÁFICO",
     bgImage: "/images/dark_forest_bg.png",
     posterImage: "/images/dark_forest_bg.png",
     description:
-      "A modern publishing platform engineered for low-latency server rendering, Redis caching, and heavy reader traffic.",
+      "Plataforma editorial moderna diseñada para renderizado de servidor de baja latencia, almacenamiento en caché con Redis y alto tráfico de lectores.",
     headline:
-      "Architecting clean, maintainable codebases with robust type-safety and automated CI/CD pipelines.",
+      "Arquitectura de código limpio y mantenible con estricta seguridad de tipos y pipelines CI/CD automatizados.",
     tags: ["Next.js App Router", "Redis", "TypeScript", "Vercel"],
-    githubUrl: "https://github.com/rogerinfas",
     liveUrl: "https://dagens.media",
   },
   {
     id: "perla-cloud",
-    title: "PERLA TELEMETRY",
+    title: "TELEMETRÍA PERLA CLOUD",
     year: "2024",
-    subtitle: "DISTRIBUTED CLOUD DASHBOARD",
+    subtitle: "PANEL DE CONTROL EN LA NUBE DISTRIBUIDA",
     bgImage: "/images/project_merla_bg.png",
     posterImage: "/images/merla_poster_card.png",
     description:
-      "Distributed telemetry backend providing real-time infrastructure metrics, PostgreSQL data pipelines, and interactive charts.",
+      "Backend de telemetría distribuida que proporciona métricas de infraestructura en tiempo real, pipelines de datos en PostgreSQL y gráficos interactivos.",
     headline:
-      "Delivering end-to-end full-stack solutions from database modeling to fluid UI monitoring tools.",
+      "Soluciones full-stack de extremo a extremo, desde el modelado de bases de datos hasta herramientas fluidas de monitoreo UI.",
     tags: ["Node.js", "PostgreSQL", "React", "Recharts", "Docker"],
-    githubUrl: "https://github.com/rogerinfas",
     liveUrl: "https://perla.cloud",
   },
 ]
@@ -111,37 +106,37 @@ export const projects: Project[] = [
 export const capabilities: Capability[] = [
   {
     number: "(01)",
-    title: "Backend & System Architecture",
+    title: "Arquitectura Backend y Sistemas",
     description:
-      "Designing high-throughput REST and GraphQL APIs, relational database schemas (PostgreSQL, Redis), authentication flows, and high-concurrency Node.js backends.",
-    image: "/images/merla_poster_card.png",
+      "Diseño de APIs REST y GraphQL de alto rendimiento, esquemas de bases de datos relacionales (PostgreSQL, Redis), flujos de autenticación y servicios backend concurrentes en Node.js.",
+    image: "/images/transigo_preview.png",
   },
   {
     number: "(02)",
-    title: "Full-Stack Web Development",
+    title: "Desarrollo Web Full-Stack",
     description:
-      "End-to-end application development connecting modern Next.js/React frontends to resilient server backends with strict TypeScript safety.",
+      "Desarrollo de aplicaciones de extremo a extremo, conectando frontends modernos en Next.js/React con backends de servidor altamente resilientes en TypeScript.",
     image: "/images/project_hanna_bg.png",
   },
   {
     number: "(03)",
-    title: "Databases & Cloud DevOps",
+    title: "Bases de Datos y Cloud DevOps",
     description:
-      "Relational & NoSQL modeling, query optimization, Docker containerization, CI/CD pipeline automation, and cloud deployments (AWS, Vercel).",
+      "Modelado relacional y NoSQL, optimización de consultas, contenedorización con Docker, automatización de integración continua (CI/CD) y despliegue en la nube (AWS, Vercel).",
     image: "/images/project_tolum_bg.png",
   },
   {
     number: "(04)",
-    title: "UI/UX & Motion Systems",
+    title: "Sistemas de UI/UX y Animaciones",
     description:
-      "Creating clean, responsive interfaces with fluid micro-animations, mobile-first layouts, accessible components, and dark modes.",
+      "Creación de interfaces limpias y adaptables con microanimaciones CSS fluidas, diseños mobile-first, componentes accesibles y modos oscuros.",
     image: "/images/dark_forest_bg.png",
   },
   {
     number: "(05)",
-    title: "Performance & Code Audits",
+    title: "Auditorías de Código y Rendimiento",
     description:
-      "Backend load testing, database query tuning, fixing memory leaks, optimizing Core Web Vitals, and refactoring complex legacy codebases.",
+      "Pruebas de carga backend, afinamiento de consultas a bases de datos, corrección de fugas de memoria, optimización de Core Web Vitals y refactorización de código legado.",
     image: "/images/project_merla_bg.png",
   },
 ]
@@ -149,29 +144,29 @@ export const capabilities: Capability[] = [
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Roger Infa is an outstanding engineer with incredible backend strength. He designed our real-time database architecture and delivered a flawless full-stack platform ahead of schedule.",
+      "Roger Infa es un ingeniero excepcional con una solidez técnica notable en backend. Diseñó la arquitectura de nuestra base de datos en tiempo real y entregó una plataforma impecable antes del plazo.",
     name: "Kristín Eva Ólafsdóttir",
-    role: "CEO at Gagarin",
+    role: "CEO en Gagarin",
   },
   {
     quote:
-      "Roger's backend focus and attention to API performance gave our web platform rock-solid reliability under high traffic.",
+      "El enfoque de Roger en backend y su atención al rendimiento de las APIs le dieron a nuestra plataforma web una confiabilidad absoluta ante picos de tráfico.",
     name: "Oliver Jónsson",
-    role: "Founder at Merla",
+    role: "Fundador en Merla",
   },
   {
     quote:
-      "Roger seamlessly bridges complex backend data pipelines with sleek, fast web interfaces. A top-tier full-stack developer.",
+      "Roger conecta fluidamente complejos pipelines de datos en el servidor con interfaces web rápidas y elegantes. Un desarrollador full-stack de primer nivel.",
     name: "Hanna Stína",
-    role: "Lead Architect",
+    role: "Arquitecta Principal",
   },
 ]
 
 export const navItems: NavItem[] = [
-  { name: "Home", href: "#home" },
-  { name: "Work", href: "#work" },
-  { name: "About", href: "#studio" },
-  { name: "Capabilities", href: "#capabilities" },
-  { name: "Contact", href: "#contact" },
+  { name: "Inicio", href: "#home" },
+  { name: "Proyectos", href: "#work" },
+  { name: "Sobre mí", href: "#studio" },
+  { name: "Habilidades", href: "#capabilities" },
+  { name: "Contacto", href: "#contact" },
 ]
 

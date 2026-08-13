@@ -17,7 +17,7 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
       <div className="max-w-6xl mx-auto space-y-12">
         
         <h3 className="text-4xl sm:text-6xl font-sans font-light tracking-tight">
-          Featured Projects
+          Proyectos Destacados
         </h3>
 
         {/* 2-Column Split Layout: Left Floating Parallax Card + Right Project List */}
@@ -75,7 +75,7 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold transition-all hover:bg-white/90"
                   >
-                    <span>View Live</span>
+                    <span>Ver Demo</span>
                     <ArrowUpRight className="size-3.5" />
                   </a>
                 )}
@@ -86,7 +86,7 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider font-medium border border-white/20 transition-all hover:bg-white/20"
                   >
-                    <span>GitHub</span>
+                    <span>Código GitHub</span>
                     <ArrowRight className="size-3.5" />
                   </a>
                 )}

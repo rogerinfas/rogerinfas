@@ -24,13 +24,13 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
           <button
             onClick={onClose}
             className="text-black hover:opacity-60 transition-opacity p-1 cursor-pointer"
-            aria-label="Close Navigation Menu"
+            aria-label="Cerrar Menú de Navegación"
           >
             <X className="size-6 stroke-[1.5]" />
           </button>
         </div>
 
-        <nav aria-label="Main Navigation" className="flex flex-col gap-2.5 mt-10 sm:mt-14 mb-auto">
+        <nav aria-label="Navegación Principal" className="flex flex-col gap-2.5 mt-10 sm:mt-14 mb-auto">
           {navItems.map((item) => {
             const isActive = activeTab === item.name
             return (
@@ -51,7 +51,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
 
         <div className="border-t border-black/15 pt-6 grid grid-cols-2 gap-4 text-left">
           <div>
-            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Profiles</p>
+            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Perfiles</p>
             <div className="space-y-1">
               <a
                 href="https://github.com/rogerinfas"
@@ -73,7 +73,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
           </div>
 
           <div>
-            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Direct Contact</p>
+            <p className="text-[10px] font-mono uppercase text-black/50 tracking-wider mb-2">Contacto Directo</p>
             <div className="space-y-1">
               <a
                 href="mailto:contactorogeris@gmail.com"
@@ -81,7 +81,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
               >
                 contactorogeris@gmail.com
               </a>
-              <span className="text-xs text-black/60 block">Full-Stack (Backend Focus)</span>
+              <span className="text-xs text-black/60 block">Dev Full-Stack (Especialista Backend)</span>
             </div>
           </div>
         </div>

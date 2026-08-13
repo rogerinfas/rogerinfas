@@ -84,7 +84,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
             }}
             className="pointer-events-auto hidden sm:flex items-center gap-2 uppercase hover:text-white transition-colors group cursor-pointer"
           >
-            <span>VIEW PROJECT</span>
+            <span>VER PROYECTO</span>
             <span className="inline-flex items-center justify-center size-5 rounded-md border border-white/30 text-[10px] group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
               <ArrowRight className="size-3" />
             </span>
@@ -121,7 +121,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
                     className={`size-2.5 rounded-full transition-all cursor-pointer ${
                       currentSlide === idx ? "bg-white scale-125" : "bg-white/30 hover:bg-white/60"
                     }`}
-                    aria-label={`Go to slide ${idx + 1}`}
+                    aria-label={`Ir a la diapositiva ${idx + 1}`}
                   />
                 ))}
               </div>
