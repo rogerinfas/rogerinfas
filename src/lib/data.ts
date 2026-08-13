@@ -32,6 +32,20 @@ export interface NavItem {
 
 export const projects: Project[] = [
   {
+    id: "roger-portfolio",
+    title: "PORTFOLIO EDITORIAL — ROGER INFA",
+    year: "2026",
+    subtitle: "SISTEMA WEB Y EXPERIENCIA INTERACTIVA",
+    bgImage: "/images/portfolio_bg_main.jpg",
+    posterImage: "/images/portfolio_bg_main.jpg",
+    description:
+      "Portfolio personal de desarrollador con diseño editorial avanzado, animaciones 3D en canvas, arquitectura desacoplada, selector de proyectos y formulario de contacto interactivo.",
+    headline:
+      "Experiencia digital de alto rendimiento construida con Next.js App Router, Tailwind CSS, TypeScript y animaciones fluidas.",
+    tags: ["Next.js App Router", "TypeScript", "Tailwind CSS", "Diseño Editorial", "Canvas Motion"],
+    liveUrl: "#home",
+  },
+  {
     id: "transigo-gps",
     title: "TRANSIGO — MONITOREO GPS",
     year: "2026",
@@ -44,20 +58,6 @@ export const projects: Project[] = [
       "Seguimiento satelital de vehículos en tiempo real usando WebSockets (Pub/Sub) e interfaz directa con la API backend.",
     tags: ["TransiGo", "WebSockets Pub/Sub", "TypeScript", "Telemetría GPS", "OpenStreetMap", "APIs Backend"],
     liveUrl: "https://gps-based-transit-optimization.onlinestornsoftware.win/",
-  },
-  {
-    id: "hanna-stina",
-    title: "PORTFOLIO HANNA STÍNA",
-    year: "2026",
-    subtitle: "FRONTEND DE ALTO RENDIMIENTO Y CMS",
-    bgImage: "/images/project_hanna_bg.png",
-    posterImage: "/images/project_hanna_bg.png",
-    description:
-      "Portfolio enfocado en fotografía para la arquitecta de interiores Hanna Stína, optimizado con caché CDN personalizada y tiempos de carga inferiores a un segundo.",
-    headline:
-      "Creación de experiencias frontend impecables respaldadas por sistemas eficientes de entrega de contenido.",
-    tags: ["React", "Next.js", "Tailwind CSS", "MDX"],
-    liveUrl: "https://hannastina.is",
   },
   {
     id: "tolum-engine",
