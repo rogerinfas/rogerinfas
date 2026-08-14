@@ -26,7 +26,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   if (!isOpen) return null
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!name.trim() || !email.trim() || !message.trim()) {
@@ -36,14 +36,39 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     setIsSubmitting(true)
 
-    // Simulate sending message
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          projectType: selectedType,
+          message: message.trim(),
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "No se pudo enviar el mensaje.")
+      }
+
       setIsSubmitted(true)
       toast.success("¡Mensaje enviado con éxito!", {
         description: "Gracias por escribir. Te responderé a la brevedad.",
       })
-    }, 1200)
+    } catch (err: unknown) {
+      console.error("Error al enviar formulario:", err)
+      const errorMsg = err instanceof Error ? err.message : "Ocurrió un error inesperado al enviar."
+      toast.error("Error al enviar", {
+        description: errorMsg,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleReset = () => {
