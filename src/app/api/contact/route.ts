@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     const resend = new Resend(apiKey)
 
     const recipientEmail = process.env.CONTACT_RECEIVER_EMAIL || "contactorogeris@gmail.com"
-    const senderEmail = process.env.CONTACT_SENDER_EMAIL || "onboarding@resend.dev"
+    const senderEmail = process.env.CONTACT_SENDER_EMAIL || "contacto@webcoresys.com"
 
     const data = await resend.emails.send({
       from: `Portfolio Roger Infa <${senderEmail}>`,
