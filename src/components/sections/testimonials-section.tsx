@@ -44,13 +44,13 @@ export function TestimonialsSection() {
 
         {/* Author Info */}
         <div className="flex items-center gap-4 pt-4 border-t border-black/10">
-          <div className="size-10 rounded-full bg-black/10 overflow-hidden relative">
-            <Image
-              src="/images/project_hanna_bg.png"
-              alt={testimonials[testimonialIdx].name}
-              fill
-              className="object-cover"
-            />
+          <div className="size-10 rounded-full bg-black text-white text-xs font-mono font-bold flex items-center justify-center tracking-wider shrink-0 select-none shadow-sm">
+            {testimonials[testimonialIdx].name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .slice(0, 2)
+              .toUpperCase()}
           </div>
           <div>
             <h5 className="font-semibold text-sm">{testimonials[testimonialIdx].name}</h5>
