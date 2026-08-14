@@ -80,35 +80,35 @@ export const capabilities: Capability[] = [
     title: "Arquitectura Backend y Sistemas",
     description:
       "Diseño de APIs REST y GraphQL de alto rendimiento, esquemas de bases de datos relacionales (PostgreSQL, Redis), flujos de autenticación y servicios backend concurrentes en Node.js.",
-    image: "/images/project_1.png",
+    image: "/images/capabilities/1.avif",
   },
   {
     number: "(02)",
     title: "Desarrollo Web Full-Stack",
     description:
       "Desarrollo de aplicaciones de extremo a extremo, conectando frontends modernos en Next.js/React con backends de servidor altamente resilientes en TypeScript.",
-    image: "/images/project_2.png",
+    image: "/images/capabilities/2.png",
   },
   {
     number: "(03)",
     title: "Bases de Datos y Cloud DevOps",
     description:
       "Modelado relacional y NoSQL, optimización de consultas, contenedorización con Docker, automatización de integración continua (CI/CD) y despliegue en la nube (AWS, Vercel).",
-    image: "/images/project_3.png",
+    image: "/images/capabilities/3.jpeg",
   },
   {
     number: "(04)",
     title: "Sistemas de UI/UX y Animaciones",
     description:
       "Creación de interfaces limpias y adaptables con microanimaciones CSS fluidas, diseños mobile-first, componentes accesibles y modos oscuros.",
-    image: "/images/project_1.png",
+    image: "/images/capabilities/4.png",
   },
   {
     number: "(05)",
     title: "Auditorías de Código y Rendimiento",
     description:
       "Pruebas de carga backend, afinamiento de consultas a bases de datos, corrección de fugas de memoria, optimización de Core Web Vitals y refactorización de código legado.",
-    image: "/images/project_2.png",
+    image: "/images/capabilities/5.png",
   },
 ]
 

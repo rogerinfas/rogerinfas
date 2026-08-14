@@ -55,132 +55,63 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
     <section
       ref={sectionRef}
       id="capabilities"
-      className="relative bg-[#F4F4F0] text-black overflow-visible"
+      className="relative bg-[#F4F4F0] text-black overflow-visible px-6 sm:px-12 md:px-16"
       style={{ paddingBlock: "clamp(6rem, 15vh, 11rem)" }}
     >
-      <div
-        className="mx-auto"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
-          gap: "0 clamp(1rem, 1.5vw, 1.5rem)",
-          maxWidth: "100rem",
-          paddingInline: "1.5rem",
-        }}
-      >
+      <div className="max-w-6xl mx-auto space-y-12">
+        
         {/* Eyebrow with pulsing dot */}
-        <p
-          className="inline-flex items-center gap-3 text-sm font-medium leading-none"
-          style={{ gridColumn: "2 / span 10", marginBottom: "clamp(3rem, 7vh, 4.8rem)" }}
-        >
+        <p className="inline-flex items-center gap-3 text-sm font-medium leading-none text-black/70">
           <span
-            className="inline-block size-1.5 rounded-full bg-current"
+            className="inline-block size-1.5 rounded-full bg-black"
             style={{ animation: "servicesDot 1.15s ease-in-out infinite" }}
           />
           <span>Dónde puedo aportar valor</span>
         </p>
 
-        {/* Body: 10-col sub-grid */}
-        <div
-          style={{
-            gridColumn: "2 / span 10",
-            display: "grid",
-            gridTemplateColumns: "repeat(10, minmax(0, 1fr))",
-            gap: "0 clamp(1rem, 1.5vw, 1.5rem)",
-            alignItems: "start",
-          }}
-        >
-          {/* Left Column: Accordion List */}
-          <div
-            className="flex flex-col items-start"
-            style={{
-              gridColumn: "1 / span 6",
-              gap: "clamp(0.18rem, 1vh, 0.55rem)",
-              containerType: "inline-size",
-            }}
-          >
+        {/* 2-Column Split: Editorial Accordion (Left) + Floating Parallax Image Card (Right) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column: Original Editorial Typography List */}
+          <div className="lg:col-span-7 flex flex-col items-start gap-1">
             {capabilities.map((cap, idx) => {
               const isActive = activeIdx === idx
               const isExpanded = expandedIdx === idx
               return (
                 <div key={idx} className="w-full">
-                  {/* Accordion Button Row */}
+                  {/* Accordion Row Button */}
                   <button
                     type="button"
                     id={`capability-button-${idx}`}
                     aria-expanded={isExpanded}
                     aria-controls={`capability-panel-${idx}`}
                     onClick={() => handleClick(idx)}
-                    className="w-full text-left cursor-pointer transition-colors duration-200 ease-out"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "max-content minmax(0, 1fr)",
-                      columnGap: "clamp(1rem, 6vw, 50px)",
-                      alignItems: "center",
-                      padding: 0,
-                      border: 0,
-                      background: "transparent",
-                      fontWeight: 500,
-                      lineHeight: 1,
-                      whiteSpace: "nowrap",
-                      color: isActive || isExpanded ? "#131313" : "#13131380",
-                    }}
+                    onMouseEnter={() => setActiveIdx(idx)}
+                    className="w-full text-left cursor-pointer transition-colors duration-200 ease-out py-2 group flex items-baseline gap-6 sm:gap-8"
                   >
-                    <span
-                      className="tabular-nums"
-                      style={{ width: "4ch", fontSize: 14, fontWeight: 500 }}
-                    >
+                    <span className="tabular-nums font-mono text-xs text-black/40 w-8 shrink-0">
                       {cap.number}
                     </span>
                     <span
-                      style={{
-                        fontSize: "clamp(1.45rem, calc((100cqw - 80px) / 11.5), 3rem)",
-                        lineHeight: 1,
-                      }}
+                      className={`text-2xl sm:text-4xl md:text-5xl font-sans tracking-tight transition-colors duration-200 ${
+                        isActive || isExpanded ? "font-normal text-black" : "font-light text-black/50 group-hover:text-black/80"
+                      }`}
                     >
                       {cap.title}
                     </span>
                   </button>
 
-                  {/* Expandable Panel with animated height */}
+                  {/* Expandable Panel */}
                   <div
                     ref={(el) => { panelRefs.current[idx] = el }}
                     id={`capability-panel-${idx}`}
                     role="region"
                     aria-labelledby={`capability-button-${idx}`}
-                    className="w-full overflow-hidden"
-                    style={{
-                      height: 0,
-                      opacity: 0,
-                      transition: "height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease",
-                    }}
+                    className="w-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{ height: 0, opacity: 0 }}
                   >
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "max-content minmax(0, 1fr)",
-                        columnGap: "clamp(1rem, 6vw, 50px)",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      {/* Invisible spacer to align with index column */}
-                      <span
-                        aria-hidden="true"
-                        className="tabular-nums invisible"
-                        style={{ width: "4ch", fontSize: 14, fontWeight: 500 }}
-                      >
-                        {cap.number}
-                      </span>
-                      <p
-                        className="text-sm font-normal leading-snug text-[#131313]"
-                        style={{
-                          maxWidth: "28rem",
-                          paddingTop: 50,
-                          paddingBottom: 30,
-                          opacity: isExpanded ? 1 : 0,
-                          transition: "opacity 0.5s ease 0.15s",
-                        }}
-                      >
+                    <div className="pl-14 sm:pl-16 pt-2 pb-6 max-w-xl">
+                      <p className="text-sm sm:text-base font-light leading-relaxed text-black/75">
                         {cap.description}
                       </p>
                     </div>
@@ -190,40 +121,36 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
             })}
           </div>
 
-          {/* Right Column: Floating Scroll-Driven Preview Image */}
-          <div
-            className="relative self-stretch pointer-events-none hidden lg:block"
-            style={{ gridColumn: "8 / span 3", minHeight: "100%" }}
-          >
-            <div
-              className="absolute top-0 left-0 overflow-hidden"
-              style={{
-                width: "clamp(9rem, 18vw, 21rem)",
-                aspectRatio: expandedIdx !== null ? "1 / 1.5" : "1 / 0.95",
-                transform: `translate3d(0, ${previewY}px, 0)`,
-                willChange: "transform",
-                transition: "aspect-ratio 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-            >
-              {capabilities.map((cap, idx) => (
-                <Image
-                  key={idx}
-                  src={cap.image}
-                  alt={cap.title}
-                  fill
-                  className="object-cover object-center"
-                  style={{
-                    opacity: activeIdx === idx ? 1 : 0,
-                    transition: "opacity 0.3s ease",
-                    willChange: "opacity",
-                  }}
-                />
-              ))}
+          {/* Right Column: Floating Parallax Image Card */}
+          <div className="lg:col-span-5 hidden lg:block sticky top-28">
+            <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-black/10 shadow-xl border border-black/10 transition-all duration-500">
+              <div
+                className="absolute inset-[-10%] will-change-transform"
+                style={{
+                  transform: `translate3d(0, ${previewY * 0.4}px, 0)`,
+                }}
+              >
+                {capabilities.map((cap, idx) => (
+                  <Image
+                    key={idx}
+                    src={cap.image}
+                    alt={cap.title}
+                    fill
+                    className={`object-cover object-center transition-all duration-500 ${
+                      activeIdx === idx ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                    }`}
+                    priority={idx === 0}
+                  />
+                ))}
+              </div>
+              <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md text-white text-[11px] font-mono px-3 py-1.5 rounded-lg uppercase z-10 font-semibold shadow-md">
+                {capabilities[activeIdx].number} {capabilities[activeIdx].title}
+              </div>
             </div>
           </div>
+
         </div>
       </div>
-
     </section>
   )
 }
