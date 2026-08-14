@@ -31,21 +31,8 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
   return (
     <section ref={sectionRef} id="contact" className="relative bg-[#141414] text-white px-6 sm:px-12 md:px-16 py-28 md:py-36 overflow-hidden">
       
-      {/* Nature Background Image Parallax Layer */}
-      {/* We use inset-[-25%] so the image is taller than the container, giving it room to travel without showing the edges */}
-      <div
-        className="absolute inset-[-25%] opacity-30 z-0 pointer-events-none will-change-transform"
-        style={{
-          transform: `translate3d(0, ${parallaxY}px, 0)`,
-        }}
-      >
-        <Image
-          src="/images/dark_forest_bg.png"
-          alt="Dark forest nature parallax"
-          fill
-          className="object-cover object-center brightness-[0.7]"
-        />
-      </div>
+      {/* Subtle Ambient Radial Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_50%)] z-0 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-12 relative z-10">
         <div className="space-y-6">
