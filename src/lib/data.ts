@@ -32,74 +32,45 @@ export interface NavItem {
 
 export const projects: Project[] = [
   {
-    id: "roger-portfolio",
-    title: "PORTFOLIO EDITORIAL — ROGER INFA",
+    id: "saas-core",
+    title: "SAAS CORE — PLATAFORMA BASE",
     year: "2026",
-    subtitle: "SISTEMA WEB Y EXPERIENCIA INTERACTIVA",
-    bgImage: "/images/portfolio_bg_main.png",
-    posterImage: "/images/portfolio_bg_main.png",
+    subtitle: "ARQUITECTURA Y CORE PARA APLICACIONES SAAS",
+    bgImage: "/images/proyecto_saas_core.png",
+    posterImage: "/images/proyecto_saas_core.png",
     description:
-      "Portfolio personal de desarrollador con diseño editorial avanzado, animaciones 3D en canvas, arquitectura desacoplada, selector de proyectos y formulario de contacto interactivo.",
+      "Repositorio y arquitectura core para plataformas SaaS que posibilita la administración centralizada, gestión multi-tenant, control de roles, autenticación segura y servicios base escalables.",
     headline:
-      "Experiencia digital de alto rendimiento construida con Next.js App Router, Tailwind CSS, TypeScript y animaciones fluidas.",
-    tags: ["Next.js App Router", "TypeScript", "Tailwind CSS", "Diseño Editorial", "Canvas Motion"],
-    liveUrl: "#home",
+      "Arquitectura backend y panel administrativo preparado para escalar aplicaciones SaaS empresariales con seguridad y modularidad.",
+    tags: ["Next.js", "TypeScript", "Node.js", "Multi-Tenant", "PostgreSQL", "REST APIs"],
+    liveUrl: "https://admin.saas.webcoresys.com/",
   },
   {
     id: "transigo-gps",
     title: "TRANSIGO — MONITOREO GPS",
     year: "2026",
-    subtitle: "SISTEMA DE MONITOREO EN TIEMPO REAL",
-    bgImage: "/images/transigo_preview.png",
-    posterImage: "/images/transigo_preview.png",
+    subtitle: "SISTEMA DE MONITOREO Y TELEMETRÍA DE TRANSPORTE",
+    bgImage: "/images/proyecto_transigo.png",
+    posterImage: "/images/proyecto_transigo.png",
     description:
-      "Aplicación web orientada a la gestión, monitoreo y visualización en tiempo real del sistema de transporte público basado en GPS. Supervisa unidades satelitales mediante WebSockets (Pub/Sub), gestiona rutas y calcula estimaciones de arribo (ETA).",
+      "Aplicación web orientada a la gestión, monitoreo y visualización en tiempo real del sistema de transporte público basado en GPS mediante WebSockets (Pub/Sub). Supervisa unidades, gestiona rutas y calcula estimaciones de arribo.",
     headline:
-      "Seguimiento satelital de vehículos en tiempo real usando WebSockets (Pub/Sub) e interfaz directa con la API backend.",
-    tags: ["TransiGo", "WebSockets Pub/Sub", "TypeScript", "Telemetría GPS", "OpenStreetMap", "APIs Backend"],
+      "Seguimiento satelital de vehículos en tiempo real con WebSockets e interfaz de alta precisión para la toma de decisiones.",
+    tags: ["TypeScript", "Next.js", "WebSockets Pub/Sub", "Telemetría GPS", "OpenStreetMap", "Node.js API"],
     liveUrl: "https://gps-based-transit-optimization.onlinestornsoftware.win/",
   },
   {
-    id: "tolum-engine",
-    title: "MOTOR NLP TÖLUM",
+    id: "canchas-deportivas",
+    title: "GESTIÓN DE CANCHAS DEPORTIVAS",
     year: "2026",
-    subtitle: "BACKEND Y API OPEN-SOURCE",
-    bgImage: "/images/project_tolum_bg.png",
-    posterImage: "/images/project_tolum_bg.png",
+    subtitle: "SISTEMA DE RESERVAS Y ADMINISTRACIÓN",
+    bgImage: "/images/proyecto_canchas.png",
+    posterImage: "/images/proyecto_canchas.png",
     description:
-      "API interactiva de reconocimiento de voz y herramienta de procesamiento de lenguaje desarrollada con Python FastAPI y Web Audio API.",
+      "Aplicativo integral orientado a la gestión de instalaciones deportivas, control de reservas en tiempo real, administración de horarios, pagos e informes de ocupación.",
     headline:
-      "Diseño de servicios backend escalables y herramientas de código abierto impulsadas por Web APIs modernas.",
-    tags: ["Python", "FastAPI", "TypeScript", "Web Audio API"],
-    liveUrl: "https://tolum.app",
-  },
-  {
-    id: "dagens-media",
-    title: "PLATAFORMA DAGENS MEDIA",
-    year: "2025",
-    subtitle: "BACKEND EDITORIAL DE ALTO TRÁFICO",
-    bgImage: "/images/dark_forest_bg.png",
-    posterImage: "/images/dark_forest_bg.png",
-    description:
-      "Plataforma editorial moderna diseñada para renderizado de servidor de baja latencia, almacenamiento en caché con Redis y alto tráfico de lectores.",
-    headline:
-      "Arquitectura de código limpio y mantenible con estricta seguridad de tipos y pipelines CI/CD automatizados.",
-    tags: ["Next.js App Router", "Redis", "TypeScript", "Vercel"],
-    liveUrl: "https://dagens.media",
-  },
-  {
-    id: "perla-cloud",
-    title: "TELEMETRÍA PERLA CLOUD",
-    year: "2024",
-    subtitle: "PANEL DE CONTROL EN LA NUBE DISTRIBUIDA",
-    bgImage: "/images/project_merla_bg.png",
-    posterImage: "/images/merla_poster_card.png",
-    description:
-      "Backend de telemetría distribuida que proporciona métricas de infraestructura en tiempo real, pipelines de datos en PostgreSQL y gráficos interactivos.",
-    headline:
-      "Soluciones full-stack de extremo a extremo, desde el modelado de bases de datos hasta herramientas fluidas de monitoreo UI.",
-    tags: ["Node.js", "PostgreSQL", "React", "Recharts", "Docker"],
-    liveUrl: "https://perla.cloud",
+      "Sistema web intuitivo para la automatización de reservas de canchas, gestión de disponibilidad y control operativo.",
+    tags: ["React", "TypeScript", "Node.js", "Gestión de Reservas", "PostgreSQL"],
   },
 ]
 
@@ -109,35 +80,35 @@ export const capabilities: Capability[] = [
     title: "Arquitectura Backend y Sistemas",
     description:
       "Diseño de APIs REST y GraphQL de alto rendimiento, esquemas de bases de datos relacionales (PostgreSQL, Redis), flujos de autenticación y servicios backend concurrentes en Node.js.",
-    image: "/images/transigo_preview.png",
+    image: "/images/proyecto_saas_core.png",
   },
   {
     number: "(02)",
     title: "Desarrollo Web Full-Stack",
     description:
       "Desarrollo de aplicaciones de extremo a extremo, conectando frontends modernos en Next.js/React con backends de servidor altamente resilientes en TypeScript.",
-    image: "/images/project_hanna_bg.png",
+    image: "/images/proyecto_transigo.png",
   },
   {
     number: "(03)",
     title: "Bases de Datos y Cloud DevOps",
     description:
       "Modelado relacional y NoSQL, optimización de consultas, contenedorización con Docker, automatización de integración continua (CI/CD) y despliegue en la nube (AWS, Vercel).",
-    image: "/images/project_tolum_bg.png",
+    image: "/images/proyecto_canchas.png",
   },
   {
     number: "(04)",
     title: "Sistemas de UI/UX y Animaciones",
     description:
       "Creación de interfaces limpias y adaptables con microanimaciones CSS fluidas, diseños mobile-first, componentes accesibles y modos oscuros.",
-    image: "/images/dark_forest_bg.png",
+    image: "/images/proyecto_transigo.png",
   },
   {
     number: "(05)",
     title: "Auditorías de Código y Rendimiento",
     description:
       "Pruebas de carga backend, afinamiento de consultas a bases de datos, corrección de fugas de memoria, optimización de Core Web Vitals y refactorización de código legado.",
-    image: "/images/project_merla_bg.png",
+    image: "/images/proyecto_saas_core.png",
   },
 ]
 
