@@ -9,6 +9,22 @@ interface IntroSectionProps {
 export function IntroSection({ scrollY }: IntroSectionProps) {
   return (
     <section id="studio" className="relative bg-[#F4F4F0] text-black px-6 sm:px-12 md:px-16 py-24 md:py-32 overflow-hidden">
+      
+      {/* Subtle Parallax Global Background Layer */}
+      <div
+        className="absolute inset-0 opacity-[0.06] pointer-events-none will-change-transform scale-110"
+        style={{
+          transform: `translate3d(0, ${(scrollY - 500) * 0.12}px, 0)`,
+        }}
+      >
+        <Image
+          src="/images/bg_global.png"
+          alt="Global background parallax"
+          fill
+          className="object-cover"
+        />
+      </div>
+
       <div className="relative z-10 max-w-6xl mx-auto space-y-16">
         
         {/* Small Section Subtitle Tag */}

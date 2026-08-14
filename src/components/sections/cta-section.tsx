@@ -31,8 +31,23 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
   return (
     <section ref={sectionRef} id="contact" className="relative bg-[#141414] text-white px-6 sm:px-12 md:px-16 py-28 md:py-36 overflow-hidden">
       
-      {/* Subtle Ambient Radial Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_50%)] z-0 pointer-events-none" />
+      {/* Parallax Background Image Layer */}
+      <div
+        className="absolute inset-[-25%] opacity-35 z-0 pointer-events-none will-change-transform"
+        style={{
+          transform: `translate3d(0, ${parallaxY}px, 0)`,
+        }}
+      >
+        <Image
+          src="/images/bg_global.png"
+          alt="Global Background Parallax"
+          fill
+          className="object-cover object-center brightness-[0.75]"
+        />
+      </div>
+
+      {/* Subtle Dark Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#141414]/80 via-transparent to-[#141414]/90 z-0 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-12 relative z-10">
         <div className="space-y-6">
