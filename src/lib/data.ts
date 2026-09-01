@@ -140,4 +140,3 @@ export const navItems: NavItem[] = [
   { name: "Habilidades", href: "#capabilities" },
   { name: "Contacto", href: "#contact" },
 ]
-

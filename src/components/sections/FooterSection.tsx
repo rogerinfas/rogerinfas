@@ -1,0 +1,77 @@
+import { useState, useEffect } from "react"
+
+interface FooterSectionProps {
+  onNavigate: (href: string, tabName: string) => void
+}
+
+export function FooterSection({ onNavigate }: FooterSectionProps) {
+  const [timeString, setTimeString] = useState<string>("")
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date()
+      const formatted = now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZoneName: "short",
+      })
+      setTimeString(formatted)
+    }
+
+    updateTime()
+    const timer = setInterval(updateTime, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <footer className="bg-[#0D0D0E] text-white/70 px-6 sm:px-12 md:px-16 pt-20 pb-12 border-t border-white/10 relative z-10">
+      <div className="max-w-6xl mx-auto space-y-16">
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs font-mono">
+          <div>
+            <p className="uppercase text-white/40 mb-3">Contacto</p>
+            <div className="space-y-1 text-white/80">
+              <a href="mailto:contactorogeris@gmail.com" className="block hover:text-white transition-colors truncate">
+                contactorogeris@gmail.com
+              </a>
+              <a href="https://github.com/rogerinfas" target="_blank" rel="noreferrer" className="block hover:text-white transition-colors">
+                GitHub @rogerinfas ↗
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <p className="uppercase text-white/40 mb-3">Navegación</p>
+            <div className="space-y-1 text-white/80">
+              <button onClick={() => onNavigate("#home", "Inicio")} className="block hover:text-white cursor-pointer">INICIO</button>
+              <button onClick={() => onNavigate("#work", "Proyectos")} className="block hover:text-white cursor-pointer">PROYECTOS</button>
+              <button onClick={() => onNavigate("#studio", "Sobre mí")} className="block hover:text-white cursor-pointer">SOBRE MÍ</button>
+              <button onClick={() => onNavigate("#capabilities", "Habilidades")} className="block hover:text-white cursor-pointer">HABILIDADES</button>
+              <button onClick={() => onNavigate("#contact", "Contacto")} className="block hover:text-white cursor-pointer">CONTACTO</button>
+            </div>
+          </div>
+
+          <div>
+            <p className="uppercase text-white/40 mb-3">Ubicación y Hora</p>
+            <div className="space-y-1 text-white/80">
+              <p>Dev Full-Stack (Especialista Backend)</p>
+              <p className="text-white font-semibold">{timeString || "00:00:00 UTC"}</p>
+              <p className="text-white/50">Remoto / Todo el mundo</p>
+            </div>
+          </div>
+
+          <div>
+            <p className="uppercase text-white/40 mb-3">Derechos</p>
+            <div className="space-y-1 text-white/80">
+              <p>© {new Date().getFullYear()} Roger Infa Sanchez</p>
+              <p>Desarrollado con Astro y Tailwind</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  )
+}

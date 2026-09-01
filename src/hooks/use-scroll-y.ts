@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 
 /**
@@ -13,6 +11,7 @@ export function useScrollY(): number {
     const handleScroll = () => {
       setScrollY(window.scrollY)
     }
+    handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
