@@ -1,11 +1,16 @@
+import { useReveal } from "@/hooks/use-reveal"
+import { Reveal } from "@/components/Reveal"
+
 interface IntroSectionProps {
   scrollY: number
 }
 
 export function IntroSection({ scrollY }: IntroSectionProps) {
+  const { ref: headlineRef, isVisible: headlineVisible } = useReveal<HTMLHeadingElement>(0.4)
+
   return (
     <section id="studio" className="relative bg-[#F4F4F0] text-black px-6 sm:px-12 md:px-16 py-24 md:py-32 overflow-hidden">
-      
+
       {/* Subtle Parallax Global Background Layer */}
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none will-change-transform scale-110"
@@ -21,29 +26,87 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto space-y-16">
-        
+
         {/* Small Section Subtitle Tag */}
-        <div className="flex items-center gap-2 text-xs font-mono text-black/50 uppercase tracking-widest">
+        <Reveal className="flex items-center gap-2 text-xs font-mono text-black/50 uppercase tracking-widest">
           <span>Introducción</span>
-        </div>
+        </Reveal>
 
         {/* Typography Statement Layout */}
         <div className="space-y-4">
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-normal tracking-tight leading-[1.12]">
-            Tú <span className="text-black/40 italic font-serif font-light">imaginas</span> el producto<br />
-            Yo <span className="font-serif italic font-light">construyo</span><br />
-            lo que realmente importa.
+          <h2
+            ref={headlineRef}
+            className="text-4xl sm:text-6xl lg:text-7xl font-sans font-normal tracking-tight leading-[1.12]"
+          >
+            <span
+              className="inline-block transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{
+                transitionDelay: "0ms",
+                opacity: headlineVisible ? 1 : 0,
+                transform: headlineVisible ? "translateY(0)" : "translateY(24px)",
+                filter: headlineVisible ? "blur(0px)" : "blur(6px)",
+              }}
+            >
+              Tú{" "}
+              <span
+                className="italic font-serif font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom text-black/40 transition-[background-size] duration-[900ms] ease-out"
+                style={{
+                  backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
+                  transitionDelay: "500ms",
+                }}
+              >
+                imaginas
+              </span>{" "}
+              el producto
+            </span>
+            <br />
+            <span
+              className="inline-block transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{
+                transitionDelay: "150ms",
+                opacity: headlineVisible ? 1 : 0,
+                transform: headlineVisible ? "translateY(0)" : "translateY(24px)",
+                filter: headlineVisible ? "blur(0px)" : "blur(6px)",
+              }}
+            >
+              Yo{" "}
+              <span
+                className="font-serif italic font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom transition-[background-size] duration-[900ms] ease-out"
+                style={{
+                  backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
+                  transitionDelay: "650ms",
+                }}
+              >
+                construyo
+              </span>
+            </span>
+            <br />
+            <span
+              className="inline-block transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{
+                transitionDelay: "300ms",
+                opacity: headlineVisible ? 1 : 0,
+                transform: headlineVisible ? "translateY(0)" : "translateY(24px)",
+                filter: headlineVisible ? "blur(0px)" : "blur(6px)",
+              }}
+            >
+              lo que realmente importa.
+            </span>
           </h2>
         </div>
 
         {/* Two Paragraph Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 pt-8 border-t border-black/15 text-base sm:text-lg font-light leading-relaxed text-black/80">
-          <p>
-            I am Roger Infa Sanchez, a Full-Stack Developer with a deep passion for backend architecture, scalable APIs, and system performance.
-          </p>
-          <p>
-            While I engineer complete end-to-end web applications with modern Next.js and React frontends, I thrive most when designing resilient server workflows, database schemas (PostgreSQL), and cloud infrastructure.
-          </p>
+          <Reveal delay={100}>
+            <p>
+              I am Roger Infa Sanchez, a Full-Stack Developer with a deep passion for backend architecture, scalable APIs, and system performance.
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <p>
+              While I engineer complete end-to-end web applications with modern Next.js and React frontends, I thrive most when designing resilient server workflows, database schemas (PostgreSQL), and cloud infrastructure.
+            </p>
+          </Reveal>
         </div>
 
       </div>

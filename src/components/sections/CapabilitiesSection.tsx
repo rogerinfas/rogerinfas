@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { capabilities } from "@/lib/data"
+import { Reveal } from "@/components/Reveal"
 
 interface CapabilitiesSectionProps {
   scrollY: number
@@ -58,13 +59,15 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
       <div className="max-w-6xl mx-auto space-y-12">
         
         {/* Eyebrow with pulsing dot */}
-        <p className="inline-flex items-center gap-3 text-sm font-medium leading-none text-black/70">
-          <span
-            className="inline-block size-1.5 rounded-full bg-black"
-            style={{ animation: "servicesDot 1.15s ease-in-out infinite" }}
-          />
-          <span>Dónde puedo aportar valor</span>
-        </p>
+        <Reveal as="span" className="block">
+          <p className="inline-flex items-center gap-3 text-sm font-medium leading-none text-black/70">
+            <span
+              className="inline-block size-1.5 rounded-full bg-black"
+              style={{ animation: "servicesDot 1.15s ease-in-out infinite" }}
+            />
+            <span>Dónde puedo aportar valor</span>
+          </p>
+        </Reveal>
 
         {/* 2-Column Split: Editorial Accordion (Left) + Floating Parallax Image Card (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -75,7 +78,7 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
               const isActive = activeIdx === idx
               const isExpanded = expandedIdx === idx
               return (
-                <div key={idx} className="w-full">
+                <Reveal key={idx} delay={idx * 80} className="w-full">
                   {/* Accordion Row Button */}
                   <button
                     type="button"
@@ -113,7 +116,7 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
                       </p>
                     </div>
                   </div>
-                </div>
+                </Reveal>
               )
             })}
           </div>

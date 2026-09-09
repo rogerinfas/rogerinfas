@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { ArrowRight } from "lucide-react"
 import { projects } from "@/lib/data"
+import { useMagnetic } from "@/hooks/use-magnetic"
 
 interface HeroSectionProps {
   scrollY: number
@@ -11,6 +12,7 @@ const SLIDE_DURATION = 5000
 export function HeroSection({ scrollY }: HeroSectionProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [progress, setProgress] = useState(0)
+  const nextMagnetic = useMagnetic<HTMLButtonElement>(0.3)
 
   // 5-Second Auto-play Timer for Hero Carousel
   useEffect(() => {
@@ -67,11 +69,14 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
       <div className="relative z-30 flex h-full flex-col justify-between p-6 sm:p-10 lg:p-12 pt-24 sm:pt-28">
         
         {/* Center Metadata Line */}
-        <div className="relative flex flex-1 items-center justify-between px-2 sm:px-6 text-[11px] font-mono tracking-[0.25em] text-white/85 pointer-events-none">
+        <div key={`meta-${currentSlide}`} className="relative flex flex-1 items-center justify-between px-2 sm:px-6 text-[11px] font-mono tracking-[0.25em] text-white/85 pointer-events-none" style={{ animation: "fadeIn 700ms cubic-bezier(0.16,1,0.3,1)" }}>
           <span className="uppercase">{activeProject.subtitle}</span>
           <span className="uppercase font-bold tracking-[0.3em] text-white text-base sm:text-lg drop-shadow-lg">{activeProject.title}</span>
           <span className="uppercase">{activeProject.year}</span>
           <button
+            ref={nextMagnetic.ref}
+            onMouseMove={nextMagnetic.onMouseMove}
+            onMouseLeave={nextMagnetic.onMouseLeave}
             onClick={(e) => {
               e.stopPropagation()
               setCurrentSlide((prev) => (prev + 1) % projects.length)
@@ -88,7 +93,11 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
         {/* Bottom Editorial Headline & Progress Controls */}
         <footer className="grid grid-cols-1 md:grid-cols-12 items-end gap-6 w-full pt-4">
           <div className="md:col-span-8 lg:col-span-7">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-white/95 max-w-2xl font-sans drop-shadow-md">
+            <p
+              key={`headline-${currentSlide}`}
+              className="text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-white/95 max-w-2xl font-sans drop-shadow-md"
+              style={{ animation: "fadeIn 700ms cubic-bezier(0.16,1,0.3,1)" }}
+            >
               {activeProject.headline}
             </p>
           </div>
