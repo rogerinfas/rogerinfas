@@ -35,12 +35,19 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
               <button
                 key={item.name}
                 onClick={() => onNavigate(item.href, item.name)}
-                className={`text-left text-3xl sm:text-4xl font-sans tracking-tight transition-all px-4 py-2 cursor-pointer ${
+                className={`group text-left text-3xl sm:text-4xl font-sans tracking-tight transition-all duration-300 px-4 py-2 cursor-pointer flex items-center gap-3 ${
                   isActive
                     ? "bg-[#E54838] text-white font-normal"
-                    : "text-black hover:opacity-60 font-normal"
+                    : "text-black hover:translate-x-2 hover:text-[#E54838] font-normal"
                 }`}
               >
+                <span
+                  className={`text-base overflow-hidden transition-all duration-300 ${
+                    isActive ? "opacity-100 w-4" : "opacity-0 w-0 group-hover:opacity-100 group-hover:w-4"
+                  }`}
+                >
+                  →
+                </span>
                 {item.name}
               </button>
             )
@@ -55,7 +62,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
                 href="https://github.com/rogerinfas"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-black/85 hover:text-black block transition-colors font-medium"
+                className="link-underline text-xs text-black/85 hover:text-black inline-block transition-colors font-medium"
               >
                 GitHub ↗
               </a>
@@ -63,7 +70,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
                 href="https://www.linkedin.com/in/roger-infa-sanchez/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-black/85 hover:text-black block transition-colors font-medium"
+                className="link-underline text-xs text-black/85 hover:text-black inline-block transition-colors font-medium"
               >
                 LinkedIn ↗
               </a>
@@ -75,7 +82,7 @@ export function SideMenu({ menuOpen, activeTab, onClose, onNavigate }: SideMenuP
             <div className="space-y-1">
               <a
                 href="mailto:contactorogeris@gmail.com"
-                className="text-xs text-black/85 hover:text-black block transition-colors font-medium truncate"
+                className="link-underline text-xs text-black/85 hover:text-black inline-block transition-colors font-medium truncate max-w-full"
               >
                 contactorogeris@gmail.com
               </a>

@@ -38,7 +38,7 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
       {/* Logo - Roger Infa Monogram Logo */}
       <a
         href="/"
-        className={`pointer-events-auto shrink-0 text-lg sm:text-2xl font-mono font-bold tracking-widest uppercase hover:opacity-80 transition-colors duration-300 select-none ${
+        className={`pointer-events-auto shrink-0 text-lg sm:text-2xl font-mono font-bold tracking-widest uppercase hover:tracking-[0.2em] transition-[letter-spacing,color] duration-300 select-none ${
           isDarkSection ? "text-white drop-shadow-md" : "text-black"
         }`}
         aria-label="Roger Infa Sanchez Home"

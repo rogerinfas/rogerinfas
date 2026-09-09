@@ -33,10 +33,10 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
           <div>
             <p className="uppercase text-white/40 mb-3">Contacto</p>
             <div className="space-y-1 text-white/80">
-              <a href="mailto:contactorogeris@gmail.com" className="block hover:text-white transition-colors truncate">
+              <a href="mailto:contactorogeris@gmail.com" className="link-underline inline-block hover:text-white transition-colors truncate">
                 contactorogeris@gmail.com
               </a>
-              <a href="https://github.com/rogerinfas" target="_blank" rel="noreferrer" className="block hover:text-white transition-colors">
+              <a href="https://github.com/rogerinfas" target="_blank" rel="noreferrer" className="link-underline inline-block hover:text-white transition-colors">
                 GitHub @rogerinfas ↗
               </a>
             </div>
@@ -45,11 +45,11 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
           <div>
             <p className="uppercase text-white/40 mb-3">Navegación</p>
             <div className="space-y-1 text-white/80">
-              <button onClick={() => onNavigate("#home", "Inicio")} className="block hover:text-white cursor-pointer">INICIO</button>
-              <button onClick={() => onNavigate("#work", "Proyectos")} className="block hover:text-white cursor-pointer">PROYECTOS</button>
-              <button onClick={() => onNavigate("#studio", "Sobre mí")} className="block hover:text-white cursor-pointer">SOBRE MÍ</button>
-              <button onClick={() => onNavigate("#capabilities", "Habilidades")} className="block hover:text-white cursor-pointer">HABILIDADES</button>
-              <button onClick={() => onNavigate("#contact", "Contacto")} className="block hover:text-white cursor-pointer">CONTACTO</button>
+              <button onClick={() => onNavigate("#home", "Inicio")} className="link-underline inline-block hover:text-white cursor-pointer">INICIO</button>
+              <button onClick={() => onNavigate("#work", "Proyectos")} className="link-underline inline-block hover:text-white cursor-pointer">PROYECTOS</button>
+              <button onClick={() => onNavigate("#studio", "Sobre mí")} className="link-underline inline-block hover:text-white cursor-pointer">SOBRE MÍ</button>
+              <button onClick={() => onNavigate("#capabilities", "Habilidades")} className="link-underline inline-block hover:text-white cursor-pointer">HABILIDADES</button>
+              <button onClick={() => onNavigate("#contact", "Contacto")} className="link-underline inline-block hover:text-white cursor-pointer">CONTACTO</button>
             </div>
           </div>
 

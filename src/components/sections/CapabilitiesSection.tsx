@@ -93,8 +93,10 @@ export function CapabilitiesSection({ scrollY }: CapabilitiesSectionProps) {
                       {cap.number}
                     </span>
                     <span
-                      className={`text-2xl sm:text-4xl md:text-5xl font-sans tracking-tight transition-colors duration-200 ${
-                        isActive || isExpanded ? "font-normal text-black" : "font-light text-black/50 group-hover:text-black/80"
+                      className={`inline-block text-2xl sm:text-4xl md:text-5xl font-sans tracking-tight transition-all duration-300 ${
+                        isActive || isExpanded
+                          ? "font-normal text-black"
+                          : "font-light text-black/50 group-hover:text-black/80 group-hover:translate-x-1.5"
                       }`}
                     >
                       {cap.title}
