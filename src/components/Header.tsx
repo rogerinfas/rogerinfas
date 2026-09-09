@@ -34,11 +34,11 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
   }, [])
 
   return (
-    <header className="fixed top-0 inset-x-0 z-40 p-6 sm:p-10 lg:p-12 flex items-center justify-between pointer-events-none">
+    <header className="fixed top-0 inset-x-0 z-40 p-6 sm:p-10 lg:p-12 flex items-center justify-between gap-4 pointer-events-none">
       {/* Logo - Roger Infa Monogram Logo */}
       <a
         href="/"
-        className={`pointer-events-auto text-xl sm:text-2xl font-mono font-bold tracking-widest uppercase hover:opacity-80 transition-colors duration-300 select-none ${
+        className={`pointer-events-auto shrink-0 text-lg sm:text-2xl font-mono font-bold tracking-widest uppercase hover:opacity-80 transition-colors duration-300 select-none ${
           isDarkSection ? "text-white drop-shadow-md" : "text-black"
         }`}
         aria-label="Roger Infa Sanchez Home"
@@ -48,20 +48,20 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
 
       {/* Right Actions */}
       <div
-        className={`pointer-events-auto flex items-center gap-5 sm:gap-6 transition-opacity duration-300 ${
+        className={`pointer-events-auto flex items-center gap-3 sm:gap-6 transition-opacity duration-300 ${
           menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
         {/* Contáctame Button */}
         <button
           onClick={onContactClick}
-          className={`inline-flex items-center gap-3 rounded-md px-4 py-2 text-sm font-medium tracking-tight shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer group ${
+          className={`inline-flex items-center gap-0 sm:gap-3 rounded-md px-2 sm:px-4 py-2 text-sm font-medium tracking-tight shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer group ${
             isDarkSection
               ? "bg-[#141414] text-white border border-white/20 hover:bg-black"
               : "bg-white text-black border border-black/15 hover:bg-black hover:text-white"
           }`}
         >
-          <span className="text-xs sm:text-sm font-sans font-normal">Contáctame</span>
+          <span className="hidden sm:inline text-xs sm:text-sm font-sans font-normal">Contáctame</span>
           <span
             className={`flex size-5 items-center justify-center rounded-[3px] p-0.5 transition-colors duration-300 ${
               isDarkSection
