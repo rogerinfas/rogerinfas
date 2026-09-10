@@ -1,5 +1,6 @@
 import { useReveal } from "@/hooks/use-reveal"
 import { Reveal } from "@/components/Reveal"
+import { MagneticText } from "@/components/MagneticText"
 
 interface IntroSectionProps {
   scrollY: number
@@ -47,17 +48,19 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
                 filter: headlineVisible ? "blur(0px)" : "blur(6px)",
               }}
             >
-              Tú{" "}
-              <span
-                className="italic font-serif font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom text-black/40 transition-[background-size] duration-[900ms] ease-out"
-                style={{
-                  backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
-                  transitionDelay: "500ms",
-                }}
-              >
-                imaginas
-              </span>{" "}
-              el producto
+              <MagneticText as="span" radius={90} strength={0.45}>
+                Tú{" "}
+                <span
+                  className="italic font-serif font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom text-black/40 transition-[background-size] duration-[900ms] ease-out"
+                  style={{
+                    backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
+                    transitionDelay: "500ms",
+                  }}
+                >
+                  imaginas
+                </span>{" "}
+                el producto
+              </MagneticText>
             </span>
             <br />
             <span
@@ -69,16 +72,18 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
                 filter: headlineVisible ? "blur(0px)" : "blur(6px)",
               }}
             >
-              Yo{" "}
-              <span
-                className="font-serif italic font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom transition-[background-size] duration-[900ms] ease-out"
-                style={{
-                  backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
-                  transitionDelay: "650ms",
-                }}
-              >
-                construyo
-              </span>
+              <MagneticText as="span" radius={90} strength={0.45}>
+                Yo{" "}
+                <span
+                  className="font-serif italic font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom transition-[background-size] duration-[900ms] ease-out"
+                  style={{
+                    backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
+                    transitionDelay: "650ms",
+                  }}
+                >
+                  construyo
+                </span>
+              </MagneticText>
             </span>
             <br />
             <span
@@ -90,7 +95,7 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
                 filter: headlineVisible ? "blur(0px)" : "blur(6px)",
               }}
             >
-              lo que realmente importa.
+              <MagneticText text="lo que realmente importa." radius={90} strength={0.45} />
             </span>
           </h2>
         </div>
