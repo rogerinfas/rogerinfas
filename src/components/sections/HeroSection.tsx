@@ -39,9 +39,9 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
       
       {/* Background Images with Parallax Motion */}
       <div
-        className="absolute inset-0 z-0 will-change-transform pointer-events-none"
+        className="absolute -inset-y-[15%] inset-x-0 z-0 will-change-transform pointer-events-none"
         style={{
-          transform: `translate3d(0, ${scrollY * 0.35}px, 0) scale(1.08)`,
+          transform: `translate3d(0, ${Math.min(scrollY, window.innerHeight) * 0.15}px, 0) scale(1.08)`,
         }}
       >
         {projects.map((proj, idx) => (
