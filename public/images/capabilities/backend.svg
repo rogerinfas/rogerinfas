@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs><linearGradient id="b" x1="70" y1="40" x2="730" y2="560" gradientUnits="userSpaceOnUse"><stop stop-color="#151515"/><stop offset="1" stop-color="#33271F"/></linearGradient><linearGradient id="a" x1="180" y1="160" x2="620" y2="440" gradientUnits="userSpaceOnUse"><stop stop-color="#E54838"/><stop offset="1" stop-color="#C6A77D"/></linearGradient></defs>
+  <rect width="800" height="600" rx="28" fill="url(#b)"/>
+  <text x="78" y="86" fill="#F4F4F0" font-family="monospace" font-size="16" letter-spacing="4">01 / BACKEND ARCHITECTURE</text>
+  <g stroke="#F4F4F0" stroke-opacity=".12"><path d="M80 150H720M80 250H720M80 350H720M80 450H720"/><path d="M180 110V500M340 110V500M500 110V500M660 110V500"/></g>
+  <rect x="100" y="210" width="170" height="180" rx="16" fill="#F4F4F0" fill-opacity=".08" stroke="#F4F4F0" stroke-opacity=".4"/>
+  <path d="M124 250L148 268L124 286M164 286H220" stroke="#E54838" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="124" y="340" fill="#F4F4F0" font-family="monospace" font-size="14">REST API</text>
+  <rect x="315" y="165" width="170" height="270" rx="16" fill="#F4F4F0" fill-opacity=".08" stroke="#C6A77D" stroke-opacity=".7"/>
+  <path d="M350 220H450M350 250H430M350 280H465" stroke="#F4F4F0" stroke-opacity=".6" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="400" cy="355" r="42" stroke="url(#a)" stroke-width="10"/><path d="M400 333V378M378 355H422" stroke="#F4F4F0" stroke-width="7" stroke-linecap="round"/>
+  <text x="344" y="410" fill="#F4F4F0" font-family="monospace" font-size="14">NODE SERVICE</text>
+  <rect x="530" y="230" width="170" height="140" rx="16" fill="#F4F4F0" fill-opacity=".08" stroke="#E54838" stroke-opacity=".8"/>
+  <ellipse cx="615" cy="265" rx="55" ry="18" stroke="#F4F4F0" stroke-width="6"/><path d="M560 265V330C560 350 670 350 670 330V265M560 298C560 318 670 318 670 298" stroke="#F4F4F0" stroke-width="6"/>
+  <text x="570" y="405" fill="#F4F4F0" font-family="monospace" font-size="14">DATABASE</text>
+  <path d="M270 300H315M485 300H530" stroke="url(#a)" stroke-width="6" stroke-dasharray="10 10"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs><linearGradient id="b" x1="50" y1="20" x2="750" y2="580" gradientUnits="userSpaceOnUse"><stop stop-color="#171717"/><stop offset="1" stop-color="#202C30"/></linearGradient><linearGradient id="a" x1="120" y1="440" x2="680" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#C6A77D"/><stop offset="1" stop-color="#E54838"/></linearGradient></defs>
+  <rect width="800" height="600" rx="28" fill="url(#b)"/>
+  <text x="78" y="86" fill="#F4F4F0" font-family="monospace" font-size="16" letter-spacing="4">03 / DATA + CLOUD DEVOPS</text>
+  <g stroke="#F4F4F0" stroke-opacity=".12"><path d="M80 160H720M80 260H720M80 360H720M80 460H720"/><path d="M180 110V510M340 110V510M500 110V510M660 110V510"/></g>
+  <path d="M120 430L230 370L350 410L470 290L590 330L680 190" stroke="url(#a)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#F4F4F0"><circle cx="120" cy="430" r="10"/><circle cx="230" cy="370" r="10"/><circle cx="350" cy="410" r="10"/><circle cx="470" cy="290" r="10"/><circle cx="590" cy="330" r="10"/><circle cx="680" cy="190" r="10"/></g>
+  <ellipse cx="180" cy="200" rx="68" ry="22" fill="#F4F4F0" fill-opacity=".1" stroke="#C6A77D" stroke-width="4"/><path d="M112 200V264C112 288 248 288 248 264V200M112 232C112 256 248 256 248 232" stroke="#C6A77D" stroke-width="4"/>
+  <path d="M550 150C550 122 578 104 610 112C622 88 665 92 672 124C700 120 716 142 708 164C720 174 710 198 688 198H568C544 198 534 174 550 150Z" fill="#E54838" fill-opacity=".86"/>
+  <text x="134" y="340" fill="#F4F4F0" font-family="monospace" font-size="14">POSTGRESQL / REDIS</text><text x="548" y="230" fill="#F4F4F0" font-family="monospace" font-size="14">AWS / CI-CD</text>
+</svg>

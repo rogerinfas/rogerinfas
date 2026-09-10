@@ -80,56 +80,68 @@ export const capabilities: Capability[] = [
     title: "Arquitectura Backend y Sistemas",
     description:
       "Diseño de APIs REST y GraphQL de alto rendimiento, esquemas de bases de datos relacionales (PostgreSQL, Redis), flujos de autenticación y servicios backend concurrentes en Node.js.",
-    image: "/images/capabilities/1.avif",
+    image: "/images/capabilities/backend.svg",
   },
   {
     number: "(02)",
     title: "Desarrollo Web Full-Stack",
     description:
       "Desarrollo de aplicaciones de extremo a extremo, conectando frontends modernos en Next.js/React con backends de servidor altamente resilientes en TypeScript.",
-    image: "/images/capabilities/2.png",
+    image: "/images/capabilities/fullstack.svg",
   },
   {
     number: "(03)",
     title: "Bases de Datos y Cloud DevOps",
     description:
       "Modelado relacional y NoSQL, optimización de consultas, contenedorización con Docker, automatización de integración continua (CI/CD) y despliegue en la nube (AWS, Vercel).",
-    image: "/images/capabilities/3.jpeg",
+    image: "/images/capabilities/cloud.svg",
   },
   {
     number: "(04)",
     title: "Sistemas de UI/UX y Animaciones",
     description:
       "Creación de interfaces limpias y adaptables con microanimaciones CSS fluidas, diseños mobile-first, componentes accesibles y modos oscuros.",
-    image: "/images/capabilities/4.png",
+    image: "/images/capabilities/ui-motion.svg",
   },
   {
     number: "(05)",
     title: "Auditorías de Código y Rendimiento",
     description:
       "Pruebas de carga backend, afinamiento de consultas a bases de datos, corrección de fugas de memoria, optimización de Core Web Vitals y refactorización de código legado.",
-    image: "/images/capabilities/5.png",
+    image: "/images/capabilities/performance.svg",
   },
 ]
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Roger es un ingeniero excepcional con una solidez técnica notable en backend. Diseñó la arquitectura de nuestra base de datos en tiempo real y entregó una plataforma impecable antes del plazo.",
+      "Trabajar con Roger nos ayudó a ordenar un sistema que ya se había vuelto difícil de mantener. Diseñó la base de datos y las APIs pensando en la operación diaria de nuestra empresa de transporte en Arequipa, incluso cuando aumentaban las consultas y el seguimiento de unidades.",
     name: "Gabriel Torres",
-    role: "CTO en Nimbucore",
+    role: "Responsable de Tecnología · Empresa de transporte, Arequipa",
   },
   {
     quote:
-      "El enfoque de Roger en backend y su atención al rendimiento de las APIs le dieron a nuestra plataforma web una confiabilidad absoluta ante picos de tráfico.",
+      "Roger entendió rápido las necesidades de nuestro negocio local y convirtió varios procesos manuales en una plataforma sencilla de usar. Hoy podemos atender reservas y consultas de clientes de Yanahuara, Cayma y Cerro Colorado sin depender de hojas de cálculo.",
     name: "Valentina Ríos",
-    role: "Fundadora en Vertta",
+    role: "Fundadora · Servicios y reservas, Arequipa",
   },
   {
     quote:
-      "Roger conecta fluidamente complejos pipelines de datos en el servidor con interfaces web rápidas y elegantes. Un desarrollador full-stack de primer nivel.",
+      "Lo que más valoro de Roger es que no se queda solo en la interfaz. Puede conversar sobre la experiencia del usuario y, al mismo tiempo, resolver el modelo de datos, la API y el despliegue para que el producto funcione de verdad.",
     name: "Andrés Molina",
-    role: "Arquitecto de Software Principal",
+    role: "Ingeniero de Software · Consultora tecnológica, Arequipa",
+  },
+  {
+    quote:
+      "Roger nos ayudó a convertir un proceso de atención que llevábamos por WhatsApp y archivos separados en una herramienta mucho más ordenada. Su trabajo fue claro, práctico y pensado para el ritmo real de un negocio local.",
+    name: "Patricia Salazar",
+    role: "Administradora · Negocio gastronómico, Arequipa",
+  },
+  {
+    quote:
+      "Necesitábamos una plataforma que pudiera crecer sin complicar al equipo. Roger propuso una solución sencilla para comenzar, pero con una arquitectura preparada para sumar usuarios, reportes e integraciones más adelante.",
+    name: "Luis Cáceres",
+    role: "Coordinador de Operaciones · Empresa de servicios, Arequipa",
   },
 ]
 

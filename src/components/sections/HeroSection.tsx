@@ -54,7 +54,9 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
             <img
               src={proj.bgImage}
               alt={proj.title}
-              className="w-full h-full object-cover object-center brightness-[0.8] contrast-[1.05]"
+              className={`w-full h-full object-cover object-center brightness-[0.8] contrast-[1.05] ${
+                currentSlide === idx ? "hero-slow-zoom" : ""
+              }`}
             />
           </div>
         ))}

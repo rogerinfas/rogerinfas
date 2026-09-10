@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs><linearGradient id="b" x1="50" y1="30" x2="750" y2="560" gradientUnits="userSpaceOnUse"><stop stop-color="#181818"/><stop offset="1" stop-color="#29231E"/></linearGradient><linearGradient id="a" x1="160" y1="430" x2="650" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#E54838"/><stop offset="1" stop-color="#F4F4F0"/></linearGradient></defs>
+  <rect width="800" height="600" rx="28" fill="url(#b)"/>
+  <text x="78" y="86" fill="#F4F4F0" font-family="monospace" font-size="16" letter-spacing="4">05 / CODE AUDIT + SPEED</text>
+  <rect x="94" y="150" width="272" height="320" rx="18" fill="#F4F4F0" fill-opacity=".08" stroke="#F4F4F0" stroke-opacity=".3"/>
+  <path d="M128 210H318M128 250H290M128 290H306M128 330H262M128 370H312" stroke="#F4F4F0" stroke-opacity=".58" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="310" cy="210" r="10" fill="#E54838"/><circle cx="282" cy="290" r="10" fill="#E54838"/><circle cx="288" cy="370" r="10" fill="#C6A77D"/>
+  <path d="M438 430V235C438 220 450 208 465 208H670" stroke="#C6A77D" stroke-width="7"/>
+  <path d="M438 430H684" stroke="#F4F4F0" stroke-opacity=".5" stroke-width="4"/>
+  <path d="M470 394L516 360L554 378L610 286L672 242" stroke="url(#a)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="672" cy="242" r="12" fill="#E54838"/>
+  <rect x="476" y="138" width="190" height="46" rx="12" fill="#E54838"/><text x="500" y="168" fill="#F4F4F0" font-family="monospace" font-size="15" letter-spacing="2">CORE WEB VITALS</text>
+  <text x="124" y="510" fill="#F4F4F0" font-family="monospace" font-size="14">REFACTOR / TEST / OPTIMIZE</text>
+</svg>

@@ -32,7 +32,7 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-xs font-mono">
           <div>
             <p className="uppercase text-white/40 mb-3">Contacto</p>
-            <div className="space-y-1 text-white/80">
+            <div className="flex flex-col items-start gap-1 text-white/80">
               <a href="mailto:contactorogeris@gmail.com" className="link-underline inline-block hover:text-white transition-colors truncate">
                 contactorogeris@gmail.com
               </a>
@@ -44,7 +44,7 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
 
           <div>
             <p className="uppercase text-white/40 mb-3">Navegación</p>
-            <div className="space-y-1 text-white/80">
+            <div className="flex flex-col items-start gap-1 text-white/80">
               <button onClick={() => onNavigate("#home", "Inicio")} className="link-underline inline-block hover:text-white cursor-pointer">INICIO</button>
               <button onClick={() => onNavigate("#work", "Proyectos")} className="link-underline inline-block hover:text-white cursor-pointer">PROYECTOS</button>
               <button onClick={() => onNavigate("#studio", "Sobre mí")} className="link-underline inline-block hover:text-white cursor-pointer">SOBRE MÍ</button>

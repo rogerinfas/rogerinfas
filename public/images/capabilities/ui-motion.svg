@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs><linearGradient id="b" x1="60" y1="20" x2="740" y2="580" gradientUnits="userSpaceOnUse"><stop stop-color="#F7F5F0"/><stop offset="1" stop-color="#E1D4C2"/></linearGradient><linearGradient id="a" x1="180" y1="130" x2="620" y2="470" gradientUnits="userSpaceOnUse"><stop stop-color="#E54838"/><stop offset="1" stop-color="#B8895D"/></linearGradient></defs>
+  <rect width="800" height="600" rx="28" fill="url(#b)"/>
+  <text x="78" y="86" fill="#141414" font-family="monospace" font-size="16" letter-spacing="4">04 / UI SYSTEMS + MOTION</text>
+  <rect x="100" y="150" width="250" height="310" rx="20" fill="#141414"/>
+  <rect x="126" y="184" width="198" height="242" rx="12" fill="#F4F4F0"/>
+  <circle cx="225" cy="234" r="38" fill="url(#a)"/><path d="M225 214V258M203 236H247" stroke="#F4F4F0" stroke-width="8" stroke-linecap="round"/>
+  <rect x="158" y="302" width="134" height="16" rx="8" fill="#141414" fill-opacity=".18"/><rect x="158" y="332" width="98" height="16" rx="8" fill="#141414" fill-opacity=".18"/><rect x="158" y="372" width="134" height="26" rx="10" fill="#141414"/>
+  <rect x="428" y="150" width="250" height="310" rx="20" fill="#141414" fill-opacity=".92"/>
+  <rect x="454" y="184" width="198" height="242" rx="12" fill="#2B2927" stroke="#C6A77D" stroke-opacity=".7"/>
+  <rect x="484" y="226" width="138" height="62" rx="14" fill="#E54838"/><path d="M520 258H586" stroke="#F4F4F0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M484 336H622M484 370H580" stroke="#F4F4F0" stroke-opacity=".55" stroke-width="10" stroke-linecap="round"/>
+  <path d="M350 290C380 250 398 250 428 290" stroke="#E54838" stroke-width="5" stroke-dasharray="8 8"/><path d="M350 290C380 330 398 330 428 290" stroke="#C6A77D" stroke-width="5" stroke-dasharray="8 8"/>
+  <text x="142" y="500" fill="#141414" font-family="monospace" font-size="14">RESPONSIVE</text><text x="498" y="500" fill="#141414" font-family="monospace" font-size="14">STATES / TRANSITIONS</text>
+</svg>
