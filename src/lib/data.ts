@@ -115,21 +115,21 @@ export const capabilities: Capability[] = [
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Roger Infa es un ingeniero excepcional con una solidez técnica notable en backend. Diseñó la arquitectura de nuestra base de datos en tiempo real y entregó una plataforma impecable antes del plazo.",
-    name: "Kristín Eva Ólafsdóttir",
-    role: "CEO en Gagarin",
+      "Roger es un ingeniero excepcional con una solidez técnica notable en backend. Diseñó la arquitectura de nuestra base de datos en tiempo real y entregó una plataforma impecable antes del plazo.",
+    name: "Gabriel Torres",
+    role: "CTO en Nimbucore",
   },
   {
     quote:
       "El enfoque de Roger en backend y su atención al rendimiento de las APIs le dieron a nuestra plataforma web una confiabilidad absoluta ante picos de tráfico.",
-    name: "Oliver Jónsson",
-    role: "Fundador en Merla",
+    name: "Valentina Ríos",
+    role: "Fundadora en Vertta",
   },
   {
     quote:
       "Roger conecta fluidamente complejos pipelines de datos en el servidor con interfaces web rápidas y elegantes. Un desarrollador full-stack de primer nivel.",
-    name: "Hanna Stína",
-    role: "Arquitecta Principal",
+    name: "Andrés Molina",
+    role: "Arquitecto de Software Principal",
   },
 ]
 
