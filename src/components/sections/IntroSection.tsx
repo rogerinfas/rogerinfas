@@ -1,5 +1,6 @@
 import { useReveal } from "@/hooks/use-reveal"
 import { Reveal } from "@/components/Reveal"
+import { MagneticText } from "@/components/MagneticText"
 
 interface IntroSectionProps {
   scrollY: number
@@ -47,17 +48,19 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
                 filter: headlineVisible ? "blur(0px)" : "blur(6px)",
               }}
             >
-              Tú{" "}
-              <span
-                className="italic font-serif font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom text-black/40 transition-[background-size] duration-[900ms] ease-out"
-                style={{
-                  backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
-                  transitionDelay: "500ms",
-                }}
-              >
-                imaginas
-              </span>{" "}
-              el producto
+              <MagneticText as="span" radius={90} strength={0.45}>
+                Tú{" "}
+                <span
+                  className="italic font-serif font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom text-black/40 transition-[background-size] duration-[900ms] ease-out"
+                  style={{
+                    backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
+                    transitionDelay: "500ms",
+                  }}
+                >
+                  imaginas
+                </span>{" "}
+                el producto
+              </MagneticText>
             </span>
             <br />
             <span
@@ -69,16 +72,18 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
                 filter: headlineVisible ? "blur(0px)" : "blur(6px)",
               }}
             >
-              Yo{" "}
-              <span
-                className="font-serif italic font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom transition-[background-size] duration-[900ms] ease-out"
-                style={{
-                  backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
-                  transitionDelay: "650ms",
-                }}
-              >
-                construyo
-              </span>
+              <MagneticText as="span" radius={90} strength={0.45}>
+                Yo{" "}
+                <span
+                  className="font-serif italic font-light bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-left-bottom transition-[background-size] duration-[900ms] ease-out"
+                  style={{
+                    backgroundSize: headlineVisible ? "100% 1px" : "0% 1px",
+                    transitionDelay: "650ms",
+                  }}
+                >
+                  construyo
+                </span>
+              </MagneticText>
             </span>
             <br />
             <span
@@ -90,7 +95,7 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
                 filter: headlineVisible ? "blur(0px)" : "blur(6px)",
               }}
             >
-              lo que realmente importa.
+              <MagneticText text="lo que realmente importa." radius={90} strength={0.45} />
             </span>
           </h2>
         </div>
@@ -99,12 +104,12 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 pt-8 border-t border-black/15 text-base sm:text-lg font-light leading-relaxed text-black/80">
           <Reveal delay={100}>
             <p>
-              I am Roger Infa Sanchez, a Full-Stack Developer with a deep passion for backend architecture, scalable APIs, and system performance.
+              Soy Roger Infa Sanchez, Full-Stack Developer con una pasión profunda por la arquitectura backend, las APIs escalables y el rendimiento de sistemas.
             </p>
           </Reveal>
           <Reveal delay={200}>
             <p>
-              While I engineer complete end-to-end web applications with modern Next.js and React frontends, I thrive most when designing resilient server workflows, database schemas (PostgreSQL), and cloud infrastructure.
+              Construyo aplicaciones web completas de extremo a extremo con frontends modernos en Next.js y React, pero disfruto más diseñando flujos de servidor resilientes, esquemas de base de datos (PostgreSQL) e infraestructura en la nube.
             </p>
           </Reveal>
         </div>
