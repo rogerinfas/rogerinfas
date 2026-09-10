@@ -104,12 +104,12 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 pt-8 border-t border-black/15 text-base sm:text-lg font-light leading-relaxed text-black/80">
           <Reveal delay={100}>
             <p>
-              I am Roger Infa Sanchez, a Full-Stack Developer with a deep passion for backend architecture, scalable APIs, and system performance.
+              Soy Roger Infa Sanchez, Full-Stack Developer con una pasión profunda por la arquitectura backend, las APIs escalables y el rendimiento de sistemas.
             </p>
           </Reveal>
           <Reveal delay={200}>
             <p>
-              While I engineer complete end-to-end web applications with modern Next.js and React frontends, I thrive most when designing resilient server workflows, database schemas (PostgreSQL), and cloud infrastructure.
+              Construyo aplicaciones web completas de extremo a extremo con frontends modernos en Next.js y React, pero disfruto más diseñando flujos de servidor resilientes, esquemas de base de datos (PostgreSQL) e infraestructura en la nube.
             </p>
           </Reveal>
         </div>
