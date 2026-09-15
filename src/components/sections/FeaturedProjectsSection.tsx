@@ -55,6 +55,25 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
                 {projects[activeProjectIdx].description}
               </p>
 
+              {/* Public demo access details, shown only for projects that provide them. */}
+              {projects[activeProjectIdx].demoCredentials && (
+                <div className="rounded-xl border border-[#C6A77D]/30 bg-[#C6A77D]/10 px-4 py-3 text-xs text-white/80">
+                  <p className="mb-2 font-mono uppercase tracking-wider text-[#C6A77D]">Credenciales de prueba</p>
+                  <div className="flex flex-col gap-1 font-mono">
+                    <p>
+                      <span className="text-white/45">{projects[activeProjectIdx].demoCredentials.username ? "Usuario: " : "Correo: "}</span>
+                      <span className="break-all text-white">
+                        {projects[activeProjectIdx].demoCredentials.username ?? projects[activeProjectIdx].demoCredentials.email}
+                      </span>
+                    </p>
+                    <p>
+                      <span className="text-white/45">Contraseña: </span>
+                      <span className="break-all text-white">{projects[activeProjectIdx].demoCredentials.password}</span>
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* Tech Stack Tags */}
               {projects[activeProjectIdx].tags && (
                 <div className="flex flex-wrap gap-2 pt-1">

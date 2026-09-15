@@ -10,6 +10,11 @@ export interface Project {
   tags?: string[]
   githubUrl?: string
   liveUrl?: string
+  demoCredentials?: {
+    email?: string
+    username?: string
+    password: string
+  }
 }
 
 export interface Capability {
@@ -44,6 +49,10 @@ export const projects: Project[] = [
       "Arquitectura backend y panel administrativo preparado para escalar aplicaciones SaaS empresariales con seguridad y modularidad.",
     tags: ["Next.js", "TypeScript", "Node.js", "Multi-Tenant", "PostgreSQL", "REST APIs"],
     liveUrl: "https://admin.saas.webcoresys.com/",
+    demoCredentials: {
+      username: "orgadmin",
+      password: "OrgAdmin123!",
+    },
   },
   {
     id: "transigo-gps",
@@ -58,19 +67,28 @@ export const projects: Project[] = [
       "Seguimiento satelital de vehículos en tiempo real con WebSockets e interfaz de alta precisión para la toma de decisiones.",
     tags: ["TypeScript", "Next.js", "WebSockets Pub/Sub", "Telemetría GPS", "OpenStreetMap", "Node.js API"],
     liveUrl: "https://gps-based-transit-optimization.onlinestornsoftware.win/",
+    demoCredentials: {
+      email: "user@gps-transit.com",
+      password: "User123!",
+    },
   },
   {
-    id: "canchas-deportivas",
-    title: "GESTIÓN DE CANCHAS DEPORTIVAS",
+    id: "misti",
+    title: "MISTI — GESTIÓN DE CANCHAS",
     year: "2026",
-    subtitle: "SISTEMA DE RESERVAS Y ADMINISTRACIÓN",
+    subtitle: "PLATAFORMA ADMINISTRATIVA PARA ALQUILER DE CANCHAS",
     bgImage: "/images/project_3.png",
     posterImage: "/images/project_3.png",
     description:
-      "Aplicativo integral orientado a la gestión de instalaciones deportivas, control de reservas en tiempo real, administración de horarios, pagos e informes de ocupación.",
+      "Plataforma administrativa monocliente para gestionar el alquiler de canchas deportivas, incluyendo sedes, canchas, horarios, tarifas, clientes, reservas y pagos.",
     headline:
-      "Sistema web intuitivo para la automatización de reservas de canchas, gestión de disponibilidad y control operativo.",
-    tags: ["React", "TypeScript", "Node.js", "Gestión de Reservas", "PostgreSQL"],
+      "Una solución centralizada para ordenar la operación diaria de complejos deportivos y administrar reservas, clientes y pagos desde un solo lugar.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "NestJS", "Prisma", "PostgreSQL", "Better Auth", "Docker", "Traefik"],
+    liveUrl: "https://misti.webcoresys.com/auth/login",
+    demoCredentials: {
+      email: "admin@admin.com",
+      password: "ChooseASafePassword123!",
+    },
   },
 ]
 
