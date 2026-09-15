@@ -54,18 +54,29 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
             <h3 className="text-4xl sm:text-6xl md:text-7xl font-sans font-light tracking-tight max-w-2xl">
               ¿Tienes un proyecto o rol técnico en mente?
             </h3>
+            <p className="max-w-xl text-base font-light leading-relaxed text-white/65 sm:text-lg">
+              Si necesitas construir o mejorar un sistema, cuéntame tu reto. Si estás formando equipo, conversemos sobre cómo puedo aportar desde backend y full-stack.
+            </p>
           </Reveal>
           <Reveal delay={150}>
-            <button
-              ref={ctaMagnetic.ref}
-              onMouseMove={ctaMagnetic.onMouseMove}
-              onMouseLeave={ctaMagnetic.onMouseLeave}
-              onClick={onContactClick}
-              className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-lg text-sm font-mono uppercase tracking-wider font-semibold transition-transform duration-200 ease-out hover:bg-white/90 cursor-pointer shadow-xl"
-            >
-              <span>Construyamos juntos</span>
-              <ArrowRight className="size-4" />
-            </button>
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <button
+                ref={ctaMagnetic.ref}
+                onMouseMove={ctaMagnetic.onMouseMove}
+                onMouseLeave={ctaMagnetic.onMouseLeave}
+                onClick={onContactClick}
+                className="inline-flex items-center gap-3 bg-white px-6 py-3.5 text-sm font-mono font-semibold uppercase tracking-wider text-black shadow-xl transition-transform duration-200 ease-out hover:scale-[1.02] hover:bg-white/90 cursor-pointer"
+              >
+                <span>Soy cliente</span>
+                <ArrowRight className="size-4" />
+              </button>
+              <a
+                href="mailto:contactorogeris@gmail.com?subject=Oportunidad%20técnica%20o%20colaboración"
+                className="inline-flex items-center gap-2 border border-white/25 px-6 py-3.5 text-sm font-mono font-semibold uppercase tracking-wider text-white transition-all hover:border-white hover:bg-white/10"
+              >
+                Busco perfil técnico
+              </a>
+            </div>
           </Reveal>
         </div>
 

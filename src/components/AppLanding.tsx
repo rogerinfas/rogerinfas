@@ -4,6 +4,7 @@ import { Header } from "@/components/Header"
 import { SideMenu } from "@/components/SideMenu"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { IntroSection } from "@/components/sections/IntroSection"
+import { ProcessSection } from "@/components/sections/ProcessSection"
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection"
 import { CapabilitiesSection } from "@/components/sections/CapabilitiesSection"
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection"
@@ -15,7 +16,7 @@ import { Toaster } from "sonner"
 export function AppLanding() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [contactModalOpen, setContactModalOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState("Home")
+  const [activeTab, setActiveTab] = useState("Inicio")
   const scrollY = useScrollY()
 
   const scrollToSection = useCallback((href: string, tabName: string) => {
@@ -57,6 +58,7 @@ export function AppLanding() {
       >
         <HeroSection scrollY={scrollY} />
         <IntroSection scrollY={scrollY} />
+        <ProcessSection />
         <FeaturedProjectsSection scrollY={scrollY} />
 
         {/* Capabilities + Testimonials share the same background section wrapper */}

@@ -48,6 +48,7 @@ export function FooterSection({ onNavigate }: FooterSectionProps) {
               <button onClick={() => onNavigate("#home", "Inicio")} className="link-underline inline-block hover:text-white cursor-pointer">INICIO</button>
               <button onClick={() => onNavigate("#work", "Proyectos")} className="link-underline inline-block hover:text-white cursor-pointer">PROYECTOS</button>
               <button onClick={() => onNavigate("#studio", "Sobre mí")} className="link-underline inline-block hover:text-white cursor-pointer">SOBRE MÍ</button>
+              <button onClick={() => onNavigate("#approach", "Cómo trabajo")} className="link-underline inline-block hover:text-white cursor-pointer">CÓMO TRABAJO</button>
               <button onClick={() => onNavigate("#capabilities", "Habilidades")} className="link-underline inline-block hover:text-white cursor-pointer">HABILIDADES</button>
               <button onClick={() => onNavigate("#contact", "Contacto")} className="link-underline inline-block hover:text-white cursor-pointer">CONTACTO</button>
             </div>

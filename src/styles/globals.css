@@ -197,6 +197,16 @@ body::-webkit-scrollbar-thumb,
   50% { opacity: 0.3; }
 }
 
+/* Process section: active step progress bar and blueprint data flow */
+@keyframes processProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes blueprintFlow {
+  to { stroke-dashoffset: -24; }
+}
+
 /* Generic fade-in for accordion content */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }

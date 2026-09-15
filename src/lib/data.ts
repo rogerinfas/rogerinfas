@@ -167,6 +167,7 @@ export const navItems: NavItem[] = [
   { name: "Inicio", href: "#home" },
   { name: "Proyectos", href: "#work" },
   { name: "Sobre mí", href: "#studio" },
+  { name: "Cómo trabajo", href: "#approach" },
   { name: "Habilidades", href: "#capabilities" },
   { name: "Contacto", href: "#contact" },
 ]

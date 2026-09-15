@@ -95,12 +95,18 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
         {/* Bottom Editorial Headline & Progress Controls */}
         <footer className="grid grid-cols-1 md:grid-cols-12 items-end gap-6 w-full pt-4">
           <div className="md:col-span-8 lg:col-span-7">
+            <p className="mb-3 text-[10px] font-mono uppercase tracking-[0.28em] text-white/60">
+              Full-Stack Developer · Backend Focus
+            </p>
+            <h1 className="mb-4 max-w-3xl text-3xl font-light leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Construyo sistemas digitales que funcionan en el mundo real.
+            </h1>
             <p
               key={`headline-${currentSlide}`}
-              className="text-xl sm:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-white/95 max-w-2xl font-sans drop-shadow-md"
+              className="max-w-2xl text-base font-light leading-relaxed tracking-tight text-white/80 sm:text-xl lg:text-2xl"
               style={{ animation: "fadeIn 700ms cubic-bezier(0.16,1,0.3,1)" }}
             >
-              {activeProject.headline}
+              Para negocios que necesitan ordenar su operación y equipos técnicos que buscan un backend sólido, claro y preparado para crecer.
             </p>
           </div>
 
