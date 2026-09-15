@@ -207,6 +207,12 @@ body::-webkit-scrollbar-thumb,
   to { stroke-dashoffset: -24; }
 }
 
+/* Featured projects: endless tech-stack ribbon along the card edge */
+@keyframes projectRibbon {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* Generic fade-in for accordion content */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }

@@ -32,7 +32,7 @@ export function AppLanding() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full bg-[#F4F4F0] text-black font-sans selection:bg-black selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-[#F4F4F0] text-black font-sans selection:bg-black selection:text-white overflow-x-clip">
       
       <Header
         menuOpen={menuOpen}
