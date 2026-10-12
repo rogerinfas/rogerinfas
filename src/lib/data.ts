@@ -97,35 +97,35 @@ export const capabilities: Capability[] = [
     number: "(01)",
     title: "Arquitectura Backend y Sistemas",
     description:
-      "Diseño de APIs REST y GraphQL de alto rendimiento, esquemas de bases de datos relacionales (PostgreSQL, Redis), flujos de autenticación y servicios backend concurrentes en Node.js.",
+      "APIs rápidas, PostgreSQL y auth sólida en Node.js.",
     image: "/images/capabilities/backend.svg",
   },
   {
     number: "(02)",
     title: "Desarrollo Web Full-Stack",
     description:
-      "Desarrollo de aplicaciones de extremo a extremo, conectando frontends modernos en Next.js/React con backends de servidor altamente resilientes en TypeScript.",
+      "Next.js/React + backend resiliente, de punta a punta.",
     image: "/images/capabilities/fullstack.svg",
   },
   {
     number: "(03)",
     title: "Bases de Datos y Cloud DevOps",
     description:
-      "Modelado relacional y NoSQL, optimización de consultas, contenedorización con Docker, automatización de integración continua (CI/CD) y despliegue en la nube (AWS, Vercel).",
+      "Modelado, Docker, CI/CD y nube (AWS, Vercel).",
     image: "/images/capabilities/cloud.svg",
   },
   {
     number: "(04)",
     title: "Sistemas de UI/UX y Animaciones",
     description:
-      "Creación de interfaces limpias y adaptables con microanimaciones CSS fluidas, diseños mobile-first, componentes accesibles y modos oscuros.",
+      "Interfaces limpias, mobile-first y accesibles.",
     image: "/images/capabilities/ui-motion.svg",
   },
   {
     number: "(05)",
     title: "Auditorías de Código y Rendimiento",
     description:
-      "Pruebas de carga backend, afinamiento de consultas a bases de datos, corrección de fugas de memoria, optimización de Core Web Vitals y refactorización de código legado.",
+      "Consultas, Core Web Vitals y legado optimizados.",
     image: "/images/capabilities/performance.svg",
   },
 ]
