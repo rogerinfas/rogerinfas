@@ -4,9 +4,8 @@ import { Header } from "@/components/Header"
 import { SideMenu } from "@/components/SideMenu"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { IntroSection } from "@/components/sections/IntroSection"
-import { ProcessSection } from "@/components/sections/ProcessSection"
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection"
-import { CapabilitiesSection } from "@/components/sections/CapabilitiesSection"
+import { ValueSection } from "@/components/sections/ValueSection"
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection"
 import { CtaSection } from "@/components/sections/CtaSection"
 import { FooterSection } from "@/components/sections/FooterSection"
@@ -58,12 +57,11 @@ export function AppLanding() {
       >
         <HeroSection scrollY={scrollY} />
         <IntroSection scrollY={scrollY} />
-        <ProcessSection />
         <FeaturedProjectsSection scrollY={scrollY} />
 
-        {/* Capabilities + Testimonials share the same background section wrapper */}
+        {/* Value + Testimonials share the same background section wrapper */}
         <section className="bg-[#F4F4F0]">
-          <CapabilitiesSection scrollY={scrollY} />
+          <ValueSection />
           <div className="max-w-6xl mx-auto px-6 sm:px-12 md:px-16 pb-24 md:pb-32">
             <TestimonialsSection />
           </div>
