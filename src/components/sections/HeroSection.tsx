@@ -41,7 +41,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
       <div
         className="absolute -inset-y-[15%] inset-x-0 z-0 will-change-transform pointer-events-none"
         style={{
-          transform: `translate3d(0, ${Math.min(scrollY, window.innerHeight) * 0.15}px, 0) scale(1.08)`,
+          transform: `translate3d(0, ${Math.min(scrollY, typeof window !== "undefined" ? window.innerHeight : 800) * 0.15}px, 0) scale(1.08)`,
         }}
       >
         {projects.map((proj, idx) => (
@@ -71,10 +71,10 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
       <div className="relative z-30 flex h-full flex-col justify-between p-6 sm:p-10 lg:p-12 pt-24 sm:pt-28">
         
         {/* Center Metadata Line */}
-        <div key={`meta-${currentSlide}`} className="relative flex flex-1 items-center justify-between px-2 sm:px-6 text-[11px] font-mono tracking-[0.25em] text-white/85 pointer-events-none" style={{ animation: "fadeIn 700ms cubic-bezier(0.16,1,0.3,1)" }}>
-          <span className="uppercase">{activeProject.subtitle}</span>
-          <span className="uppercase font-bold tracking-[0.3em] text-white text-base sm:text-lg drop-shadow-lg">{activeProject.title}</span>
-          <span className="uppercase">{activeProject.year}</span>
+        <div key={`meta-${currentSlide}`} className="relative flex flex-1 flex-col items-start justify-center gap-2 px-2 text-[11px] font-mono tracking-[0.25em] text-white/85 pointer-events-none sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6" style={{ animation: "fadeIn 700ms cubic-bezier(0.16,1,0.3,1)" }}>
+          <span className="uppercase hidden md:inline">{activeProject.subtitle}</span>
+          <span className="uppercase font-bold tracking-[0.2em] sm:tracking-[0.3em] text-white text-xl sm:text-lg drop-shadow-lg leading-tight max-w-full">{activeProject.title}</span>
+          <span className="uppercase text-white/60 sm:text-white/85">{activeProject.year} · {activeProject.subtitle}</span>
           <button
             ref={nextMagnetic.ref}
             onMouseMove={nextMagnetic.onMouseMove}
@@ -121,7 +121,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
               </div>
 
               {/* Dots */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 {projects.map((_, idx) => (
                   <button
                     key={idx}
@@ -129,11 +129,15 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
                       e.stopPropagation()
                       setCurrentSlide(idx)
                     }}
-                    className={`size-2.5 rounded-full transition-all cursor-pointer ${
-                      currentSlide === idx ? "bg-white scale-125" : "bg-white/30 hover:bg-white/60"
-                    }`}
+                    className="flex size-7 items-center justify-center cursor-pointer"
                     aria-label={`Ir a la diapositiva ${idx + 1}`}
-                  />
+                  >
+                    <span
+                      className={`size-2.5 rounded-full transition-all ${
+                        currentSlide === idx ? "bg-white scale-125" : "bg-white/30 hover:bg-white/60"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>

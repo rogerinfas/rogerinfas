@@ -42,11 +42,24 @@ export const POST: APIRoute = async ({ request }) => {
     const recipientEmail = import.meta.env.CONTACT_RECEIVER_EMAIL || process.env.CONTACT_RECEIVER_EMAIL || "contactorogeris@gmail.com"
     const senderEmail = import.meta.env.CONTACT_SENDER_EMAIL || process.env.CONTACT_SENDER_EMAIL || "contacto@webcoresys.com"
 
+    const escapeHtml = (value: unknown) =>
+      String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;")
+
+    const safeName = escapeHtml(name)
+    const safeEmail = escapeHtml(email)
+    const safeProjectType = escapeHtml(projectType || "No especificado")
+    const safeMessage = escapeHtml(message)
+
     const data = await resend.emails.send({
       from: `Portfolio Roger Infa <${senderEmail}>`,
       to: recipientEmail,
       replyTo: email,
-      subject: `[Nuevo Contacto Portfolio] ${name} - ${projectType || "Consulta General"}`,
+      subject: `[Nuevo Contacto Portfolio] ${safeName} - ${safeProjectType}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0D0D0E; color: #FFFFFF; border-radius: 12px;">
           <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 20px;">
@@ -55,18 +68,18 @@ export const POST: APIRoute = async ({ request }) => {
           </div>
 
           <div style="background: rgba(255,255,255,0.05); padding: 18px; border-radius: 8px; margin-bottom: 20px;">
-            <p style="margin: 0 0 10px; font-size: 14px;"><strong style="color: rgba(255,255,255,0.6);">Nombre:</strong> ${name}</p>
-            <p style="margin: 0 0 10px; font-size: 14px;"><strong style="color: rgba(255,255,255,0.6);">Correo:</strong> <a href="mailto:${email}" style="color: #60A5FA;">${email}</a></p>
-            <p style="margin: 0; font-size: 14px;"><strong style="color: rgba(255,255,255,0.6);">Tipo de Proyecto / Rol:</strong> ${projectType || "No especificado"}</p>
+            <p style="margin: 0 0 10px; font-size: 14px;"><strong style="color: rgba(255,255,255,0.6);">Nombre:</strong> ${safeName}</p>
+            <p style="margin: 0 0 10px; font-size: 14px;"><strong style="color: rgba(255,255,255,0.6);">Correo:</strong> <a href="mailto:${safeEmail}" style="color: #60A5FA;">${safeEmail}</a></p>
+            <p style="margin: 0; font-size: 14px;"><strong style="color: rgba(255,255,255,0.6);">Tipo de Proyecto / Rol:</strong> ${safeProjectType}</p>
           </div>
 
           <div style="margin-bottom: 24px;">
             <h3 style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px;">Mensaje:</h3>
-            <div style="background: rgba(255,255,255,0.03); border-left: 3px solid #FFFFFF; padding: 14px 16px; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.9); white-space: pre-wrap;">${message}</div>
+            <div style="background: rgba(255,255,255,0.03); border-left: 3px solid #FFFFFF; padding: 14px 16px; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.9); white-space: pre-wrap;">${safeMessage}</div>
           </div>
 
           <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; font-size: 12px; color: rgba(255,255,255,0.4); text-align: center;">
-            Puedes responder directamente a este correo para contactar a ${name}.
+            Puedes responder directamente a este correo para contactar a ${safeName}.
           </div>
         </div>
       `,

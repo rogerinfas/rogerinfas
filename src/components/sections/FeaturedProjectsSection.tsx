@@ -42,19 +42,26 @@ function CopyField({ label, value }: { label: string; value: string }) {
   )
 }
 
-function ProjectCard({ project, index, progress }: { project: (typeof projects)[number]; index: number; progress: number }) {
+function ProjectCard({ project, index, progress, isLast }: { project: (typeof projects)[number]; index: number; progress: number; isLast: boolean }) {
   const demoMagnetic = useMagnetic<HTMLAnchorElement>(0.3)
   const ribbon = [...(project.tags ?? []), ...(project.tags ?? [])]
   const number = String(index + 1).padStart(2, "0")
 
   return (
     <article
-      className="relative overflow-hidden rounded-3xl bg-[#141414] text-white shadow-2xl ring-1 ring-white/10 will-change-transform"
-      style={{
-        transform: `scale(${1 - progress * 0.06}) translateY(${progress * -8}px)`,
-        transformOrigin: "top center",
-        transition: "transform 80ms linear",
-      }}
+      className="relative overflow-hidden rounded-3xl bg-[#141414] text-white shadow-none"
+      style={
+        isLast || progress <= 0
+          ? undefined
+          : {
+              // Keep full width while stacking: only a slight upward shift,
+              // no scale. Scaling narrows the card and exposes the edges of
+              // the cards underneath as thin vertical lines on the sides.
+              transform: `translateY(${progress * -8}px)`,
+              transformOrigin: "top center",
+              transition: "transform 80ms linear",
+            }
+      }
     >
       <div className="grid lg:grid-cols-12">
         <a
@@ -155,6 +162,7 @@ function ProjectCard({ project, index, progress }: { project: (typeof projects)[
 export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProps) {
   const headerRef = useRef<HTMLDivElement | null>(null)
   const slotRefs = useRef<(HTMLDivElement | null)[]>([])
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const [slots, setSlots] = useState<{ top: number; height: number }[]>([])
   const [headerHeight, setHeaderHeight] = useState(0)
   const [stacking, setStacking] = useState(false)
@@ -172,11 +180,26 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
       )
     }
     measure()
+    // Re-measure after images/fonts settle — stale offsets caused the
+    // last-card scale/shadow pop.
+    const t1 = window.setTimeout(measure, 500)
+    const t2 = window.setTimeout(measure, 1500)
     window.addEventListener("resize", measure)
     window.addEventListener("load", measure)
+    const images = Array.from(document.querySelectorAll("#work img"))
+    const onImgLoad = () => measure()
+    images.forEach((img) => img.addEventListener("load", onImgLoad))
+    // Observe card size changes (responsive image height, font loading).
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => measure()) : null
+    cardRefs.current.forEach((el) => el && ro?.observe(el))
+    if (headerRef.current) ro?.observe(headerRef.current)
     return () => {
+      window.clearTimeout(t1)
+      window.clearTimeout(t2)
       window.removeEventListener("resize", measure)
       window.removeEventListener("load", measure)
+      images.forEach((img) => img.removeEventListener("load", onImgLoad))
+      ro?.disconnect()
     }
   }, [])
 
@@ -207,7 +230,7 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
             const stickyTop = headerHeight + STICKY_GAP + index * STICKY_STEP
             const isLast = index === projects.length - 1
             const progress =
-              stacking && slot && !isLast ? Math.min(1, Math.max(0, (scrollY - (slot.top - stickyTop)) / slot.height)) : 0
+              stacking && slot && !isLast ? Math.min(1, Math.max(0, (scrollY - (slot.top - stickyTop)) / Math.max(1, slot.height))) : 0
 
             return (
               <Fragment key={project.id}>
@@ -219,9 +242,17 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
                   aria-hidden="true"
                   className="h-0"
                 />
-                <div className="mb-6 lg:sticky lg:mb-8" style={{ top: stacking ? `${stickyTop}px` : undefined }}>
+                {/* Last card is NOT sticky: it scrolls naturally so no floating
+                    shadow / empty gap appears at the end of the stack. */}
+                <div
+                  ref={(el) => {
+                    cardRefs.current[index] = el
+                  }}
+                  className={isLast ? "mb-0 lg:relative" : "mb-6 lg:sticky lg:mb-8"}
+                  style={!isLast && stacking ? { top: `${stickyTop}px` } : undefined}
+                >
                   <Reveal variant="up">
-                    <ProjectCard project={project} index={index} progress={progress} />
+                    <ProjectCard project={project} index={index} progress={progress} isLast={isLast} />
                   </Reveal>
                 </div>
               </Fragment>
