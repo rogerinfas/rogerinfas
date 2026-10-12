@@ -22,8 +22,7 @@ Assumptions: anime.js v4 API (`animate`, `createTimeline`, `stagger`, `splitText
 - `<Reveal>` keeps its props API (`delay`, `variant`, `as`, `className`). Simple fades stay CSS. Add optional staggered-children mode powered by anime for headlines, grids, and nav lists.
 - Hero slide change becomes one `createTimeline`: image crossfade + slow-zoom, metadata lines stagger, headline swap, progress bar driven by the timeline clock via `onUpdate` (replaces the independent `setInterval` progress loop).
 - Intro headline uses `splitText` char stagger (rise + un-blur); underline sweeps chained after text lands.
-- Process steps become timeline labels on one `createTimeline`: autoplay = `play()`, click/hover/focus = `seek(label)`; step progress bar reads timeline progress. Pause-on-hover preserved.
-- Capabilities accordion animates height/opacity with `animate()`; floating preview crossfades with a scale settle.
+- `ValueSection` (merged "Cómo trabajo" steps + capabilities lists, static): list rows stagger on entry via the `Reveal` staggered-children mode; outcomes rows stagger the same way. No autoplay, no accordion, no floating preview.
 - Project cards: content stagger on entry; CSS sticky stacking, offsets, and ribbons untouched.
 - CTA headline stagger + button pop on entry.
 
@@ -40,7 +39,7 @@ Visibility (`useReveal` IntersectionObserver, one-shot) or user events → compo
 
 ## 6. Error handling
 
-- Reduced motion: skip all timelines, render final states; accordion/modal open instantly.
+- Reduced motion: skip all timelines, render final states; modal opens instantly.
 - Unmount: `scope.revert()` cancels everything; callbacks guarded against post-unmount state writes.
 - SSR: no `window` access outside effects (existing guards kept).
 - If anime import ever fails, components fall back to current CSS behavior (final visible states).
@@ -48,7 +47,7 @@ Visibility (`useReveal` IntersectionObserver, one-shot) or user events → compo
 ## 7. Testing / verification
 
 - `npm run build` passes.
-- Manual checklist at 360 / 640 / 768 / 1024 / 1280px: hero rotation, intro reveal, process auto+click steps, project stack, accordion, modal open/close, menu open/close, testimonial prev/next.
+- Manual checklist at 360 / 640 / 768 / 1024 / 1280px: hero rotation, intro reveal, value section reveal, project stack, modal open/close, menu open/close, testimonial prev/next.
 - Emulate `prefers-reduced-motion: reduce`: assert no motion, all content visible and operable.
 - Mount/unmount modal and menu repeatedly: no console errors, no stuck transforms.
 - No new `setInterval` clocks for animation; no layout-property animation.
