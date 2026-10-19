@@ -51,6 +51,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
     <section
       ref={regionRef as React.RefObject<HTMLElement>}
       id="home"
+      data-theme="dark"
       aria-roledescription="carrusel"
       aria-label="Proyectos destacados"
       onMouseEnter={() => setPaused(true)}

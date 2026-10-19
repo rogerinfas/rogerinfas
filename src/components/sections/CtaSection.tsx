@@ -39,7 +39,7 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
   const ctaMagnetic = useMagnetic<HTMLButtonElement>(0.25)
 
   return (
-    <section ref={sectionRef} id="contact" className="relative bg-[#141414] text-white px-6 sm:px-12 md:px-16 py-28 md:py-36 overflow-hidden">
+    <section ref={sectionRef} id="contact" data-theme="dark" className="relative bg-[#141414] text-white px-6 sm:px-12 md:px-16 py-28 md:py-36 overflow-hidden">
       
       {/* Parallax Background Image Layer */}
       <div

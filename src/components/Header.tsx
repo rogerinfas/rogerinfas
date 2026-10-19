@@ -11,9 +11,12 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Header sits around 40px - 60px from top of window
+      // Header sits around 40px - 60px from top of window.
+      // Las secciones oscuras se marcan con data-theme="dark" en su propio
+      // componente, así el logo/botones siempre contrastan (4.5:1) sin
+      // depender de IDs fijos que se rompen con cada rediseño.
       const headerY = 60
-      const darkSections = document.querySelectorAll("#home, #contact, footer")
+      const darkSections = document.querySelectorAll('[data-theme="dark"]')
       let dark = false
       darkSections.forEach((sec) => {
         const rect = sec.getBoundingClientRect()

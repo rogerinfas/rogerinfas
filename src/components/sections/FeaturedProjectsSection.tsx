@@ -206,6 +206,7 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
   return (
     <section
       id="work"
+      data-theme="dark"
       aria-labelledby="work-title"
       className="relative overflow-hidden bg-[#0D0D0E] px-6 pb-24 pt-20 text-white sm:px-12 md:px-16 md:pb-32"
     >
