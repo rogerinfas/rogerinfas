@@ -39,6 +39,20 @@ export interface NavItem {
 
 export const projects: Project[] = [
   {
+    id: "warpweft",
+    title: "WARPWEFT — ERP TEXTIL",
+    year: "2026",
+    subtitle: "ERP MULTI-EMPRESA PARA CONFECCIÓN Y TALLERES",
+    bgImage: "/images/project_4.png",
+    posterImage: "/images/project_4.png",
+    description:
+      "ERP para el rubro textil y confección: empresas, clientes y proveedores, talleres, trabajadores y planillas, materiales, prendas y control de medidas, cotizaciones con PDF, órdenes de compra, finanzas y reportes en Excel. Backend con arquitectura DDD/CQRS, RBAC y auditoría; panel administrativo con dashboard, KPIs y tipos generados desde el OpenAPI.",
+    headline:
+      "De la cotización a la planilla: operación textil completa con backend auditable y panel administrativo en tiempo real.",
+    tags: ["Next.js", "NestJS", "TypeScript", "PostgreSQL", "Prisma", "Better Auth", "Tailwind CSS", "Docker"],
+    badge: "En desarrollo",
+  },
+  {
     id: "saas-core",
     title: "SAAS CORE — PLATAFORMA BASE",
     year: "2026",
@@ -91,20 +105,6 @@ export const projects: Project[] = [
       email: "admin@admin.com",
       password: "ChooseASafePassword123!",
     },
-  },
-  {
-    id: "warpweft",
-    title: "WARPWEFT — ERP TEXTIL",
-    year: "2026",
-    subtitle: "ERP MULTI-EMPRESA PARA CONFECCIÓN Y TALLERES",
-    bgImage: "/images/project_4.png",
-    posterImage: "/images/project_4.png",
-    description:
-      "ERP para el rubro textil y confección: empresas, clientes y proveedores, talleres, trabajadores y planillas, materiales, prendas y control de medidas, cotizaciones con PDF, órdenes de compra, finanzas y reportes en Excel. Backend con arquitectura DDD/CQRS, RBAC y auditoría; panel administrativo con dashboard, KPIs y tipos generados desde el OpenAPI.",
-    headline:
-      "De la cotización a la planilla: operación textil completa con backend auditable y panel administrativo en tiempo real.",
-    tags: ["Next.js", "NestJS", "TypeScript", "PostgreSQL", "Prisma", "Better Auth", "Tailwind CSS", "Docker"],
-    badge: "En desarrollo",
   },
 ]
 
