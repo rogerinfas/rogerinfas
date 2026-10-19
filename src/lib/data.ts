@@ -65,6 +65,7 @@ export const projects: Project[] = [
       "De la cotización a la liquidación: operación turística completa con costos reales, cobranzas y control por reserva.",
     tags: ["Next.js", ".NET", "C#", "PostgreSQL", "SignalR", "TypeScript", "Tailwind CSS", "Docker"],
     liveUrl: "https://tourismhub-staging-frontend.acide.win/login",
+    badge: "En desarrollo",
     demoCredentials: {
       email: "admin@tourism-hub.dev",
       password: "Admin123!",
