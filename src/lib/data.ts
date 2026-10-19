@@ -53,6 +53,24 @@ export const projects: Project[] = [
     badge: "En desarrollo",
   },
   {
+    id: "tourism-hub",
+    title: "TOURISM HUB — OPERADORA TURÍSTICA",
+    year: "2026",
+    subtitle: "SUITE INTEGRAL PARA OPERACIÓN TURÍSTICA",
+    bgImage: "/images/project_5.png",
+    posterImage: "/images/project_5.png",
+    description:
+      "Ecosistema para operar una agencia de turismo de punta a punta: cotizaciones y reservas con itinerarios editables, tours multidestino con tarifarios y costeo, proveedores, salidas con manifiestos, cobranzas multimoneda, liquidación de costos e incidentes en ruta. Backend en .NET con monolito modular, DDD y PostgreSQL multiesquema; panel tipo suite de aplicaciones con tipos generados desde el OpenAPI.",
+    headline:
+      "De la cotización a la liquidación: operación turística completa con costos reales, cobranzas y control por reserva.",
+    tags: ["Next.js", ".NET", "C#", "PostgreSQL", "SignalR", "TypeScript", "Tailwind CSS", "Docker"],
+    liveUrl: "https://tourismhub-staging-frontend.acide.win/login",
+    demoCredentials: {
+      email: "admin@tourism-hub.dev",
+      password: "Admin123!",
+    },
+  },
+  {
     id: "saas-core",
     title: "SAAS CORE — PLATAFORMA BASE",
     year: "2026",
