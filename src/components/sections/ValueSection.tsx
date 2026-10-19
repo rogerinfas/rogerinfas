@@ -54,11 +54,11 @@ export function ValueSection() {
       <div className="relative mx-auto max-w-6xl space-y-10">
         <div className="grid gap-8 md:grid-cols-12 md:gap-12">
           <Reveal className="md:col-span-7" variant="left">
-            <p className="mb-4 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-black/50">
-              <span className="inline-block size-1.5 rounded-full bg-[#E54838]" style={{ animation: "servicesDot 1.15s ease-in-out infinite" }} />
+            <p className="mb-4 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-black/60">
+              <span className="inline-block size-1.5 rounded-full bg-[#C23A2A]" style={{ animation: "servicesDot 1.15s ease-in-out infinite" }} />
               Valor
             </p>
-            <h2 className="text-4xl font-light leading-tight tracking-tight sm:text-6xl">
+            <h2 className="text-4xl font-heading font-semibold leading-tight tracking-tight sm:text-6xl text-balance">
               Cómo trabajo y dónde aporto valor.
             </h2>
           </Reveal>
@@ -106,7 +106,7 @@ export function ValueSection() {
             {steps.map((step) => (
               <div key={step.number} className="bg-[#F4F4F0] p-6 sm:p-7">
                 <p className="font-mono text-4xl font-light tabular-nums text-black/25">{step.number}</p>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#E54838]">{step.phase}</p>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#C23A2A]">{step.phase}</p>
                 <h3 className="mt-1 text-lg font-normal tracking-tight">{step.title}</h3>
                 <p className="mt-2 text-sm font-light leading-relaxed text-black/70">{step.text}</p>
               </div>
@@ -148,7 +148,7 @@ export function ValueSection() {
         </div>
 
         <Reveal className="flex flex-col gap-4 text-sm font-mono text-black/60 sm:flex-row sm:items-center sm:justify-between" delay={100}>
-          <span><span className="mr-2 inline-block size-2 rounded-full bg-[#E54838]" style={{ animation: "servicesDot 1.15s ease-in-out infinite" }} />Disponible para proyectos y oportunidades remotas.</span>
+          <span><span className="mr-2 inline-block size-2 rounded-full bg-[#C23A2A]" style={{ animation: "servicesDot 1.15s ease-in-out infinite" }} />Disponible para proyectos y oportunidades remotas.</span>
           <span>Perú · UTC-5</span>
         </Reveal>
       </div>

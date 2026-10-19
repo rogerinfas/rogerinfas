@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { X, Send, CheckCircle2 } from "lucide-react"
 import { toast } from "sonner"
 
@@ -21,6 +21,23 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [message, setMessage] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const firstFieldRef = useRef<HTMLInputElement | null>(null)
+
+  // Esc cierra + foco inicial + bloqueo de scroll del fondo
+  useEffect(() => {
+    if (!isOpen) return
+    firstFieldRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [isOpen, onClose])
 
   if (!isOpen) return null
 
@@ -78,11 +95,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/60 backdrop-blur-md transition-all duration-300 animate-in fade-in">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/60 backdrop-blur-md"
+      onClick={onClose}
+      role="presentation"
+    >
       
       {/* Modal Container */}
       <div
-        className="relative w-full max-w-2xl bg-[#141414] text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-white/10 overflow-hidden space-y-6"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-title"
+        className="relative w-full max-w-2xl bg-[#141414] text-white rounded-[20px] p-6 sm:p-10 shadow-2xl border border-white/10 overflow-hidden space-y-6"
         onClick={(e) => e.stopPropagation()}
       >
         
@@ -94,10 +118,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-white/10 pb-5">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#E54838]">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF6B5B]">
               Ponte en Contacto
             </span>
-            <h3 className="text-2xl sm:text-3xl font-sans font-light tracking-tight mt-0.5">
+            <h3 id="contact-title" className="text-2xl sm:text-3xl font-heading font-semibold tracking-tight mt-0.5">
               Contactar a Roger Infa Sanchez
             </h3>
           </div>
@@ -113,12 +137,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Modal Body */}
         {isSubmitted ? (
           <div className="py-12 flex flex-col items-center text-center space-y-4 animate-in zoom-in-95">
-            <div className="size-16 rounded-full bg-[#E54838]/20 text-[#E54838] flex items-center justify-center">
+            <div className="size-16 rounded-full bg-[#FF6B5B]/20 text-[#FF6B5B] flex items-center justify-center">
               <CheckCircle2 className="size-10" />
             </div>
             <h4 className="text-2xl font-sans font-medium">¡Mensaje Enviado con Éxito!</h4>
             <p className="text-sm text-white/70 max-w-md">
-              Gracias por escribir, <span className="text-white font-semibold">{name}</span>. He recibido tu mensaje sobre <span className="text-[#E54838] font-mono">{selectedType}</span>. Te responderé lo antes posible.
+              Gracias por escribir, <span className="text-white font-semibold">{name}</span>. He recibido tu mensaje sobre <span className="text-[#FF6B5B] font-mono">{selectedType}</span>. Te responderé lo antes posible.
             </p>
             <div className="pt-4">
               <button
@@ -145,7 +169,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     onClick={() => setSelectedType(type)}
                     className={`text-xs font-mono px-3 py-1.5 rounded-md border transition-all cursor-pointer ${
                       selectedType === type
-                        ? "bg-[#E54838] border-[#E54838] text-white font-medium shadow-sm"
+                        ? "bg-[#FF6B5B] border-[#FF6B5B] text-white font-medium shadow-sm"
                         : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10"
                     }`}
                   >
@@ -163,8 +187,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </label>
                 <input
                   id="contact-name"
+                  ref={firstFieldRef}
                   type="text"
                   required
+                  autoComplete="name"
                   placeholder="Juan Pérez"
                   value={name}
                   onChange={(e) => setName(e.target.value)}

@@ -12,6 +12,12 @@ export function useReveal<T extends HTMLElement>(threshold = 0.2) {
     const node = ref.current
     if (!node) return
 
+    // Sin animación si el usuario prefiere movimiento reducido
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

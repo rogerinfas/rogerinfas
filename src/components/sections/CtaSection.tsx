@@ -25,7 +25,17 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
   }, [])
 
   // Calc distance from section top to window scroll, applied to the parallax
-  const parallaxY = (scrollY - sectionTop) * 0.15
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+
+  const parallaxY = reducedMotion ? 0 : (scrollY - sectionTop) * 0.15
   const ctaMagnetic = useMagnetic<HTMLButtonElement>(0.25)
 
   return (
@@ -51,7 +61,7 @@ export function CtaSection({ scrollY, onContactClick }: CtaSectionProps) {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-12 relative z-10">
         <div className="space-y-6">
           <Reveal as="span" className="block">
-            <h3 className="text-4xl sm:text-6xl md:text-7xl font-sans font-light tracking-tight max-w-2xl">
+            <h3 className="text-4xl sm:text-6xl md:text-7xl font-heading font-semibold tracking-tight max-w-2xl text-balance">
               ¿Tienes un proyecto o rol técnico en mente?
             </h3>
             <p className="max-w-xl text-base font-light leading-relaxed text-white/65 sm:text-lg">

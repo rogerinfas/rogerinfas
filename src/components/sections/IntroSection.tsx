@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { useReveal } from "@/hooks/use-reveal"
 import { Reveal } from "@/components/Reveal"
 import { MagneticText } from "@/components/MagneticText"
@@ -8,6 +9,17 @@ interface IntroSectionProps {
 
 export function IntroSection({ scrollY }: IntroSectionProps) {
   const { ref: headlineRef, isVisible: headlineVisible } = useReveal<HTMLHeadingElement>(0.4)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+
+  const parallaxY = reducedMotion ? 0 : (scrollY - 500) * 0.12
 
   return (
     <section id="studio" className="relative bg-[#F4F4F0] text-black px-6 sm:px-12 md:px-16 py-24 md:py-32 overflow-hidden">
@@ -16,7 +28,7 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none will-change-transform scale-110"
         style={{
-          transform: `translate3d(0, ${(scrollY - 500) * 0.12}px, 0)`,
+          transform: `translate3d(0, ${parallaxY}px, 0)`,
         }}
       >
         <img
@@ -26,10 +38,11 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto space-y-16">
+      <div className="relative z-10 max-w-6xl mx-auto space-y-12 sm:space-y-16">
 
-        {/* Small Section Subtitle Tag */}
-        <Reveal className="flex items-center gap-2 text-xs font-mono text-black/50 uppercase tracking-widest">
+        {/* Etiqueta de sección */}
+        <Reveal className="flex items-center gap-2 text-xs font-mono text-black/60 uppercase tracking-[0.25em]">
+          <span aria-hidden="true" className="inline-block size-1.5 rounded-full bg-[#C23A2A]" />
           <span>Introducción</span>
         </Reveal>
 
@@ -37,7 +50,7 @@ export function IntroSection({ scrollY }: IntroSectionProps) {
         <div className="space-y-4">
           <h2
             ref={headlineRef}
-            className="text-4xl sm:text-6xl lg:text-7xl font-sans font-normal tracking-tight leading-[1.12]"
+            className="text-4xl sm:text-6xl lg:text-7xl font-heading font-semibold tracking-tight leading-[1.08] text-balance"
           >
             <span
               className="inline-block transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"

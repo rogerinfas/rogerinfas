@@ -28,6 +28,7 @@ const visibleState: Record<RevealVariant, string> = {
 /**
  * Fades, shifts, and un-blurs its children once they scroll into view.
  * One-shot: replays only on remount, not on every re-entry.
+ * Respeta prefers-reduced-motion: muestra el contenido sin animación.
  */
 export function Reveal({ children, delay = 0, className = "", as = "div", variant = "up" }: RevealProps) {
   const { ref, isVisible } = useReveal<HTMLDivElement>()
@@ -36,9 +37,9 @@ export function Reveal({ children, delay = 0, className = "", as = "div", varian
   return (
     <Tag
       ref={ref}
-      className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isVisible ? visibleState[variant] : hiddenState[variant]
-      } ${className}`}
+      } motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:blur-none ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

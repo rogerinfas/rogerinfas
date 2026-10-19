@@ -37,7 +37,7 @@ function CopyField({ label, value }: { label: string; value: string }) {
         <span className="block text-[10px] uppercase tracking-[0.2em] text-white/40">{label}</span>
         <span className="block truncate text-white/90">{value}</span>
       </span>
-      {copied ? <Check className="size-3.5 shrink-0 text-[#E54838]" /> : <Copy className="size-3.5 shrink-0 text-white/40 transition-colors group-hover/copy:text-white" />}
+      {copied ? <Check className="size-3.5 shrink-0 text-[#FF6B5B]" /> : <Copy className="size-3.5 shrink-0 text-white/40 transition-colors group-hover/copy:text-white" />}
     </button>
   )
 }
@@ -99,7 +99,7 @@ function ProjectCard({ project, index, progress, isLast }: { project: (typeof pr
           <div className="space-y-4">
             {project.demoCredentials && (
               <div className="space-y-2">
-                <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#E54838]">
+                <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#FF6B5B]">
                   <KeyRound className="size-3" />
                   Acceso demo · clic para copiar
                 </p>
@@ -149,7 +149,7 @@ function ProjectCard({ project, index, progress, isLast }: { project: (typeof pr
             {ribbon.map((tag, i) => (
               <span key={`${tag}-${i}`} className="flex items-center gap-6">
                 {tag}
-                <span className="size-1 rounded-full bg-[#E54838]" />
+                <span className="size-1 rounded-full bg-[#FF6B5B]" />
               </span>
             ))}
           </div>
@@ -212,13 +212,13 @@ export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProp
           className="z-20 mb-10 grid gap-4 border-b border-black/15 bg-[#EBEBE6] pb-5 pt-20 md:grid-cols-12 md:items-end lg:sticky lg:top-0"
         >
           <Reveal className="md:col-span-8" variant="left">
-            <p className="mb-3 text-xs font-mono uppercase tracking-[0.25em] text-black/50">Proyectos destacados</p>
-            <h3 className="text-3xl font-light leading-tight tracking-tight sm:text-4xl">
+            <p className="mb-3 text-xs font-mono uppercase tracking-[0.25em] text-black/60">Proyectos destacados</p>
+            <h3 className="text-3xl font-heading font-semibold leading-tight tracking-tight sm:text-4xl text-balance">
               Sistemas en producción, no maquetas.
             </h3>
           </Reveal>
           <Reveal delay={120} className="md:col-span-4 md:text-right" variant="right">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-black/50">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-black/60">
               0{projects.length} proyectos · demo con acceso
             </p>
           </Reveal>
