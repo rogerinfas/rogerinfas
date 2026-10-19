@@ -125,6 +125,20 @@ export const projects: Project[] = [
       password: "ChooseASafePassword123!",
     },
   },
+  {
+    id: "school-admin",
+    title: "SCHOOL ADMIN — GESTIÓN ESCOLAR",
+    year: "2026",
+    subtitle: "ADMISIÓN, MATRÍCULA Y TESORERÍA PARA COLEGIO",
+    bgImage: "/images/project_6.png",
+    posterImage: "/images/project_6.png",
+    description:
+      "Sistema de gestión escolar para colegio real: admisión con pipeline kanban de postulantes, agenda de citas y dictamen final; matrícula con expediente familiar, control de vacantes y ficha en PDF; malla curricular, horarios, carga docente y comunicados; personal con asistencia por reconocimiento facial y pre-planilla; tesorería con tarifario y cobranzas. Backend NestJS con Prisma y frontend Next.js con tipos generados desde el OpenAPI.",
+    headline:
+      "Del postulante al egresado: todo el ciclo escolar trazable en un solo sistema.",
+    tags: ["Next.js", "NestJS", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "Docker"],
+    githubUrl: "https://github.com/rogerinfas/software-project-management-course-project",
+  },
 ]
 
 export const capabilities: Capability[] = [
