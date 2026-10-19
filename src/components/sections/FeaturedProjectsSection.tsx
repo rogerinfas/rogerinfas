@@ -97,6 +97,11 @@ const CoverCard = memo(function CoverCard({
           <span className="rounded-md bg-white/90 px-2.5 py-1 font-semibold text-black">
             {String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
           </span>
+          {project.badge && (
+            <span className="rounded-md bg-[#E54838] px-2.5 py-1 font-semibold text-white">
+              {project.badge}
+            </span>
+          )}
         </div>
         <div className="absolute inset-x-0 bottom-0 space-y-1 p-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
@@ -397,6 +402,12 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
           </div>
 
           <div className="space-y-3 lg:col-span-5">
+            {activeProject.badge && (
+              <p className="inline-flex items-center gap-2 rounded-full border border-[#E54838]/40 bg-[#E54838]/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF6B5B]">
+                <span className="size-1.5 rounded-full bg-[#E54838]" aria-hidden="true" />
+                {activeProject.badge} · demo en camino
+              </p>
+            )}
             {activeProject.demoCredentials && (
               <div className="space-y-2">
                 <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#FF6B5B]">
@@ -432,6 +443,14 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
                   className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/20 px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-white transition-colors duration-200 hover:bg-white/10"
                 >
                   Código
+                </a>
+              )}
+              {!activeProject.liveUrl && !activeProject.githubUrl && (
+                <a
+                  href="mailto:contactorogeris@gmail.com?subject=Demo%20WarpWeft%20ERP%20textil"
+                  className="link-underline font-mono text-xs uppercase tracking-[0.18em] text-white/60 hover:text-white"
+                >
+                  Escríbeme para una walkthrough ↗
                 </a>
               )}
             </div>

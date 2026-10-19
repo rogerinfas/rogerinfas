@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="WarpWeft — ERP textil multi-empresa">
+  <defs>
+    <pattern id="weave" width="56" height="56" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="56" height="56" fill="none"/>
+      <line x1="0" y1="0" x2="0" y2="56" stroke="#ffffff" stroke-opacity="0.055" stroke-width="2"/>
+      <line x1="28" y1="0" x2="28" y2="56" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="thread" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E54838" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#E54838"/>
+      <stop offset="1" stop-color="#E54838" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#141414"/>
+  <rect width="1600" height="1000" fill="url(#weave)"/>
+
+  <!-- hilos decorativos -->
+  <path d="M-40,780 C360,700 620,860 980,760 S1400,700 1660,780" fill="none" stroke="url(#thread)" stroke-width="3"/>
+  <path d="M-40,830 C360,750 620,910 980,810 S1400,750 1660,830" fill="none" stroke="#E54838" stroke-opacity="0.28" stroke-width="2"/>
+  <path d="M-40,180 C400,240 700,120 1040,190 S1400,160 1660,210" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+
+  <!-- monograma -->
+  <g font-family="Archivo, Inter, system-ui, sans-serif" font-weight="800">
+    <text x="120" y="300" font-size="72" fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="2" letter-spacing="8">W</text>
+    <text x="208" y="300" font-size="72" fill="#E54838" letter-spacing="8">W</text>
+  </g>
+
+  <!-- titular -->
+  <g font-family="Archivo, Inter, system-ui, sans-serif">
+    <text x="120" y="560" font-size="150" font-weight="800" fill="#ffffff" letter-spacing="4">WARPWEFT</text>
+    <text x="124" y="640" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="34" font-weight="500" fill="#E54838" letter-spacing="10">ERP TEXTIL · MULTI-EMPRESA</text>
+    <text x="124" y="700" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="26" fill="#ffffff" opacity="0.55" letter-spacing="6">COTIZACIONES · PRODUCCIÓN · PLANILLAS · FINANZAS</text>
+  </g>
+
+  <!-- pills de stack -->
+  <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="24" letter-spacing="3">
+    <rect x="120" y="780" width="170" height="56" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="205" y="817" text-anchor="middle" fill="#ffffff" opacity="0.9">NEXT.JS</text>
+    <rect x="310" y="780" width="150" height="56" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="385" y="817" text-anchor="middle" fill="#ffffff" opacity="0.9">NESTJS</text>
+    <rect x="480" y="780" width="210" height="56" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="585" y="817" text-anchor="middle" fill="#ffffff" opacity="0.9">POSTGRESQL</text>
+  </g>
+
+  <rect width="1600" height="1000" fill="url(#fade)"/>
+</svg>
