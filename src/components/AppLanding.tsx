@@ -48,10 +48,11 @@ export function AppLanding() {
 
       {/* MAIN SITE CANVAS CONTAINER */}
       <main
-        className={`relative transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#F4F4F0] text-white ${
+        id="contenido"
+        className={`relative transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#F4F4F0] text-white ${
           menuOpen
-            ? "mr-[300px] sm:mr-[360px] md:mr-[400px] my-3.5 ml-3.5 rounded-[20px] shadow-lg border-none overflow-hidden cursor-pointer"
-            : "mr-0 my-0 ml-0 rounded-none shadow-none border-none"
+            ? "mr-[300px] sm:mr-[360px] md:mr-[400px] my-3.5 ml-3.5 rounded-[20px] shadow-lg overflow-hidden cursor-pointer"
+            : "mr-0 my-0 ml-0 rounded-none shadow-none"
         }`}
         onClick={() => menuOpen && setMenuOpen(false)}
       >

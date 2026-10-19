@@ -6,27 +6,41 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --border-radius: 24px;
+  --border-radius: 20px;
   --box-shadow-x: 0px;
   --box-shadow-y: 8px;
   --reverse-box-shadow-x: 0px;
   --reverse-box-shadow-y: -8px;
 
-  --heading-font-weight: 700;
+  --heading-font-weight: 600;
   --base-font-weight: 400;
 
-  /* Modo Claro - Alta Gama (Crema, Oro y Carbón) */
-  --background: #F7F5F0; /* Crema suave lujoso */
-  --secondary-background: #FFFFFF; /* Tarjetas blancas inmaculadas */
-  --foreground: #1C1C1C; /* Negro suave para texto principal */
-  --main-foreground: #FFFFFF; /* Texto blanco sobre botones principales */
+  /* Design System — Minimalismo Suizo Editorial (crema / carbón / rojo) */
+  --background: #F4F4F0; /* Crema editorial — se mantiene */
+  --secondary-background: #FFFFFF;
+  --foreground: #141414;
+  --main-foreground: #FFFFFF;
 
-  --main: #9A7B56; /* Oro/bronce profundo para alto contraste en modo claro */
-  --border: rgba(154, 123, 86, 0.2); /* Borde con tinte dorado sutil */
-  --ring: #9A7B56;
-  --overlay: rgba(247, 245, 240, 0.85);
+  --main: #C23A2A; /* Rojo editorial con contraste AA sobre crema (antes #E54838 3.4:1) */
+  --main-bright: #E54838; /* Acento visual para superficies oscuras */
+  --border: rgba(20, 20, 20, 0.12);
+  --ring: #141414;
+  --overlay: rgba(244, 244, 240, 0.85);
 
-  --shadow: 0 10px 40px -10px rgba(154, 123, 86, 0.08);
+  --shadow: 0 10px 40px -10px rgba(20, 20, 20, 0.12);
+
+  /* Ritmo suizo 8pt + movimiento sutil 200-250ms */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 250ms;
+  --duration-slow: 700ms;
 
   --chart-1: #9A7B56;
   --chart-2: #BFA181;
@@ -37,15 +51,16 @@
 }
 
 .dark {
-  /* Modo Oscuro - Alta Gama (Negro Suave, Carbón y Oro Apagado) */
+  /* Modo Oscuro — se mantiene carbón + rojo brillante para contraste */
   --background: #1C1C1C; /* Negro suave */
   --secondary-background: #252525; /* Tarjetas en carbón sutil */
   --foreground: #F4F4F4; /* Gris claro para texto principal */
-  --main-foreground: #1C1C1C; /* Negro suave sobre el oro principal */
+  --main-foreground: #FFFFFF;
 
-  --main: #BFA181; /* Oro apagado radiante en fondo oscuro */
-  --border: rgba(191, 161, 129, 0.18); /* Borde sutil con tinte dorado */
-  --ring: #BFA181;
+  --main: #E54838;
+  --main-bright: #E54838;
+  --border: rgba(255, 255, 255, 0.14);
+  --ring: #FFFFFF;
   --overlay: rgba(28, 28, 28, 0.85);
 
   --shadow: 0 10px 40px -10px rgba(0,0,0,0.6);
@@ -62,6 +77,11 @@
   --color-border: var(--border);
   --color-overlay: var(--overlay);
   --color-ring: var(--ring);
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Archivo", "Inter", system-ui, sans-serif;
+  --font-base: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -111,7 +131,51 @@
   h5,
   h6 {
     @apply font-heading;
+    text-wrap: balance;
   }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Foco visible AA: perímetro 2px con contraste 3:1 (ui-ux-pro-max § Focus Appearance) */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Movimiento: respeta prefers-reduced-motion en todo el sitio */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Skip-link para navegación por teclado */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  transform: translateY(-200%);
+  background: #141414;
+  color: #fff;
+  font-size: 13px;
+  font-family: monospace;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline-color: #fff;
 }
 
 body,
@@ -219,15 +283,44 @@ body::-webkit-scrollbar-thumb,
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Slow cinematic zoom for the active hero project image */
+/* Slow cinematic zoom for the active hero project image — desactivado con reduced-motion */
 @keyframes heroSlowZoom {
   from { transform: scale(1); }
-  to { transform: scale(1.08); }
+  to { transform: scale(1.06); }
 }
 
 .hero-slow-zoom {
-  animation: heroSlowZoom 5s ease-out both;
+  animation: heroSlowZoom 6s var(--ease-out) both;
   will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slow-zoom {
+    animation: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Galería de paneles expandibles (Proyectos) ---------- */
+.work-panel {
+  flex: 0 0 76px;
+  min-height: 76px;
+}
+.work-panel.is-active {
+  flex: 0 0 auto;
+}
+@media (min-width: 1024px) {
+  .work-panel {
+    flex: 0 1 76px;
+    min-height: 0;
+    transition: flex-grow 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .work-panel.is-active {
+    flex: 3.2 1 0%;
+  }
 }
 
 /* Underline that sweeps in from the left on hover/focus */

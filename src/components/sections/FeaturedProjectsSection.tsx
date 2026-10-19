@@ -1,16 +1,17 @@
-import { Fragment, useEffect, useRef, useState } from "react"
-import { ArrowUpRight, Copy, Check, KeyRound } from "lucide-react"
+import { memo, useCallback, useEffect, useRef, useState } from "react"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Copy, Check, KeyRound, Pause, Play } from "lucide-react"
 import { toast } from "sonner"
-import { projects } from "@/lib/data"
+import { projects, type Project } from "@/lib/data"
 import { Reveal } from "@/components/Reveal"
-import { useMagnetic } from "@/hooks/use-magnetic"
 
 interface FeaturedProjectsSectionProps {
   scrollY: number
 }
 
-const STICKY_GAP = 12
-const STICKY_STEP = 16
+const AUTOPLAY_MS = 6000
+const DRAG_THRESHOLD = 60
+
+/* ---------- Credenciales demo con copiar al clic ---------- */
 
 function CopyField({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false)
@@ -30,110 +31,405 @@ function CopyField({ label, value }: { label: string; value: string }) {
     <button
       type="button"
       onClick={copy}
-      className="group/copy flex w-full items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-left font-mono text-xs transition-colors hover:border-white/25 hover:bg-white/[0.08] cursor-pointer"
+      className="flex w-full items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-left font-mono text-xs transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] cursor-pointer"
       aria-label={`Copiar ${label.toLowerCase()}`}
     >
       <span className="min-w-0">
         <span className="block text-[10px] uppercase tracking-[0.2em] text-white/40">{label}</span>
         <span className="block truncate text-white/90">{value}</span>
       </span>
-      {copied ? <Check className="size-3.5 shrink-0 text-[#E54838]" /> : <Copy className="size-3.5 shrink-0 text-white/40 transition-colors group-hover/copy:text-white" />}
+      {copied ? (
+        <Check className="size-3.5 shrink-0 text-[#FF6B5B]" aria-hidden="true" />
+      ) : (
+        <Copy className="size-3.5 shrink-0 text-white/40 transition-colors hover:text-white" aria-hidden="true" />
+      )}
     </button>
   )
 }
 
-function ProjectCard({ project, index, progress, isLast }: { project: (typeof projects)[number]; index: number; progress: number; isLast: boolean }) {
-  const demoMagnetic = useMagnetic<HTMLAnchorElement>(0.3)
-  const ribbon = [...(project.tags ?? []), ...(project.tags ?? [])]
-  const number = String(index + 1).padStart(2, "0")
+/* ---------- Tarjeta del coverflow (memoizada) ---------- */
+
+const CoverCard = memo(function CoverCard({
+  project,
+  index,
+  total,
+  offset,
+  onSelect,
+}: {
+  project: Project
+  index: number
+  total: number
+  offset: number
+  onSelect: (id: string) => void
+}) {
+  const abs = Math.abs(offset)
+  const hidden = abs > 2
+  const active = offset === 0
 
   return (
-    <article
-      className="relative overflow-hidden rounded-3xl bg-[#141414] text-white shadow-none"
-      style={
-        isLast || progress <= 0
-          ? undefined
-          : {
-              // Keep full width while stacking: only a slight upward shift,
-              // no scale. Scaling narrows the card and exposes the edges of
-              // the cards underneath as thin vertical lines on the sides.
-              transform: `translateY(${progress * -8}px)`,
-              transformOrigin: "top center",
-              transition: "transform 80ms linear",
-            }
-      }
+    <div
+      aria-hidden={!active}
+      onClick={() => {
+        if (!active) onSelect(project.id)
+        else if (project.liveUrl) window.open(project.liveUrl, "_blank", "noopener,noreferrer")
+      }}
+      style={{
+        transform: `translateX(-50%) translateX(${offset * 62}%) scale(${1 - Math.min(abs, 2) * 0.14}) rotateY(${-offset * 32}deg)`,
+        zIndex: 20 - Math.min(abs, 3) * 5,
+        opacity: hidden ? 0 : 1 - Math.min(abs, 2) * 0.35,
+        pointerEvents: hidden ? "none" : "auto",
+      }}
+      className={`absolute left-1/2 top-1/2 w-[min(76vw,400px)] -translate-y-1/2 overflow-hidden rounded-2xl bg-[#1A1A1C] shadow-2xl transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+        active ? "cursor-pointer" : "cursor-pointer"
+      }`}
     >
-      <div className="grid lg:grid-cols-12">
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/img relative block aspect-[4/3] overflow-hidden lg:col-span-7 lg:aspect-auto lg:min-h-[420px]"
-          aria-label={`Abrir demo de ${project.title}`}
+      <div className="relative aspect-[4/5] sm:aspect-[4/4.4]">
+        <img
+          src={project.posterImage || project.bgImage}
+          alt=""
+          loading={index < 2 ? "eager" : "lazy"}
+          decoding="async"
+          draggable={false}
+          className="absolute inset-0 h-full w-full select-none object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/20" aria-hidden="true" />
+        <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em]">
+          <span className="rounded-md bg-white/90 px-2.5 py-1 font-semibold text-black">
+            {String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
+          </span>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 space-y-1 p-5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
+            {project.year} · {project.subtitle}
+          </p>
+          <p className="font-heading text-xl font-semibold leading-tight tracking-tight sm:text-2xl">
+            {project.title}
+          </p>
+          {active && project.liveUrl && (
+            <p className="inline-flex items-center gap-1.5 pt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80">
+              Clic para abrir demo
+              <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            </p>
+          )}
+        </div>
+        {active && (
+          <div className="absolute inset-0 rounded-2xl ring-2 ring-inset ring-[#E54838]/80" aria-hidden="true" />
+        )}
+      </div>
+    </div>
+  )
+})
+
+/* ---------- Sección: coverflow 3D + autoplay controlable ---------- */
+
+export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
+  const n = projects.length
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [playing, setPlaying] = useState(true)
+  const [pausedByHover, setPausedByHover] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
+  const stageRef = useRef<HTMLDivElement | null>(null)
+  const dragStartX = useRef<number | null>(null)
+  const dragDelta = useRef(0)
+
+  const activeProject: Project = projects[activeIndex] ?? projects[0]
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+
+  const goTo = useCallback(
+    (index: number) => setActiveIndex(((index % n) + n) % n),
+    [n]
+  )
+  const step = useCallback((dir: 1 | -1) => goTo(activeIndex + dir), [activeIndex, goTo])
+
+  // Autoplay: solo si el usuario no lo pausó, sin hover/foco, sin reduced-motion y pestaña visible
+  useEffect(() => {
+    if (!playing || pausedByHover || reducedMotion || n <= 1) return
+    if (typeof document !== "undefined" && document.hidden) return
+    const timer = window.setTimeout(() => goTo(activeIndex + 1), AUTOPLAY_MS)
+    const onVis = () => {
+      if (document.hidden) window.clearTimeout(timer)
+    }
+    document.addEventListener("visibilitychange", onVis)
+    return () => {
+      window.clearTimeout(timer)
+      document.removeEventListener("visibilitychange", onVis)
+    }
+  }, [playing, pausedByHover, reducedMotion, activeIndex, goTo, n])
+
+  // Arrastre horizontal sobre el escenario (no secuestra el scroll vertical)
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragStartX.current = e.clientX
+    dragDelta.current = 0
+  }
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (dragStartX.current === null) return
+    dragDelta.current = e.clientX - dragStartX.current
+  }
+  const endDrag = () => {
+    if (dragStartX.current === null) return
+    if (dragDelta.current <= -DRAG_THRESHOLD) step(1)
+    else if (dragDelta.current >= DRAG_THRESHOLD) step(-1)
+    dragStartX.current = null
+    dragDelta.current = 0
+  }
+
+  const onStageKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault()
+      step(1)
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault()
+      step(-1)
+    } else if (e.key === "Home") {
+      e.preventDefault()
+      goTo(0)
+    } else if (e.key === "End") {
+      e.preventDefault()
+      goTo(n - 1)
+    }
+  }
+
+  const offsetOf = (i: number) => {
+    const half = Math.floor(n / 2)
+    return ((i - activeIndex + half + n) % n) - half
+  }
+
+  const marquee = [...projects, ...projects]
+
+  return (
+    <section
+      id="work"
+      data-theme="dark"
+      aria-labelledby="work-title"
+      className="relative overflow-hidden bg-[#0D0D0E] px-6 pb-24 pt-20 text-white sm:px-12 md:px-16 md:pb-32"
+    >
+      {/* Resplandor ambiental detrás del escenario */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-40 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-[#E54838]/15 blur-[140px]"
+      />
+      {/* Número fantasma */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-8 right-2 select-none font-heading text-[26vw] font-bold leading-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.14)] lg:text-[19vw]"
+      >
+        {String(activeIndex + 1).padStart(2, "0")}
+      </div>
+
+      <div className="relative mx-auto max-w-6xl">
+        <div className="grid gap-6 md:grid-cols-12 md:items-end">
+          <Reveal className="md:col-span-8" variant="left">
+            <p className="mb-3 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-white/50">
+              <span className="inline-block size-1.5 rounded-full bg-[#E54838]" aria-hidden="true" />
+              Proyectos destacados
+            </p>
+            <h3 id="work-title" className="text-4xl font-heading font-semibold leading-[1.02] tracking-tight text-balance sm:text-5xl lg:text-6xl">
+              Arrastra. Explora.
+              <span className="text-white/40"> Entra a cada sistema.</span>
+            </h3>
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-4 md:text-right" variant="right">
+            <div className="flex items-center gap-2 md:justify-end">
+              <button
+                type="button"
+                onClick={() => step(-1)}
+                className="flex size-11 items-center justify-center rounded-full border border-white/20 transition-colors duration-200 hover:bg-white hover:text-black cursor-pointer"
+                aria-label="Proyecto anterior"
+              >
+                <ArrowLeft className="size-4" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setPlaying((p) => !p)}
+                className="relative flex size-11 items-center justify-center overflow-hidden rounded-full bg-white text-black transition-transform duration-200 hover:scale-105 cursor-pointer"
+                aria-label={playing ? "Pausar carrusel" : "Reanudar carrusel"}
+                aria-pressed={playing}
+              >
+                {playing ? (
+                  <Pause className="size-4" aria-hidden="true" />
+                ) : (
+                  <Play className="size-4" aria-hidden="true" />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={() => step(1)}
+                className="flex size-11 items-center justify-center rounded-full border border-white/20 transition-colors duration-200 hover:bg-white hover:text-black cursor-pointer"
+                aria-label="Proyecto siguiente"
+              >
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </button>
+            </div>
+            <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-white/50" aria-live="polite">
+              <span aria-hidden="true">
+                {String(activeIndex + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
+              </span>
+              <span className="sr-only">
+                Proyecto {activeIndex + 1} de {n}: {activeProject.title}
+              </span>
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Marquesina de títulos */}
+        <div className="relative mt-8 overflow-hidden border-y border-white/10 py-3" aria-hidden="true">
+          <div
+            className="flex w-max gap-8 whitespace-nowrap font-heading text-lg font-medium uppercase tracking-[0.14em] text-white/35"
+            style={{ animation: "projectRibbon 30s linear infinite" }}
+          >
+            {marquee.map((p, i) => (
+              <span key={`${p.id}-${i}`} className="flex items-center gap-8">
+                {p.title}
+                <span className="size-1.5 rounded-full bg-[#E54838]" />
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Escenario 3D */}
+        <div
+          ref={stageRef}
+          role="region"
+          aria-roledescription="carrusel"
+          aria-label={`Carrusel de proyectos, ${activeIndex + 1} de ${n}: ${activeProject.title}. Usa las flechas para navegar o arrastra.`}
+          tabIndex={0}
+          onKeyDown={onStageKeyDown}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onPointerLeave={() => {
+            endDrag()
+            setPausedByHover(false)
+          }}
+          onMouseEnter={() => setPausedByHover(true)}
+          onMouseLeave={() => setPausedByHover(false)}
+          onFocusCapture={() => setPausedByHover(true)}
+          onBlurCapture={() => setPausedByHover(false)}
+          className="relative mt-6 h-[480px] touch-pan-y select-none overflow-visible [perspective:1400px] sm:h-[520px]"
         >
-          <img
-            src={project.posterImage || project.bgImage}
-            alt={project.title}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/img:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-[#141414]" />
-          <div className="absolute left-5 top-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em]">
-            <span className="rounded-md bg-white/90 px-2.5 py-1 font-semibold text-black">{number} / 0{projects.length}</span>
-            <span className="rounded-md bg-black/60 px-2.5 py-1 text-white/80 backdrop-blur-md">{project.year}</span>
+          <div className="absolute inset-0 [transform-style:preserve-3d]">
+            {projects.map((p, i) => (
+              <CoverCard
+                key={p.id}
+                project={p}
+                index={i}
+                total={n}
+                offset={offsetOf(i)}
+                onSelect={(id) => goTo(projects.findIndex((x) => x.id === id))}
+              />
+            ))}
           </div>
-          <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 lg:right-auto">
-            <p className="max-w-xs font-mono text-[10px] uppercase tracking-[0.25em] text-white/70">{project.subtitle}</p>
-            <span className="hidden size-11 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform duration-500 group-hover/img:rotate-45 sm:flex">
-              <ArrowUpRight className="size-4" />
-            </span>
-          </div>
-        </a>
+        </div>
 
-        <div className="flex flex-col justify-between gap-6 p-6 sm:p-8 lg:col-span-5">
-          <div className="space-y-3">
-            <h4 className="text-2xl font-normal leading-tight tracking-tight sm:text-3xl">{project.title}</h4>
-            <p className="text-base font-light leading-relaxed text-white/85">{project.headline}</p>
-            <p className="text-sm font-light leading-relaxed text-white/60 lg:line-clamp-4">{project.description}</p>
+        {/* Barra de autoplay + segmentos */}
+        <div className="mt-2 flex items-center gap-4">
+          <div
+            className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/15"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={playing && !pausedByHover && !reducedMotion ? undefined : 0}
+            aria-label={playing ? "Tiempo para el siguiente proyecto" : "Carrusel en pausa"}
+          >
+            {playing && !pausedByHover && !reducedMotion && (
+              <div
+                key={activeIndex}
+                className="h-full rounded-full bg-[#E54838]"
+                style={{
+                  animation: `coverProgress ${AUTOPLAY_MS}ms linear both`,
+                }}
+              />
+            )}
+          </div>
+          <div className="flex items-center gap-1.5" role="tablist" aria-label="Ir a un proyecto">
+            {projects.map((p, i) => (
+              <button
+                key={p.id}
+                role="tab"
+                aria-selected={i === activeIndex}
+                aria-label={`Ir al proyecto ${i + 1}: ${p.title}`}
+                onClick={() => goTo(i)}
+                className="flex size-8 items-center justify-center rounded-full cursor-pointer"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-1.5 rounded-full transition-all duration-200 ${
+                    i === activeIndex ? "w-6 bg-[#E54838]" : "w-1.5 bg-white/25 hover:bg-white/60"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Detalle del proyecto activo */}
+        <div key={activeProject.id} className="mt-8 grid gap-6 lg:grid-cols-12" style={{ animation: "fadeIn 500ms cubic-bezier(0.16,1,0.3,1)" }}>
+          <div className="space-y-3 lg:col-span-7">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/50">
+              {activeProject.subtitle}
+            </p>
+            <h4 className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+              {activeProject.title}
+            </h4>
+            <p className="max-w-2xl text-sm font-light leading-relaxed text-white/70 sm:text-base">
+              {activeProject.description}
+            </p>
+            {activeProject.tags && (
+              <ul className="flex flex-wrap gap-1.5" aria-label="Tecnologías del proyecto">
+                {activeProject.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-full border border-white/12 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/60"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          <div className="space-y-4">
-            {project.demoCredentials && (
+          <div className="space-y-3 lg:col-span-5">
+            {activeProject.demoCredentials && (
               <div className="space-y-2">
-                <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#E54838]">
-                  <KeyRound className="size-3" />
+                <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#FF6B5B]">
+                  <KeyRound className="size-3" aria-hidden="true" />
                   Acceso demo · clic para copiar
                 </p>
                 <div className="grid gap-2 sm:grid-cols-2">
                   <CopyField
-                    label={project.demoCredentials.username ? "Usuario" : "Correo"}
-                    value={project.demoCredentials.username ?? project.demoCredentials.email ?? ""}
+                    label={activeProject.demoCredentials.username ? "Usuario" : "Correo"}
+                    value={activeProject.demoCredentials.username ?? activeProject.demoCredentials.email ?? ""}
                   />
-                  <CopyField label="Contraseña" value={project.demoCredentials.password} />
+                  <CopyField label="Contraseña" value={activeProject.demoCredentials.password} />
                 </div>
               </div>
             )}
-
-            <div className="flex flex-wrap items-center gap-3">
-              {project.liveUrl && (
+            <div className="flex flex-wrap items-center gap-2.5">
+              {activeProject.liveUrl && (
                 <a
-                  ref={demoMagnetic.ref}
-                  onMouseMove={demoMagnetic.onMouseMove}
-                  onMouseLeave={demoMagnetic.onMouseLeave}
-                  href={project.liveUrl}
+                  href={activeProject.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider text-black transition-transform duration-200 ease-out hover:bg-white/90"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-black transition-colors duration-200 hover:bg-[#E54838] hover:text-white"
                 >
-                  <span>Ver demo</span>
-                  <ArrowUpRight className="size-3.5" />
+                  Ver demo
+                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
                 </a>
               )}
-              {project.githubUrl && (
+              {activeProject.githubUrl && (
                 <a
-                  href={project.githubUrl}
+                  href={activeProject.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-mono font-medium uppercase tracking-wider text-white transition-all hover:bg-white/20"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/20 px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-white transition-colors duration-200 hover:bg-white/10"
                 >
                   Código
                 </a>
@@ -141,125 +437,13 @@ function ProjectCard({ project, index, progress, isLast }: { project: (typeof pr
             </div>
           </div>
         </div>
+
+        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
+          Arrastra las tarjetas o usa ← → · clic en la tarjeta central abre la demo.
+        </p>
       </div>
 
-      {project.tags && (
-        <div className="relative overflow-hidden border-t border-white/10 py-2.5" aria-hidden="true">
-          <div className="flex w-max gap-6 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.2em] text-white/45" style={{ animation: `projectRibbon ${project.tags.length * 4}s linear infinite` }}>
-            {ribbon.map((tag, i) => (
-              <span key={`${tag}-${i}`} className="flex items-center gap-6">
-                {tag}
-                <span className="size-1 rounded-full bg-[#E54838]" />
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-    </article>
-  )
-}
-
-export function FeaturedProjectsSection({ scrollY }: FeaturedProjectsSectionProps) {
-  const headerRef = useRef<HTMLDivElement | null>(null)
-  const slotRefs = useRef<(HTMLDivElement | null)[]>([])
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-  const [slots, setSlots] = useState<{ top: number; height: number }[]>([])
-  const [headerHeight, setHeaderHeight] = useState(0)
-  const [stacking, setStacking] = useState(false)
-
-  useEffect(() => {
-    const measure = () => {
-      setStacking(window.matchMedia("(min-width: 1024px)").matches)
-      setHeaderHeight(headerRef.current?.offsetHeight ?? 0)
-      setSlots(
-        slotRefs.current.map((anchor) => {
-          const card = anchor?.nextElementSibling as HTMLElement | null
-          if (!anchor || !card) return { top: 0, height: 0 }
-          return { top: anchor.getBoundingClientRect().top + window.scrollY, height: card.offsetHeight }
-        })
-      )
-    }
-    measure()
-    // Re-measure after images/fonts settle — stale offsets caused the
-    // last-card scale/shadow pop.
-    const t1 = window.setTimeout(measure, 500)
-    const t2 = window.setTimeout(measure, 1500)
-    window.addEventListener("resize", measure)
-    window.addEventListener("load", measure)
-    const images = Array.from(document.querySelectorAll("#work img"))
-    const onImgLoad = () => measure()
-    images.forEach((img) => img.addEventListener("load", onImgLoad))
-    // Observe card size changes (responsive image height, font loading).
-    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => measure()) : null
-    cardRefs.current.forEach((el) => el && ro?.observe(el))
-    if (headerRef.current) ro?.observe(headerRef.current)
-    return () => {
-      window.clearTimeout(t1)
-      window.clearTimeout(t2)
-      window.removeEventListener("resize", measure)
-      window.removeEventListener("load", measure)
-      images.forEach((img) => img.removeEventListener("load", onImgLoad))
-      ro?.disconnect()
-    }
-  }, [])
-
-  return (
-    <section id="work" className="relative bg-[#EBEBE6] px-6 pb-24 text-black sm:px-12 md:px-16 md:pb-32">
-      <div className="mx-auto max-w-6xl">
-        {/* Section header pins at the top; the cards stack underneath it */}
-        <div
-          ref={headerRef}
-          className="z-20 mb-10 grid gap-4 border-b border-black/15 bg-[#EBEBE6] pb-5 pt-20 md:grid-cols-12 md:items-end lg:sticky lg:top-0"
-        >
-          <Reveal className="md:col-span-8" variant="left">
-            <p className="mb-3 text-xs font-mono uppercase tracking-[0.25em] text-black/50">Proyectos destacados</p>
-            <h3 className="text-3xl font-light leading-tight tracking-tight sm:text-4xl">
-              Sistemas en producción, no maquetas.
-            </h3>
-          </Reveal>
-          <Reveal delay={120} className="md:col-span-4 md:text-right" variant="right">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-black/50">
-              0{projects.length} proyectos · demo con acceso
-            </p>
-          </Reveal>
-        </div>
-
-        <div>
-          {projects.map((project, index) => {
-            const slot = slots[index]
-            const stickyTop = headerHeight + STICKY_GAP + index * STICKY_STEP
-            const isLast = index === projects.length - 1
-            const progress =
-              stacking && slot && !isLast ? Math.min(1, Math.max(0, (scrollY - (slot.top - stickyTop)) / Math.max(1, slot.height))) : 0
-
-            return (
-              <Fragment key={project.id}>
-                {/* Non-sticky anchor: gives a stable page offset to measure against */}
-                <div
-                  ref={(el) => {
-                    slotRefs.current[index] = el
-                  }}
-                  aria-hidden="true"
-                  className="h-0"
-                />
-                {/* Last card is NOT sticky: it scrolls naturally so no floating
-                    shadow / empty gap appears at the end of the stack. */}
-                <div
-                  ref={(el) => {
-                    cardRefs.current[index] = el
-                  }}
-                  className={isLast ? "mb-0 lg:relative" : "mb-6 lg:sticky lg:mb-8"}
-                  style={!isLast && stacking ? { top: `${stickyTop}px` } : undefined}
-                >
-                  <Reveal variant="up">
-                    <ProjectCard project={project} index={index} progress={progress} isLast={isLast} />
-                  </Reveal>
-                </div>
-              </Fragment>
-            )
-          })}
-        </div>
-      </div>
+      <style>{`@keyframes coverProgress { from { width: 0%; } to { width: 100%; } }`}</style>
     </section>
   )
 }

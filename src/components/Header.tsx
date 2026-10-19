@@ -11,9 +11,12 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Header sits around 40px - 60px from top of window
+      // Header sits around 40px - 60px from top of window.
+      // Las secciones oscuras se marcan con data-theme="dark" en su propio
+      // componente, así el logo/botones siempre contrastan (4.5:1) sin
+      // depender de IDs fijos que se rompen con cada rediseño.
       const headerY = 60
-      const darkSections = document.querySelectorAll("#home, #contact, footer")
+      const darkSections = document.querySelectorAll('[data-theme="dark"]')
       let dark = false
       darkSections.forEach((sec) => {
         const rect = sec.getBoundingClientRect()
@@ -38,12 +41,12 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
       {/* Logo - Roger Infa Monogram Logo */}
       <a
         href="/"
-        className={`pointer-events-auto shrink-0 text-lg sm:text-2xl font-mono font-bold tracking-widest uppercase hover:tracking-[0.2em] transition-[letter-spacing,color] duration-300 select-none ${
+        className={`pointer-events-auto shrink-0 text-lg sm:text-2xl font-mono font-bold tracking-widest uppercase hover:tracking-[0.2em] transition-[letter-spacing,color] duration-200 select-none rounded-sm ${
           isDarkSection ? "text-white drop-shadow-md" : "text-black"
         }`}
-        aria-label="Roger Infa Sanchez Home"
+        aria-label="Roger Infa Sanchez — inicio"
       >
-        ROGER<span className="text-[#E54838]">.</span>INFA
+        ROGER<span className="text-[#E54838]" aria-hidden="true">.</span>INFA
       </a>
 
       {/* Right Actions */}
@@ -55,7 +58,7 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
         {/* Contáctame Button */}
         <button
           onClick={onContactClick}
-          className={`inline-flex items-center gap-0 sm:gap-3 rounded-md px-2 sm:px-4 py-2 text-sm font-medium tracking-tight shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer group ${
+          className={`inline-flex items-center gap-0 sm:gap-3 rounded-md px-2 sm:px-4 py-2 text-sm font-medium tracking-tight shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer group min-h-[44px] ${
             isDarkSection
               ? "bg-[#141414] text-white border border-white/20 hover:bg-black"
               : "bg-white text-black border border-black/15 hover:bg-black hover:text-white"
@@ -90,16 +93,20 @@ export function Header({ menuOpen, onMenuOpen, onContactClick }: HeaderProps) {
             e.stopPropagation()
             onMenuOpen()
           }}
-          className="flex flex-col justify-center gap-[6px] p-2 cursor-pointer hover:opacity-80 transition-opacity"
-          aria-label="Abrir menú"
+          className="flex flex-col justify-center gap-[6px] p-2 min-w-[44px] min-h-[44px] items-center cursor-pointer hover:opacity-80 transition-opacity rounded-md"
+          aria-label="Abrir menú lateral"
+          aria-expanded={menuOpen}
+          aria-controls="menu-lateral"
         >
           <span
-            className={`w-7 h-[2px] rounded-full transition-colors duration-300 ${
+            aria-hidden="true"
+            className={`w-7 h-[2px] rounded-full transition-colors duration-200 ${
               isDarkSection ? "bg-white" : "bg-black"
             }`}
           />
           <span
-            className={`w-7 h-[2px] rounded-full transition-colors duration-300 ${
+            aria-hidden="true"
+            className={`w-7 h-[2px] rounded-full transition-colors duration-200 ${
               isDarkSection ? "bg-white" : "bg-black"
             }`}
           />
