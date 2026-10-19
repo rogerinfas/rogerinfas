@@ -82,9 +82,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
               fetchPriority={idx === 0 ? "high" : "low"}
               loading={idx === 0 ? "eager" : "lazy"}
               decoding="async"
-              className={`w-full h-full object-cover object-center brightness-[0.82] contrast-[1.04] ${
-                currentSlide === idx && !reducedMotion ? "hero-slow-zoom" : ""
-              }`}
+              className="w-full h-full object-cover object-center brightness-[0.82] contrast-[1.04]"
             />
           </div>
         ))}
