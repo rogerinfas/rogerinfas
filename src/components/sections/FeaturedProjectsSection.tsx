@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from "react"
+import { memo, useState } from "react"
 import { ArrowLeft, ArrowRight, ArrowUpRight, Copy, Check, KeyRound } from "lucide-react"
 import { toast } from "sonner"
 import { projects, type Project } from "@/lib/data"
@@ -193,27 +193,9 @@ const WorkPanel = memo(function WorkPanel({ project, index, total, active, onAct
 /* ---------- Sección: banda oscura + galería de paneles ---------- */
 
 export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
-  const [filter, setFilter] = useState<string>("Todos")
   const [activeId, setActiveId] = useState<string>(projects[0]?.id ?? "")
 
-  const allTags = useMemo(() => {
-    const seen = new Set<string>()
-    const ordered: string[] = []
-    for (const p of projects) {
-      for (const t of p.tags ?? []) {
-        if (!seen.has(t)) {
-          seen.add(t)
-          ordered.push(t)
-        }
-      }
-    }
-    return ordered
-  }, [])
-
-  const visible = useMemo(
-    () => (filter === "Todos" ? projects : projects.filter((p) => (p.tags ?? []).includes(filter))),
-    [filter]
-  )
+  const visible = projects
 
   const activeIndex = Math.max(
     0,
@@ -227,12 +209,6 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
     if (visible.length === 0) return
     const next = (activeIndex + dir + visible.length) % visible.length
     setActiveId(visible[next].id)
-  }
-
-  const selectFilter = (tag: string) => {
-    setFilter(tag)
-    const list = tag === "Todos" ? projects : projects.filter((p) => (p.tags ?? []).includes(tag))
-    setActiveId(list[0]?.id ?? "")
   }
 
   const onRegionKeyDown = (e: React.KeyboardEvent) => {
@@ -308,28 +284,6 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
               </span>
             </p>
           </Reveal>
-        </div>
-
-        {/* Filtros */}
-        <div className="flex flex-wrap gap-2 pt-8" role="group" aria-label="Filtrar proyectos por tecnología">
-          {["Todos", ...allTags].map((tag) => {
-            const selected = filter === tag
-            return (
-              <button
-                key={tag}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => selectFilter(tag)}
-                className={`min-h-[36px] rounded-full border px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 cursor-pointer ${
-                  selected
-                    ? "border-white bg-white text-black"
-                    : "border-white/20 bg-transparent text-white/60 hover:border-white hover:text-white"
-                }`}
-              >
-                {tag}
-              </button>
-            )
-          })}
         </div>
 
         {/* Marquesina de títulos */}
