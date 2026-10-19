@@ -97,8 +97,8 @@ export const projects: Project[] = [
     title: "WARPWEFT — ERP TEXTIL",
     year: "2026",
     subtitle: "ERP MULTI-EMPRESA PARA CONFECCIÓN Y TALLERES",
-    bgImage: "/images/project_4.svg",
-    posterImage: "/images/project_4.svg",
+    bgImage: "/images/project_4.png",
+    posterImage: "/images/project_4.png",
     description:
       "ERP para el rubro textil y confección: empresas, clientes y proveedores, talleres, trabajadores y planillas, materiales, prendas y control de medidas, cotizaciones con PDF, órdenes de compra, finanzas y reportes en Excel. Backend con arquitectura DDD/CQRS, RBAC y auditoría; panel administrativo con dashboard, KPIs y tipos generados desde el OpenAPI.",
     headline:
