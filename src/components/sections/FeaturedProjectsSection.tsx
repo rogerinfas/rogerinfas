@@ -1,5 +1,5 @@
-import { memo, useState } from "react"
-import { ArrowLeft, ArrowRight, ArrowUpRight, Copy, Check, KeyRound } from "lucide-react"
+import { memo, useCallback, useEffect, useRef, useState } from "react"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Copy, Check, KeyRound, Pause, Play } from "lucide-react"
 import { toast } from "sonner"
 import { projects, type Project } from "@/lib/data"
 import { Reveal } from "@/components/Reveal"
@@ -7,6 +7,9 @@ import { Reveal } from "@/components/Reveal"
 interface FeaturedProjectsSectionProps {
   scrollY: number
 }
+
+const AUTOPLAY_MS = 6000
+const DRAG_THRESHOLD = 60
 
 /* ---------- Credenciales demo con copiar al clic ---------- */
 
@@ -27,11 +30,8 @@ function CopyField({ label, value }: { label: string; value: string }) {
   return (
     <button
       type="button"
-      onClick={(e) => {
-        e.stopPropagation()
-        copy()
-      }}
-      className="group/copy flex w-full items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-left font-mono text-xs transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] cursor-pointer"
+      onClick={copy}
+      className="flex w-full items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-left font-mono text-xs transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.08] cursor-pointer"
       aria-label={`Copiar ${label.toLowerCase()}`}
     >
       <span className="min-w-0">
@@ -41,177 +41,146 @@ function CopyField({ label, value }: { label: string; value: string }) {
       {copied ? (
         <Check className="size-3.5 shrink-0 text-[#FF6B5B]" aria-hidden="true" />
       ) : (
-        <Copy className="size-3.5 shrink-0 text-white/40 transition-colors group-hover/copy:text-white" aria-hidden="true" />
+        <Copy className="size-3.5 shrink-0 text-white/40 transition-colors hover:text-white" aria-hidden="true" />
       )}
     </button>
   )
 }
 
-/* ---------- Panel expandible (memoizado, escala a N) ---------- */
+/* ---------- Tarjeta del coverflow (memoizada) ---------- */
 
-interface PanelProps {
+const CoverCard = memo(function CoverCard({
+  project,
+  index,
+  total,
+  offset,
+  onSelect,
+}: {
   project: Project
   index: number
   total: number
-  active: boolean
-  onActivate: (id: string) => void
-}
-
-const WorkPanel = memo(function WorkPanel({ project, index, total, active, onActivate }: PanelProps) {
-  const number = String(index + 1).padStart(2, "0")
-  const detailId = `proyecto-detalle-${project.id}`
+  offset: number
+  onSelect: (id: string) => void
+}) {
+  const abs = Math.abs(offset)
+  const hidden = abs > 2
+  const active = offset === 0
 
   return (
     <div
-      onClick={() => onActivate(project.id)}
-      className={`work-panel group relative cursor-pointer overflow-hidden rounded-2xl bg-[#1A1A1C] text-white ${
-        active ? "is-active shadow-[0_0_90px_-18px_rgba(229,72,56,0.55)]" : "hover:border-white/20 border border-transparent"
+      aria-hidden={!active}
+      onClick={() => {
+        if (!active) onSelect(project.id)
+        else if (project.liveUrl) window.open(project.liveUrl, "_blank", "noopener,noreferrer")
+      }}
+      style={{
+        transform: `translateX(-50%) translateX(${offset * 62}%) scale(${1 - Math.min(abs, 2) * 0.14}) rotateY(${-offset * 32}deg)`,
+        zIndex: 20 - Math.min(abs, 3) * 5,
+        opacity: hidden ? 0 : 1 - Math.min(abs, 2) * 0.35,
+        pointerEvents: hidden ? "none" : "auto",
+      }}
+      className={`absolute left-1/2 top-1/2 w-[min(76vw,400px)] -translate-y-1/2 overflow-hidden rounded-2xl bg-[#1A1A1C] shadow-2xl transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+        active ? "cursor-pointer" : "cursor-pointer"
       }`}
     >
-      {/* Fondo fotográfico */}
-      <img
-        src={project.posterImage || project.bgImage}
-        alt=""
-        aria-hidden="true"
-        loading={index < 2 ? "eager" : "lazy"}
-        decoding="async"
-        draggable={false}
-        className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-          active ? "opacity-60 scale-100" : "opacity-35 scale-105 group-hover:opacity-50 group-hover:scale-100"
-        }`}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/25" aria-hidden="true" />
-
-      {/* Riel colapsado: número + título vertical */}
-      <div
-        aria-hidden={active}
-        className={`absolute inset-0 flex flex-col items-center justify-between py-5 transition-opacity duration-300 motion-reduce:transition-none lg:justify-start lg:gap-6 lg:py-6 ${
-          active ? "pointer-events-none opacity-0" : "opacity-100"
-        }`}
-      >
-        <span className="font-mono text-[11px] tabular-nums text-white/70">
-          {number}
-        </span>
-        <span className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-white/90 lg:[writing-mode:vertical-rl] lg:rotate-180">
-          {project.title}
-        </span>
-        <span className="hidden size-9 items-center justify-center rounded-full border border-white/30 text-white/80 transition-colors duration-200 group-hover:border-white group-hover:bg-white group-hover:text-black lg:flex" aria-hidden="true">
-          <ArrowUpRight className="size-4" />
-        </span>
-      </div>
-
-      {/* Contenido expandido */}
-      <div
-        id={detailId}
-        className={`relative flex h-full flex-col justify-end gap-4 p-6 transition-opacity delay-150 duration-500 motion-reduce:transition-none sm:p-8 ${
-          active ? "opacity-100" : "pointer-events-none absolute inset-0 opacity-0"
-        }`}
-      >
-        <div className="space-y-2">
-          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-white/60">
-            <span className="text-[#FF6B5B]">{number}/{String(total).padStart(2, "0")}</span>
-            <span>{project.year}</span>
-            <span className="hidden sm:inline">{project.subtitle}</span>
-          </p>
-          <h4 className="max-w-xl font-heading text-3xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            {project.title}
-          </h4>
-          <p className="max-w-xl text-sm font-light leading-relaxed text-white/75 sm:text-base">
-            {project.headline}
-          </p>
+      <div className="relative aspect-[4/5] sm:aspect-[4/4.4]">
+        <img
+          src={project.posterImage || project.bgImage}
+          alt=""
+          loading={index < 2 ? "eager" : "lazy"}
+          decoding="async"
+          draggable={false}
+          className="absolute inset-0 h-full w-full select-none object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/20" aria-hidden="true" />
+        <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em]">
+          <span className="rounded-md bg-white/90 px-2.5 py-1 font-semibold text-black">
+            {String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
+          </span>
         </div>
-
-        {active && (
-          <div className="max-w-xl space-y-4">
-            <p className="hidden text-sm font-light leading-relaxed text-white/60 md:block lg:line-clamp-2">
-              {project.description}
+        <div className="absolute inset-x-0 bottom-0 space-y-1 p-5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
+            {project.year} · {project.subtitle}
+          </p>
+          <p className="font-heading text-xl font-semibold leading-tight tracking-tight sm:text-2xl">
+            {project.title}
+          </p>
+          {active && project.liveUrl && (
+            <p className="inline-flex items-center gap-1.5 pt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80">
+              Clic para abrir demo
+              <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </p>
-
-            {project.demoCredentials && (
-              <div className="grid max-w-md gap-2 sm:grid-cols-2">
-                <CopyField
-                  label={project.demoCredentials.username ? "Usuario" : "Correo"}
-                  value={project.demoCredentials.username ?? project.demoCredentials.email ?? ""}
-                />
-                <CopyField label="Contraseña" value={project.demoCredentials.password} />
-              </div>
-            )}
-
-            <div className="flex flex-wrap items-center gap-2.5">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-black transition-colors duration-200 hover:bg-[#E54838] hover:text-white"
-                >
-                  Ver demo
-                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/25 px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-white transition-colors duration-200 hover:border-white hover:bg-white/10"
-                >
-                  Código
-                </a>
-              )}
-              <span className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-white/40 xl:inline">
-                {(project.tags ?? []).slice(0, 4).join(" · ")}
-              </span>
-            </div>
-          </div>
+          )}
+        </div>
+        {active && (
+          <div className="absolute inset-0 rounded-2xl ring-2 ring-inset ring-[#E54838]/80" aria-hidden="true" />
         )}
       </div>
-
-      {/* Botón accesible real (el div onClick es solo mejora para puntero) */}
-      <button
-        type="button"
-        aria-expanded={active}
-        aria-controls={detailId}
-        aria-label={`${active ? "Contraer" : "Expandir"} proyecto: ${project.title}`}
-        onClick={(e) => {
-          e.stopPropagation()
-          onActivate(project.id)
-        }}
-        onFocus={() => {
-          if (!active) onActivate(project.id)
-        }}
-        className="absolute inset-0 cursor-pointer rounded-2xl"
-      >
-        <span className="sr-only">{project.title}</span>
-      </button>
     </div>
   )
 })
 
-/* ---------- Sección: banda oscura + galería de paneles ---------- */
+/* ---------- Sección: coverflow 3D + autoplay controlable ---------- */
 
 export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
-  const [activeId, setActiveId] = useState<string>(projects[0]?.id ?? "")
+  const n = projects.length
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [playing, setPlaying] = useState(true)
+  const [pausedByHover, setPausedByHover] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
+  const stageRef = useRef<HTMLDivElement | null>(null)
+  const dragStartX = useRef<number | null>(null)
+  const dragDelta = useRef(0)
 
-  const visible = projects
+  const activeProject: Project = projects[activeIndex] ?? projects[0]
 
-  const activeIndex = Math.max(
-    0,
-    visible.findIndex((p) => p.id === activeId)
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+
+  const goTo = useCallback(
+    (index: number) => setActiveIndex(((index % n) + n) % n),
+    [n]
   )
-  const activeProject = visible[activeIndex] ?? visible[0]
+  const step = useCallback((dir: 1 | -1) => goTo(activeIndex + dir), [activeIndex, goTo])
 
-  const activate = (id: string) => setActiveId(id)
+  // Autoplay: solo si el usuario no lo pausó, sin hover/foco, sin reduced-motion y pestaña visible
+  useEffect(() => {
+    if (!playing || pausedByHover || reducedMotion || n <= 1) return
+    if (typeof document !== "undefined" && document.hidden) return
+    const timer = window.setTimeout(() => goTo(activeIndex + 1), AUTOPLAY_MS)
+    const onVis = () => {
+      if (document.hidden) window.clearTimeout(timer)
+    }
+    document.addEventListener("visibilitychange", onVis)
+    return () => {
+      window.clearTimeout(timer)
+      document.removeEventListener("visibilitychange", onVis)
+    }
+  }, [playing, pausedByHover, reducedMotion, activeIndex, goTo, n])
 
-  const step = (dir: 1 | -1) => {
-    if (visible.length === 0) return
-    const next = (activeIndex + dir + visible.length) % visible.length
-    setActiveId(visible[next].id)
+  // Arrastre horizontal sobre el escenario (no secuestra el scroll vertical)
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragStartX.current = e.clientX
+    dragDelta.current = 0
+  }
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (dragStartX.current === null) return
+    dragDelta.current = e.clientX - dragStartX.current
+  }
+  const endDrag = () => {
+    if (dragStartX.current === null) return
+    if (dragDelta.current <= -DRAG_THRESHOLD) step(1)
+    else if (dragDelta.current >= DRAG_THRESHOLD) step(-1)
+    dragStartX.current = null
+    dragDelta.current = 0
   }
 
-  const onRegionKeyDown = (e: React.KeyboardEvent) => {
+  const onStageKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight") {
       e.preventDefault()
       step(1)
@@ -220,14 +189,19 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
       step(-1)
     } else if (e.key === "Home") {
       e.preventDefault()
-      if (visible[0]) setActiveId(visible[0].id)
+      goTo(0)
     } else if (e.key === "End") {
       e.preventDefault()
-      if (visible[visible.length - 1]) setActiveId(visible[visible.length - 1].id)
+      goTo(n - 1)
     }
   }
 
-  const marquee = [...visible, ...visible]
+  const offsetOf = (i: number) => {
+    const half = Math.floor(n / 2)
+    return ((i - activeIndex + half + n) % n) - half
+  }
+
+  const marquee = [...projects, ...projects]
 
   return (
     <section
@@ -235,7 +209,12 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
       aria-labelledby="work-title"
       className="relative overflow-hidden bg-[#0D0D0E] px-6 pb-24 pt-20 text-white sm:px-12 md:px-16 md:pb-32"
     >
-      {/* Número fantasma del proyecto activo */}
+      {/* Resplandor ambiental detrás del escenario */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-40 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-[#E54838]/15 blur-[140px]"
+      />
+      {/* Número fantasma */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-8 right-2 select-none font-heading text-[26vw] font-bold leading-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.14)] lg:text-[19vw]"
@@ -244,7 +223,6 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        {/* Encabezado */}
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
           <Reveal className="md:col-span-8" variant="left">
             <p className="mb-3 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-white/50">
@@ -252,8 +230,8 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
               Proyectos destacados
             </p>
             <h3 id="work-title" className="text-4xl font-heading font-semibold leading-[1.02] tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              Toca un proyecto.
-              <span className="text-white/40"> Mira cómo respira.</span>
+              Arrastra. Explora.
+              <span className="text-white/40"> Entra a cada sistema.</span>
             </h3>
           </Reveal>
           <Reveal delay={120} className="md:col-span-4 md:text-right" variant="right">
@@ -268,6 +246,19 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
               </button>
               <button
                 type="button"
+                onClick={() => setPlaying((p) => !p)}
+                className="relative flex size-11 items-center justify-center overflow-hidden rounded-full bg-white text-black transition-transform duration-200 hover:scale-105 cursor-pointer"
+                aria-label={playing ? "Pausar carrusel" : "Reanudar carrusel"}
+                aria-pressed={playing}
+              >
+                {playing ? (
+                  <Pause className="size-4" aria-hidden="true" />
+                ) : (
+                  <Play className="size-4" aria-hidden="true" />
+                )}
+              </button>
+              <button
+                type="button"
                 onClick={() => step(1)}
                 className="flex size-11 items-center justify-center rounded-full border border-white/20 transition-colors duration-200 hover:bg-white hover:text-black cursor-pointer"
                 aria-label="Proyecto siguiente"
@@ -277,10 +268,10 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
             </div>
             <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-white/50" aria-live="polite">
               <span aria-hidden="true">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(visible.length).padStart(2, "0")}
+                {String(activeIndex + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
               </span>
               <span className="sr-only">
-                Proyecto {activeIndex + 1} de {visible.length}
+                Proyecto {activeIndex + 1} de {n}: {activeProject.title}
               </span>
             </p>
           </Reveal>
@@ -301,63 +292,157 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
           </div>
         </div>
 
-        {/* Galería de paneles */}
-        {visible.length === 0 ? (
-          <p className="mt-8 rounded-2xl border border-dashed border-white/20 px-6 py-12 text-center text-sm text-white/60">
-            Sin proyectos con ese filtro por ahora.
-          </p>
-        ) : (
-          <div
-            role="region"
-            aria-roledescription="carrusel"
-            aria-label="Galería de proyectos. Usa las flechas izquierda y derecha para navegar."
-            tabIndex={0}
-            onKeyDown={onRegionKeyDown}
-            className="mt-8 flex min-h-[70vh] flex-col gap-3 lg:h-[72vh] lg:min-h-[560px] lg:flex-row"
-          >
-            {visible.map((project, i) => (
-              <WorkPanel
-                key={project.id}
-                project={project}
+        {/* Escenario 3D */}
+        <div
+          ref={stageRef}
+          role="region"
+          aria-roledescription="carrusel"
+          aria-label={`Carrusel de proyectos, ${activeIndex + 1} de ${n}: ${activeProject.title}. Usa las flechas para navegar o arrastra.`}
+          tabIndex={0}
+          onKeyDown={onStageKeyDown}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onPointerLeave={() => {
+            endDrag()
+            setPausedByHover(false)
+          }}
+          onMouseEnter={() => setPausedByHover(true)}
+          onMouseLeave={() => setPausedByHover(false)}
+          onFocusCapture={() => setPausedByHover(true)}
+          onBlurCapture={() => setPausedByHover(false)}
+          className="relative mt-6 h-[480px] touch-pan-y select-none overflow-visible [perspective:1400px] sm:h-[520px]"
+        >
+          <div className="absolute inset-0 [transform-style:preserve-3d]">
+            {projects.map((p, i) => (
+              <CoverCard
+                key={p.id}
+                project={p}
                 index={i}
-                total={visible.length}
-                active={project.id === activeProject?.id}
-                onActivate={activate}
+                total={n}
+                offset={offsetOf(i)}
+                onSelect={(id) => goTo(projects.findIndex((x) => x.id === id))}
               />
             ))}
           </div>
-        )}
+        </div>
 
-        {/* Segmentos */}
-        {visible.length > 1 && (
-          <div className="mt-6 flex items-center gap-2" role="group" aria-label="Ir a un proyecto">
-            {visible.map((p, i) => (
+        {/* Barra de autoplay + segmentos */}
+        <div className="mt-2 flex items-center gap-4">
+          <div
+            className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/15"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={playing && !pausedByHover && !reducedMotion ? undefined : 0}
+            aria-label={playing ? "Tiempo para el siguiente proyecto" : "Carrusel en pausa"}
+          >
+            {playing && !pausedByHover && !reducedMotion && (
+              <div
+                key={activeIndex}
+                className="h-full rounded-full bg-[#E54838]"
+                style={{
+                  animation: `coverProgress ${AUTOPLAY_MS}ms linear both`,
+                }}
+              />
+            )}
+          </div>
+          <div className="flex items-center gap-1.5" role="tablist" aria-label="Ir a un proyecto">
+            {projects.map((p, i) => (
               <button
                 key={p.id}
-                type="button"
-                onClick={() => setActiveId(p.id)}
+                role="tab"
+                aria-selected={i === activeIndex}
                 aria-label={`Ir al proyecto ${i + 1}: ${p.title}`}
-                aria-current={p.id === activeProject?.id ? "true" : undefined}
-                className="group flex h-8 flex-1 items-center cursor-pointer"
+                onClick={() => goTo(i)}
+                className="flex size-8 items-center justify-center rounded-full cursor-pointer"
               >
                 <span
                   aria-hidden="true"
-                  className={`h-[3px] w-full rounded-full transition-colors duration-300 ${
-                    p.id === activeProject?.id
-                      ? "bg-[#E54838]"
-                      : "bg-white/15 group-hover:bg-white/35"
+                  className={`h-1.5 rounded-full transition-all duration-200 ${
+                    i === activeIndex ? "w-6 bg-[#E54838]" : "w-1.5 bg-white/25 hover:bg-white/60"
                   }`}
                 />
               </button>
             ))}
           </div>
-        )}
+        </div>
 
-        <p className="mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
-          <KeyRound className="size-3" aria-hidden="true" />
-          Cada demo incluye credenciales listas para copiar y probar.
+        {/* Detalle del proyecto activo */}
+        <div key={activeProject.id} className="mt-8 grid gap-6 lg:grid-cols-12" style={{ animation: "fadeIn 500ms cubic-bezier(0.16,1,0.3,1)" }}>
+          <div className="space-y-3 lg:col-span-7">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/50">
+              {activeProject.subtitle}
+            </p>
+            <h4 className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+              {activeProject.title}
+            </h4>
+            <p className="max-w-2xl text-sm font-light leading-relaxed text-white/70 sm:text-base">
+              {activeProject.description}
+            </p>
+            {activeProject.tags && (
+              <ul className="flex flex-wrap gap-1.5" aria-label="Tecnologías del proyecto">
+                {activeProject.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-full border border-white/12 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/60"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className="space-y-3 lg:col-span-5">
+            {activeProject.demoCredentials && (
+              <div className="space-y-2">
+                <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#FF6B5B]">
+                  <KeyRound className="size-3" aria-hidden="true" />
+                  Acceso demo · clic para copiar
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <CopyField
+                    label={activeProject.demoCredentials.username ? "Usuario" : "Correo"}
+                    value={activeProject.demoCredentials.username ?? activeProject.demoCredentials.email ?? ""}
+                  />
+                  <CopyField label="Contraseña" value={activeProject.demoCredentials.password} />
+                </div>
+              </div>
+            )}
+            <div className="flex flex-wrap items-center gap-2.5">
+              {activeProject.liveUrl && (
+                <a
+                  href={activeProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-black transition-colors duration-200 hover:bg-[#E54838] hover:text-white"
+                >
+                  Ver demo
+                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                </a>
+              )}
+              {activeProject.githubUrl && (
+                <a
+                  href={activeProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/20 px-5 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-white transition-colors duration-200 hover:bg-white/10"
+                >
+                  Código
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
+          Arrastra las tarjetas o usa ← → · clic en la tarjeta central abre la demo.
         </p>
       </div>
+
+      <style>{`@keyframes coverProgress { from { width: 0%; } to { width: 100%; } }`}</style>
     </section>
   )
 }
