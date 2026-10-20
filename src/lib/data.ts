@@ -2,11 +2,12 @@ export interface Project {
   id: string
   title: string
   year: string
+  /** Qué es, en una línea corta. */
   subtitle: string
   bgImage: string
+  /** Captura real del sistema. */
   posterImage: string
   description: string
-  headline: string
   tags?: string[]
   githubUrl?: string
   liveUrl?: string
@@ -40,30 +41,26 @@ export interface NavItem {
 export const projects: Project[] = [
   {
     id: "warpweft",
-    title: "WARPWEFT — ERP TEXTIL",
+    title: "WarpWeft",
     year: "2026",
-    subtitle: "ERP MULTI-EMPRESA PARA CONFECCIÓN Y TALLERES",
+    subtitle: "ERP para talleres de confección",
     bgImage: "/images/project_4.png",
-    posterImage: "/images/project_4.png",
+    posterImage: "/images/projects/warpweft.webp",
     description:
-      "ERP para el rubro textil y confección: empresas, clientes y proveedores, talleres, trabajadores y planillas, materiales, prendas y control de medidas, cotizaciones con PDF, órdenes de compra, finanzas y reportes en Excel. Backend con arquitectura DDD/CQRS, RBAC y auditoría; panel administrativo con dashboard, KPIs y tipos generados desde el OpenAPI.",
-    headline:
-      "De la cotización a la planilla: operación textil completa con backend auditable y panel administrativo en tiempo real.",
-    tags: ["Next.js", "NestJS", "TypeScript", "PostgreSQL", "Prisma", "Better Auth", "Tailwind CSS", "Docker"],
+      "Pensado para talleres que hoy llevan cotizaciones, medidas y planillas en Excel. Cubre el flujo completo: cotización con PDF, orden de pedido, asignación a talleres, avance por trabajador, pago semanal y balance del mes. Hice el backend en NestJS con DDD/CQRS, permisos por rol y auditoría de cada cambio, y el panel en Next.js.",
+    tags: ["NestJS", "Next.js", "PostgreSQL", "Prisma", "Better Auth", "Docker"],
     badge: "En desarrollo",
   },
   {
     id: "tourism-hub",
-    title: "TOURISM HUB — OPERADORA TURÍSTICA",
+    title: "Tourism Hub",
     year: "2026",
-    subtitle: "SUITE INTEGRAL PARA OPERACIÓN TURÍSTICA",
+    subtitle: "Operación de una agencia de turismo",
     bgImage: "/images/project_5.png",
-    posterImage: "/images/project_5.png",
+    posterImage: "/images/projects/tourism-hub.webp",
     description:
-      "Ecosistema para operar una agencia de turismo de punta a punta: cotizaciones y reservas con itinerarios editables, tours multidestino con tarifarios y costeo, proveedores, salidas con manifiestos, cobranzas multimoneda, liquidación de costos e incidentes en ruta. Backend en .NET con monolito modular, DDD y PostgreSQL multiesquema; panel tipo suite de aplicaciones con tipos generados desde el OpenAPI.",
-    headline:
-      "De la cotización a la liquidación: operación turística completa con costos reales, cobranzas y control por reserva.",
-    tags: ["Next.js", ".NET", "C#", "PostgreSQL", "SignalR", "TypeScript", "Tailwind CSS", "Docker"],
+      "Una agencia cotiza, reserva proveedores, sale con el grupo y al final tiene que cuadrar cuánto costó todo. Tourism Hub cubre ese ciclo: itinerarios editables, tarifarios, salidas con manifiesto, cobros en varias monedas y liquidación por reserva. Backend en .NET como monolito modular, con un esquema de PostgreSQL por módulo y notificaciones con SignalR.",
+    tags: [".NET", "C#", "PostgreSQL", "SignalR", "Next.js", "Docker"],
     liveUrl: "https://tourismhub-staging-frontend.acide.win/login",
     badge: "En desarrollo",
     demoCredentials: {
@@ -73,16 +70,14 @@ export const projects: Project[] = [
   },
   {
     id: "saas-core",
-    title: "SAAS CORE — PLATAFORMA BASE",
+    title: "SaaS Core",
     year: "2026",
-    subtitle: "ARQUITECTURA Y CORE PARA APLICACIONES SAAS",
+    subtitle: "Base multi-tenant para productos SaaS",
     bgImage: "/images/project_1.png",
-    posterImage: "/images/project_1.png",
+    posterImage: "/images/projects/saas-core.webp",
     description:
-      "Repositorio y arquitectura core para plataformas SaaS que posibilita la administración centralizada, gestión multi-tenant, control de roles, autenticación segura y servicios base escalables.",
-    headline:
-      "Arquitectura backend y panel administrativo preparado para escalar aplicaciones SaaS empresariales con seguridad y modularidad.",
-    tags: ["Next.js", "TypeScript", "Node.js", "Multi-Tenant", "PostgreSQL", "REST APIs"],
+      "Lo que todo SaaS necesita y nadie quiere rehacer: organizaciones, usuarios, roles y permisos, invitaciones, auditoría, planes con límites y cobro con Culqi. Lo armé una vez para arrancar cada producto nuevo desde aquí.",
+    tags: ["Node.js", "Next.js", "PostgreSQL", "Redis", "Multi-tenant"],
     liveUrl: "https://admin.saas.webcoresys.com/",
     demoCredentials: {
       username: "orgadmin",
@@ -91,16 +86,14 @@ export const projects: Project[] = [
   },
   {
     id: "transigo-gps",
-    title: "TRANSIGO — MONITOREO GPS",
+    title: "TransiGo",
     year: "2026",
-    subtitle: "SISTEMA DE MONITOREO Y TELEMETRÍA DE TRANSPORTE",
+    subtitle: "Monitoreo GPS de transporte público",
     bgImage: "/images/project_2.png",
-    posterImage: "/images/project_2.png",
+    posterImage: "/images/projects/transigo.webp",
     description:
-      "Aplicación web orientada a la gestión, monitoreo y visualización en tiempo real del sistema de transporte público basado en GPS mediante WebSockets (Pub/Sub). Supervisa unidades, gestiona rutas y calcula estimaciones de arribo.",
-    headline:
-      "Seguimiento satelital de vehículos en tiempo real con WebSockets e interfaz de alta precisión para la toma de decisiones.",
-    tags: ["TypeScript", "Next.js", "WebSockets Pub/Sub", "Telemetría GPS", "OpenStreetMap", "Node.js API"],
+      "Mapa en vivo de buses en Arequipa. Cada unidad publica su posición por WebSockets y el panel calcula cuánto falta para que llegue al paradero más cercano. Incluye un editor de rutas sobre OpenStreetMap con trazado por calles (OSRM).",
+    tags: ["Node.js", "WebSockets", "Next.js", "OpenStreetMap", "OSRM"],
     liveUrl: "https://gps-based-transit-optimization.onlinestornsoftware.win/",
     demoCredentials: {
       email: "user@gps-transit.com",
@@ -109,16 +102,14 @@ export const projects: Project[] = [
   },
   {
     id: "misti",
-    title: "MISTI — GESTIÓN DE CANCHAS",
+    title: "Misti",
     year: "2026",
-    subtitle: "PLATAFORMA ADMINISTRATIVA PARA ALQUILER DE CANCHAS",
+    subtitle: "Reservas para complejos deportivos",
     bgImage: "/images/project_3.png",
-    posterImage: "/images/project_3.png",
+    posterImage: "/images/projects/misti.webp",
     description:
-      "Plataforma administrativa monocliente para gestionar el alquiler de canchas deportivas, incluyendo sedes, canchas, horarios, tarifas, clientes, reservas y pagos.",
-    headline:
-      "Una solución centralizada para ordenar la operación diaria de complejos deportivos y administrar reservas, clientes y pagos desde un solo lugar.",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "NestJS", "Prisma", "PostgreSQL", "Better Auth", "Docker", "Traefik"],
+      "Sedes, canchas, horarios, tarifas, bloqueos, reservas y pagos en un solo panel, con una agenda del día por cancha para ver de un vistazo qué está libre. Lo desplegué yo mismo con Docker y Traefik.",
+    tags: ["NestJS", "Next.js", "PostgreSQL", "Prisma", "Docker", "Traefik"],
     liveUrl: "https://misti.webcoresys.com/auth/login",
     demoCredentials: {
       email: "admin@admin.com",
@@ -127,16 +118,14 @@ export const projects: Project[] = [
   },
   {
     id: "school-admin",
-    title: "SCHOOL ADMIN — GESTIÓN ESCOLAR",
+    title: "School Admin",
     year: "2026",
-    subtitle: "ADMISIÓN, MATRÍCULA Y TESORERÍA PARA COLEGIO",
+    subtitle: "Gestión escolar para un colegio de Arequipa",
     bgImage: "/images/project_6.png",
-    posterImage: "/images/project_6.png",
+    posterImage: "/images/projects/school-admin.webp",
     description:
-      "Sistema de gestión escolar para colegio real: admisión con pipeline kanban de postulantes, agenda de citas y dictamen final; matrícula con expediente familiar, control de vacantes y ficha en PDF; malla curricular, horarios, carga docente y comunicados; personal con asistencia por reconocimiento facial y pre-planilla; tesorería con tarifario y cobranzas. Backend NestJS con Prisma y frontend Next.js con tipos generados desde el OpenAPI.",
-    headline:
-      "Del postulante al egresado: todo el ciclo escolar trazable en un solo sistema.",
-    tags: ["Next.js", "NestJS", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "Docker"],
+      "Proyecto del curso de gestión de proyectos, hecho con un colegio real como cliente. Admisión con tablero kanban de postulantes, matrícula con expediente familiar, horarios y carga docente, asistencia del personal por reconocimiento facial y cobranzas.",
+    tags: ["NestJS", "Next.js", "PostgreSQL", "Prisma", "Docker"],
     githubUrl: "https://github.com/rogerinfas/software-project-management-course-project",
   },
 ]
