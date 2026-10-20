@@ -170,12 +170,12 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
                       {/* Imagen visible en móvil directamente dentro del acordeón (clic para ampliar) */}
                       <div
                         onClick={() => setLightboxProject(project)}
-                        className="group/img relative lg:hidden overflow-hidden rounded-xl border border-white/10 cursor-pointer"
+                        className="group/img relative lg:hidden overflow-hidden rounded-xl border border-white/10 bg-black/60 cursor-pointer"
                       >
                         <img
                           src={project.posterImage}
                           alt={`Captura de ${project.title}`}
-                          className="w-full aspect-video object-cover transition-transform duration-300 group-hover/img:scale-[1.02]"
+                          className="w-full h-auto max-h-[360px] object-contain transition-transform duration-300 group-hover/img:scale-[1.01]"
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono">
@@ -293,12 +293,12 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
               </div>
 
               {/* Imagen con overlay sutil al hover para invitar al clic */}
-              <div className="relative aspect-[16/10] bg-black/40 overflow-hidden">
+              <div className="relative aspect-[16/10] bg-black/60 overflow-hidden flex items-center justify-center p-1.5">
                 <img
                   key={activeHoverProject.id}
                   src={activeHoverProject.posterImage}
                   alt={`Captura real de ${activeHoverProject.title}`}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover/preview:scale-[1.03]"
+                  className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover/preview:scale-[1.01]"
                   style={{ animation: "fadeIn 300ms ease-out" }}
                 />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-center justify-center">
