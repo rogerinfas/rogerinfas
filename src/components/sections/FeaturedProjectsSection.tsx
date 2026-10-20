@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { ArrowUpRight, Check, Copy, KeyRound, Plus, Minus } from "lucide-react"
+import { useState, useEffect } from "react"
+import { ArrowUpRight, Check, Copy, KeyRound, Plus, Minus, Maximize2, X } from "lucide-react"
 import { toast } from "sonner"
 import { projects, type Project } from "@/lib/data"
 import { Reveal } from "@/components/Reveal"
@@ -48,6 +48,25 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
   const [expandedId, setExpandedId] = useState<string | null>(projects[0]?.id ?? null)
   // Hover preview para desktop
   const [hoveredIndex, setHoveredIndex] = useState<number>(0)
+  // Estado para el modal lightbox de captura ampliada
+  const [lightboxProject, setLightboxProject] = useState<Project | null>(null)
+
+  // Cerrar lightbox con tecla Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxProject(null)
+    }
+    if (lightboxProject) {
+      document.body.style.overflow = "hidden"
+      window.addEventListener("keydown", handleKeyDown)
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [lightboxProject])
 
   const toggleExpand = (id: string, index: number) => {
     setExpandedId((prev) => (prev === id ? null : id))
@@ -77,7 +96,7 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
           </Reveal>
           <Reveal delay={100} variant="right">
             <p className="mt-4 font-mono text-xs uppercase tracking-wider text-white/40 sm:mt-0">
-              {projects.length} casos · clic para desplegar detalle
+              {projects.length} casos · clic en la captura para ampliar
             </p>
           </Reveal>
         </div>
@@ -148,14 +167,21 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
                       className="pb-7 pl-9 sm:pl-12 pr-2 space-y-5"
                       style={{ animation: "fadeIn 350ms cubic-bezier(0.16,1,0.3,1)" }}
                     >
-                      {/* Imagen visible en móvil directamente dentro del acordeón */}
-                      <div className="lg:hidden overflow-hidden rounded-xl border border-white/10">
+                      {/* Imagen visible en móvil directamente dentro del acordeón (clic para ampliar) */}
+                      <div
+                        onClick={() => setLightboxProject(project)}
+                        className="group/img relative lg:hidden overflow-hidden rounded-xl border border-white/10 cursor-pointer"
+                      >
                         <img
                           src={project.posterImage}
                           alt={`Captura de ${project.title}`}
-                          className="w-full aspect-video object-cover"
+                          className="w-full aspect-video object-cover transition-transform duration-300 group-hover/img:scale-[1.02]"
                           loading="lazy"
                         />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono">
+                          <Maximize2 className="size-4" />
+                          <span>Toca para ver en grande</span>
+                        </div>
                       </div>
 
                       <p className="text-sm sm:text-base font-light leading-relaxed text-white/80 max-w-xl">
@@ -235,9 +261,21 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
             })}
           </div>
 
-          {/* Columna Derecha (Desktop): Preview Sticky limpia de la interfaz real */}
+          {/* Columna Derecha (Desktop): Preview Sticky limpia de la interfaz real con clic para ampliar */}
           <div className="hidden lg:block lg:col-span-5 sticky top-28 space-y-4">
-            <div className="overflow-hidden rounded-2xl border border-white/15 bg-[#141415] shadow-2xl">
+            <div
+              onClick={() => setLightboxProject(activeHoverProject)}
+              className="group/preview overflow-hidden rounded-2xl border border-white/15 bg-[#141415] shadow-2xl cursor-zoom-in transition-all duration-300 hover:border-white/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  setLightboxProject(activeHoverProject)
+                }
+              }}
+              aria-label={`Ampliar captura de pantalla de ${activeHoverProject.title}`}
+            >
               {/* Barra superior estilo ventana/browser limpia */}
               <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-2.5">
                 <div className="flex items-center gap-1.5" aria-hidden="true">
@@ -248,20 +286,27 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
                 <span className="font-mono text-[10px] uppercase tracking-wider text-white/40 truncate max-w-[200px]">
                   {activeHoverProject.title} · Preview
                 </span>
-                <span className="font-mono text-[10px] text-white/30">
-                  {activeHoverProject.year}
+                <span className="flex items-center gap-1.5 font-mono text-[10px] text-white/40 group-hover/preview:text-[#FF6B5B] transition-colors">
+                  <Maximize2 className="size-3" />
+                  <span>Ampliar</span>
                 </span>
               </div>
 
-              {/* Imagen con transición suave */}
+              {/* Imagen con overlay sutil al hover para invitar al clic */}
               <div className="relative aspect-[16/10] bg-black/40 overflow-hidden">
                 <img
                   key={activeHoverProject.id}
                   src={activeHoverProject.posterImage}
                   alt={`Captura real de ${activeHoverProject.title}`}
-                  className="w-full h-full object-cover object-top transition-opacity duration-300"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover/preview:scale-[1.03]"
                   style={{ animation: "fadeIn 300ms ease-out" }}
                 />
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-black/75 px-4 py-2 font-mono text-xs text-white backdrop-blur-sm border border-white/20 shadow-lg">
+                    <Maximize2 className="size-3.5" />
+                    <span>Clic para ver en pantalla completa</span>
+                  </span>
+                </div>
               </div>
 
               {/* Pie de la preview */}
@@ -279,6 +324,7 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
                     href={activeHoverProject.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1 font-mono text-[11px] text-white/70 hover:text-white transition-colors"
                   >
                     Visitar demo <ArrowUpRight className="size-3" />
@@ -287,12 +333,77 @@ export function FeaturedProjectsSection(_props: FeaturedProjectsSectionProps) {
               </div>
             </div>
 
-            <p className="text-center font-mono text-[11px] text-white/35">
-              Pasa el cursor por cada proyecto para ver la interfaz
+            <p className="text-center font-mono text-[11px] text-white/35 flex items-center justify-center gap-1.5">
+              <Maximize2 className="size-3" />
+              <span>Haz clic en la imagen para ver todos los detalles en grande</span>
             </p>
           </div>
         </div>
       </div>
+
+      {/* Modal Lightbox de Pantalla Completa */}
+      {lightboxProject && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Captura en tamaño completo de ${lightboxProject.title}`}
+          onClick={() => setLightboxProject(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-8 backdrop-blur-md"
+          style={{ animation: "fadeIn 200ms ease-out" }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex max-h-[92vh] max-w-6xl w-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-[#121214] shadow-2xl"
+          >
+            {/* Header del Lightbox */}
+            <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-5 py-3">
+              <div className="flex items-center gap-3">
+                <span className="font-heading text-base font-semibold text-white">
+                  {lightboxProject.title}
+                </span>
+                <span className="font-mono text-xs text-white/40 hidden sm:inline">
+                  · {lightboxProject.subtitle}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                {lightboxProject.liveUrl && (
+                  <a
+                    href={lightboxProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 rounded bg-white/10 px-3 py-1 font-mono text-xs text-white hover:bg-white/20 transition-colors"
+                  >
+                    Abrir demo <ArrowUpRight className="size-3" />
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setLightboxProject(null)}
+                  className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Cerrar vista grande"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Contenedor de la Imagen con scroll natural si excede el alto */}
+            <div className="overflow-auto p-2 sm:p-4 bg-black/50 flex items-center justify-center">
+              <img
+                src={lightboxProject.posterImage}
+                alt={`Captura completa de ${lightboxProject.title}`}
+                className="max-h-[78vh] w-auto rounded-lg object-contain shadow-xl"
+              />
+            </div>
+
+            {/* Footer con atajo para salir */}
+            <div className="border-t border-white/10 bg-white/[0.02] px-5 py-2.5 flex items-center justify-between text-[11px] font-mono text-white/40">
+              <span>Resolución original del sistema</span>
+              <span>Presiona <kbd className="rounded border border-white/20 bg-white/10 px-1.5 py-0.5 text-white/70">ESC</kbd> o clic fuera para cerrar</span>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
